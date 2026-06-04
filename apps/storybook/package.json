@@ -8,20 +8,18 @@
     "build": "storybook build",
     "check-types": "tsc --noEmit"
   },
-  "dependencies": {
-    "@repo/ui": "workspace:*",
-    "@repo/utils": "workspace:*",
-    "lucide-react": "catalog:",
-    "open-props": "catalog:",
-    "react": "catalog:",
-    "react-dom": "catalog:"
-  },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
+    "@repo/ui": "workspace:*",
+    "@repo/utils": "workspace:*",
     "@storybook/nextjs-vite": "catalog:",
     "@storybook/react": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "lucide-react": "catalog:",
+    "open-props": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "storybook": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:"

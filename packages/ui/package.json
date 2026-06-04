@@ -14,8 +14,7 @@
   "dependencies": {
     "@repo/utils": "workspace:*",
     "clsx": "catalog:",
-    "lucide-react": "^1.17.0",
-    "open-props": "^1.7.23",
+    "lucide-react": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:"
   },
@@ -24,6 +23,7 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "open-props": "catalog:",
     "typescript": "catalog:"
   }
 }

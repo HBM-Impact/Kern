@@ -54,6 +54,9 @@ catalogs:
     react-dom:
       specifier: ^19.2.7
       version: 19.2.7
+    schema-dts:
+      specifier: ^2.0.0
+      version: 2.0.0
     storybook:
       specifier: ^10.4.2
       version: 10.4.2
@@ -85,29 +88,16 @@ importers:
         version: 6.0.3
 
   apps/storybook:
-    dependencies:
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@repo/utils':
         specifier: workspace:*
         version: link:../../packages/utils
-      lucide-react:
-        specifier: 'catalog:'
-        version: 1.17.0(react@19.2.7)
-      open-props:
-        specifier: 'catalog:'
-        version: 1.7.23
-      react:
-        specifier: 'catalog:'
-        version: 19.2.7
-      react-dom:
-        specifier: 'catalog:'
-        version: 19.2.7(react@19.2.7)
-    devDependencies:
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../../packages/typescript-config
       '@storybook/nextjs-vite':
         specifier: 'catalog:'
         version: 10.4.2(@babel/core@7.29.7)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(next@16.2.7(@babel/core@7.29.7)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(rollup@4.61.0)(storybook@10.4.2(@testing-library/dom@10.4.1)(@types/react@19.2.16)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3)(vite@8.0.16(@types/node@24.12.4))
@@ -120,6 +110,18 @@ importers:
       '@types/react-dom':
         specifier: 'catalog:'
         version: 19.2.3(@types/react@19.2.16)
+      lucide-react:
+        specifier: 'catalog:'
+        version: 1.17.0(react@19.2.7)
+      open-props:
+        specifier: 'catalog:'
+        version: 1.7.23
+      react:
+        specifier: 'catalog:'
+        version: 19.2.7
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.7(react@19.2.7)
       storybook:
         specifier: 'catalog:'
         version: 10.4.2(@testing-library/dom@10.4.1)(@types/react@19.2.16)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -148,7 +150,7 @@ importers:
         specifier: 'catalog:'
         version: 2.1.1
       lucide-react:
-        specifier: ^1.17.0
+        specifier: 'catalog:'
         version: 1.17.0(react@19.2.7)
       next:
         specifier: 'catalog:'
@@ -162,9 +164,6 @@ importers:
       react-dom:
         specifier: 'catalog:'
         version: 19.2.7(react@19.2.7)
-      schema-dts:
-        specifier: ^2.0.0
-        version: 2.0.0(typescript@6.0.3)
       usehooks-ts:
         specifier: 'catalog:'
         version: 3.1.1(react@19.2.7)
@@ -184,6 +183,9 @@ importers:
       babel-plugin-react-compiler:
         specifier: 'catalog:'
         version: 1.0.0
+      schema-dts:
+        specifier: 'catalog:'
+        version: 2.0.0(typescript@6.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -218,11 +220,8 @@ importers:
         specifier: 'catalog:'
         version: 2.1.1
       lucide-react:
-        specifier: ^1.17.0
+        specifier: 'catalog:'
         version: 1.17.0(react@19.2.7)
-      open-props:
-        specifier: ^1.7.23
-        version: 1.7.23
       react:
         specifier: 'catalog:'
         version: 19.2.7
@@ -242,6 +241,9 @@ importers:
       '@types/react-dom':
         specifier: 'catalog:'
         version: 19.2.3(@types/react@19.2.16)
+      open-props:
+        specifier: 'catalog:'
+        version: 1.7.23
       typescript:
         specifier: 'catalog:'
         version: 6.0.3

@@ -16,12 +16,11 @@
     "@repo/utils": "workspace:*",
     "@tanstack/react-query": "catalog:",
     "clsx": "catalog:",
-    "lucide-react": "^1.17.0",
+    "lucide-react": "catalog:",
     "next": "catalog:",
     "next-intl": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "schema-dts": "^2.0.0",
     "usehooks-ts": "catalog:"
   },
   "devDependencies": {
@@ -30,6 +29,7 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "babel-plugin-react-compiler": "catalog:",
+    "schema-dts": "catalog:",
     "typescript": "catalog:"
   }
 }
