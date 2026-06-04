@@ -1,8 +1,9 @@
 import clsx from "clsx";
 import { ChevronDown } from "lucide-react";
 import type { SelectHTMLAttributes } from "react";
-import styles from "./Form.module.css";
-import type { InputProps } from "./types";
+import formStyles from "../Form.module.css";
+import type { InputProps } from "../types";
+import styles from "./Select.module.css";
 
 type SelectOption = string | { value: string; label: string };
 
@@ -21,12 +22,12 @@ function getOptionLabel(option: SelectOption) {
 
 export function Select({ options, label, name, className, ...rest }: Props) {
   return (
-    <label className={clsx(styles.label, styles.selectWrapper)}>
-      <span className={styles.labelText}>{label}</span>
+    <label className={clsx(formStyles.label, styles.selectWrapper)}>
+      <span className={formStyles.labelText}>{label}</span>
       <select
         id={name}
         name={name}
-        className={clsx(styles.control, styles.select, className)}
+        className={clsx(formStyles.control, styles.select, className)}
         {...rest}
       >
         {options.map((option) => {

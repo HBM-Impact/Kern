@@ -2,7 +2,7 @@
 
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { type ReactNode, useRef } from "react";
-import { IconButton } from "../Button/IconButton";
+import { IconButton } from "../Buttons/IconButton";
 import { Display } from "../Display/Display";
 import { Typography } from "../Typography/Typography";
 import styles from "./Carousel.module.css";

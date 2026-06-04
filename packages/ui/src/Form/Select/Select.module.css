@@ -1,0 +1,25 @@
+.select {
+  height: 2.5rem;
+  appearance: none;
+  padding-left: var(--size-3);
+  padding-right: calc(var(--size-3) * 2);
+  cursor: pointer;
+  font-size: var(--font-size-1);
+}
+
+.selectWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-2);
+}
+
+.selectWrapper > svg {
+  width: var(--size-3);
+  height: var(--size-3);
+  position: absolute;
+  bottom: calc(2.5rem / 2 - var(--size-2));
+  right: var(--size-3);
+  cursor: pointer;
+  pointer-events: none;
+}

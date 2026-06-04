@@ -1,0 +1,15 @@
+.calendar {
+  height: 2.5rem;
+  padding-inline: var(--size-3);
+  cursor: pointer;
+}
+
+.calendar::-webkit-inner-spin-button,
+.calendar::-webkit-calendar-picker-indicator {
+  position: absolute;
+  width: var(--size-3);
+  height: var(--size-3);
+  bottom: var(--size-3);
+  right: var(--size-2);
+  cursor: pointer;
+}

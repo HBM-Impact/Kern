@@ -1,20 +1,20 @@
 import type { FieldsetHTMLAttributes } from "react";
-import styles from "./Form.module.css";
-import { Radio } from "./Radio";
-import type { InputProps } from "./types";
+import { Checkbox } from "../Checkbox";
+import styles from "../Form.module.css";
+import type { InputProps } from "../types";
 
 type Props = {
   name: string;
-  options: Parameters<typeof Radio>["0"][];
+  options: Parameters<typeof Checkbox>["0"][];
 } & InputProps &
   FieldsetHTMLAttributes<HTMLFieldSetElement>;
 
-export function RadioGroup({ label, name, options, ...rest }: Props) {
+export function CheckboxGroup({ label, name, options, ...rest }: Props) {
   return (
     <fieldset className={styles.group} {...rest}>
       <legend className={styles.labelText}>{label}</legend>
       {options.map((option) => (
-        <Radio key={String(option.value)} name={name} {...option} />
+        <Checkbox key={String(option.value)} name={name} {...option} />
       ))}
     </fieldset>
   );

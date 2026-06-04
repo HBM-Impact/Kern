@@ -1,0 +1,52 @@
+.checkboxLabel {
+  position: relative;
+  display: flex;
+  gap: var(--size-2);
+  cursor: pointer;
+  height: var(--size-6);
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.checkboxLabel > input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkbox {
+  width: var(--size-3);
+  height: var(--size-3);
+  border-radius: var(--radius-2);
+  background-color: transparent;
+  border-width: var(--border-size-1);
+  border-style: solid;
+  border-color: var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s var(--ease-in-out-3);
+}
+
+.checkbox > svg {
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-in-out-3);
+  width: 0.75rem;
+  height: 0.75rem;
+  color: var(--color-text);
+}
+
+.checkboxLabel > input:checked ~ .checkbox {
+  background-color: inherit;
+}
+
+.checkboxLabel > input:checked ~ .checkbox > svg {
+  opacity: 1;
+}
+
+.checkboxLabel > input:focus ~ .checkbox {
+  outline: var(--border-size-3) auto -webkit-focus-ring-color;
+}
