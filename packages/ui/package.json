@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+    "./globals.css": "./src/globals.css",
     "./*": "./src/*/index.ts"
   },
   "scripts": {
@@ -14,6 +15,7 @@
     "@repo/utils": "workspace:*",
     "clsx": "catalog:",
     "lucide-react": "^1.17.0",
+    "open-props": "^1.7.23",
     "react": "catalog:",
     "react-dom": "catalog:"
   },

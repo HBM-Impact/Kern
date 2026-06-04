@@ -1,0 +1,12 @@
+{
+  "extends": "@repo/typescript-config/react-library.json",
+  "compilerOptions": {
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "strictNullChecks": true,
+    "declaration": false,
+    "declarationMap": false,
+    "allowArbitraryExtensions": true
+  },
+  "include": [".storybook/**/*", "src/**/*"]
+}

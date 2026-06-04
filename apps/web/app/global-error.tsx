@@ -1,6 +1,6 @@
 "use client";
 
-import "./globals.css";
+import "@repo/ui/globals.css";
 import { Button } from "@repo/ui/buttons";
 import { Display } from "@repo/ui/display";
 import { Typography } from "@repo/ui/typography";
