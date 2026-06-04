@@ -3,6 +3,7 @@ import { Container } from "@repo/ui/container";
 import { Display } from "@repo/ui/display";
 import { Typography } from "@repo/ui/typography";
 import { AddToCart } from "@/features/cart/components/add-to-cart";
+import { AddToFavorite } from "@/features/favorites/components/add-to-favorite";
 import { ProductCarousel } from "@/features/products/components/product-carousel";
 import { ProductGallery } from "@/features/products/components/product-gallery";
 import { ProductReviews } from "@/features/products/components/product-reviews";

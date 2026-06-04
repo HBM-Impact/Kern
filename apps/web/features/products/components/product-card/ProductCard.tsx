@@ -1,6 +1,7 @@
 import type { Product } from "@repo/services/commerce/commerce-types";
 import { Typography } from "@repo/ui/typography";
 import { AddToCart } from "@/features/cart/components/add-to-cart";
+import { AddToFavorite } from "@/features/favorites/components/add-to-favorite";
 import { IntlLink } from "@/i18n/navigation";
 import { createProductSlug } from "@/lib/slug/create-product-slug";
 import { OptimizedImage } from "@/primitives/optimized-image";
