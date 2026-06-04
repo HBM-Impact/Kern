@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { Providers } from "../providers";
 import "../globals.css";
+import { RootLayout } from "@/features/layout/root-layout";
 
 export const dynamic = "force-static";
 
@@ -19,7 +19,7 @@ export const metadata = {
   },
 } satisfies Metadata;
 
-export default async function RootLayout({
+export default async function Layout({
   children,
   params,
 }: LayoutProps<"/[locale]">) {
@@ -30,12 +30,8 @@ export default async function RootLayout({
   setRequestLocale(locale);
   const messages = await getMessages();
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body>
-        <NextIntlClientProvider messages={messages}>
-          <Providers>{children}</Providers>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <RootLayout locale={locale} messages={messages}>
+      {children}
+    </RootLayout>
   );
 }

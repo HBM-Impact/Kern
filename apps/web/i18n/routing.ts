@@ -5,6 +5,10 @@ export const routingConfig = {
   defaultLocale: "en",
   pathnames: {
     "/": "/",
+    "/products": "/products",
+    "/products/search": "/products/search",
+    "/products/[category]": "/products/[category]",
+    "/products/[category]/[id]": "/products/[category]/[id]",
   },
 } as const;
 

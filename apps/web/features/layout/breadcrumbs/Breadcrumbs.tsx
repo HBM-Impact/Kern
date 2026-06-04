@@ -1,11 +1,11 @@
+"use client";
+
 import { ChevronRight, House } from "lucide-react";
+import { usePathname } from "@/i18n/navigation";
 import styles from "./Breadcrumbs.module.css";
 
-type Props = {
-  path: string;
-};
-
-export function Breadcrumbs({ path }: Props) {
+export function Breadcrumbs() {
+  const path = usePathname();
   const segments = path.split("/").filter(Boolean);
   return (
     <nav aria-label="Breadcrumb">

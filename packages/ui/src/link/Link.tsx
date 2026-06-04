@@ -1,16 +1,11 @@
-import clsx from "clsx";
-import type { AnchorHTMLAttributes, ReactNode } from "react";
+import type { ComponentPropsWithoutRef, ElementType } from "react";
 import styles from "./Link.module.css";
 
-type Props = AnchorHTMLAttributes<HTMLAnchorElement> & {
-  children?: ReactNode;
-};
+type Props<T extends ElementType = "a"> = {
+  as?: T;
+} & Omit<ComponentPropsWithoutRef<T>, "as" | "className">;
 
-export function Link({ children, className, ...rest }: Props) {
-  const fallbackTitle = typeof children === "string" ? children : undefined;
-  return (
-    <a title={fallbackTitle} className={clsx(styles.link, className)} {...rest}>
-      {children}
-    </a>
-  );
+export function Link<T extends ElementType = "a">({ as, ...props }: Props<T>) {
+  const Component = (as ?? "a") as ElementType;
+  return <Component className={styles.link} {...props} />;
 }

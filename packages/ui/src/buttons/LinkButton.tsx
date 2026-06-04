@@ -1,35 +1,32 @@
 import clsx from "clsx";
-import type { AnchorHTMLAttributes, ReactNode } from "react";
+import type { ComponentPropsWithoutRef, ElementType } from "react";
 import styles from "./Button.module.css";
 import type { ButtonProps } from "./types";
 
-type Props = ButtonProps &
-  AnchorHTMLAttributes<HTMLAnchorElement> & {
-    children?: ReactNode;
-  };
+type Props<T extends ElementType = "a"> = ButtonProps & {
+  as?: T;
+} & Omit<ComponentPropsWithoutRef<T>, "as" | "className">;
 
-export function LinkButton({
-  children,
+export function LinkButton<T extends ElementType = "a">({
+  as,
   fill = false,
   icon,
   iconPosition = "right",
-  className,
+  children,
   ...rest
-}: Props) {
-  const fallbackTitle = typeof children === "string" ? children : undefined;
+}: Props<T>) {
+  const Component = (as ?? "a") as ElementType;
   return (
-    <a
-      title={rest.title ?? fallbackTitle}
+    <Component
       className={clsx(
         styles.base,
         iconPosition === "left" && styles.reverse,
         fill && styles.fill,
-        className,
       )}
       {...rest}
     >
       {children}
       {icon ?? null}
-    </a>
+    </Component>
   );
 }
