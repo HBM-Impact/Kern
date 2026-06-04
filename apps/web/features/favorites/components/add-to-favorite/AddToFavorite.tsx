@@ -4,14 +4,14 @@ import { IconButton } from "@repo/ui/buttons/icon-button";
 import clsx from "clsx";
 import { Heart } from "lucide-react";
 import { useFavorites } from "../../favorites-context";
-import styles from "./FavoriteToggle.module.css";
+import styles from "./AddToFavorite.module.css";
 
 type Props = {
   productId: number;
   className?: string;
 };
 
-export function FavoriteToggle({ productId, className }: Props) {
+export function AddToFavorite({ productId, className }: Props) {
   const { isFavorite, toggle } = useFavorites();
   const active = isFavorite(productId);
 

@@ -3,7 +3,6 @@ import { Container } from "@repo/ui/container";
 import { Display } from "@repo/ui/display";
 import { Typography } from "@repo/ui/typography";
 import { AddToCart } from "@/features/cart/components/add-to-cart";
-import { FavoriteToggle } from "@/features/favorites/components/favorite-toggle";
 import { ProductCarousel } from "@/features/products/components/product-carousel";
 import { ProductGallery } from "@/features/products/components/product-gallery";
 import { ProductReviews } from "@/features/products/components/product-reviews";
@@ -25,7 +24,7 @@ export function ProductDetails({ product, relatedProducts }: Props) {
             <Typography as="span" variant="label" uppercase>
               {product.category}
             </Typography>
-            <FavoriteToggle productId={product.id} />
+            <AddToFavorite productId={product.id} />
           </div>
           <Display as="h1" variant="display2">
             {product.title}

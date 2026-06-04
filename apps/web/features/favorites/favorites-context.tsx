@@ -1,20 +1,21 @@
 "use client";
 
-import { createContext, use } from "react";
+import { createContext, type PropsWithChildren, use } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
-type FavoritesContextValue = {
+type Context = {
   ids: number[];
   isFavorite: (id: number) => boolean;
   toggle: (id: number) => void;
 };
 
-const FavoritesContext = createContext<FavoritesContextValue | null>(null);
+const FavoritesContext = createContext<Context | null>(null);
 
-export function FavoritesProvider({ children }: { children: React.ReactNode }) {
+export function FavoritesProvider({ children }: PropsWithChildren) {
   const [favoriteIds, setFavoriteIds] = useLocalStorage<number[]>(
     "kern-favorites",
     [],
+    { initializeWithValue: false },
   );
 
   function toggle(id: number) {

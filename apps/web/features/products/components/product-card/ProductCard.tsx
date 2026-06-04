@@ -1,7 +1,6 @@
 import type { Product } from "@repo/services/commerce/commerce-types";
 import { Typography } from "@repo/ui/typography";
 import { AddToCart } from "@/features/cart/components/add-to-cart";
-import { FavoriteToggle } from "@/features/favorites/components/favorite-toggle";
 import { IntlLink } from "@/i18n/navigation";
 import { createProductSlug } from "@/lib/slug/create-product-slug";
 import { OptimizedImage } from "@/primitives/optimized-image";
@@ -58,7 +57,7 @@ export function ProductCard({
             -{discountPercentage.toFixed(0)}%
           </span>
         ) : null}
-        <FavoriteToggle productId={id} className={styles.favoriteBtn} />
+        <AddToFavorite productId={id} className={styles.favoriteBtn} />
       </div>
       <div className={styles.body}>
         <Typography as="span" variant="label" uppercase>

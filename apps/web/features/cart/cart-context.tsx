@@ -1,21 +1,22 @@
 "use client";
 
-import { createContext, use } from "react";
+import { createContext, type PropsWithChildren, use } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
-type CartContextValue = {
+type Context = {
   items: Map<number, number>;
   add: (id: number) => void;
   remove: (id: number) => void;
   setQuantity: (id: number, quantity: number) => void;
 };
 
-const CartContext = createContext<CartContextValue | null>(null);
+const CartContext = createContext<Context | null>(null);
 
-export function CartProvider({ children }: { children: React.ReactNode }) {
+export function CartProvider({ children }: PropsWithChildren) {
   const [entries, setEntries] = useLocalStorage<[number, number][]>(
     "kern-cart",
     [],
+    { initializeWithValue: false },
   );
   const items = new Map(entries);
 
