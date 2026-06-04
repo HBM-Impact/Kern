@@ -4,7 +4,15 @@ import type { Metadata } from "next";
 import type { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { PageHeader } from "@/features/layout/page-header";
+import { routingConfig } from "@/i18n/routing";
 import { ProductCatalog } from "./[id]/_components/product-catalog";
+
+export async function generateStaticParams() {
+  const categories = await getCategories();
+  return routingConfig.locales.flatMap((locale) =>
+    categories.map((c) => ({ locale, category: c.slug })),
+  );
+}
 
 async function getCategoryName(id: string) {
   const categories = await getCategories();
@@ -39,7 +47,7 @@ export default async function CategoryRoute({
         description={`Browse all products in the ${name} category.`}
       />
       <ProductCatalog
-        slug={category}
+        category={category}
         sort={typeof sort === "string" ? sort : undefined}
       />
     </Container>
