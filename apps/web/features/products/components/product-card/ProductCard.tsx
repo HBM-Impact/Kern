@@ -1,5 +1,6 @@
 import type { Product } from "@repo/services/commerce/commerce-types";
 import { Typography } from "@repo/ui/typography";
+import { OptimizedImage } from "@/components/optimized-image";
 import styles from "./ProductCard.module.css";
 
 type Props = Pick<
@@ -31,15 +32,17 @@ export function ProductCard({
     <article className={styles.card}>
       <div className={styles.imageLink}>
         <a href={href}>
-          <img
-            src={images[0]}
+          <OptimizedImage
+            src={images[0] ?? "/fallback.png"}
             alt={title}
+            width={600}
+            height={450}
             className={styles.image}
-            loading={priority ? undefined : "lazy"}
-            fetchPriority={priority ? "high" : undefined}
+            priority={priority}
+            breakpointSizes={{ sm: "50vw", lg: "33vw", default: "25vw" }}
           />
         </a>
-        {discountPercentage > 0 && (
+        {discountPercentage > 0 ? (
           <span
             className={styles.badge}
             role="img"
@@ -47,7 +50,7 @@ export function ProductCard({
           >
             -{discountPercentage.toFixed(0)}%
           </span>
-        )}
+        ) : null}
       </div>
       <div className={styles.body}>
         <Typography as="span" variant="label" uppercase>
