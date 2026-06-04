@@ -1,8 +1,7 @@
 import { Button } from "@repo/ui/buttons";
-import { Dialog } from "@repo/ui/dialog";
+import { Dialog, useDialogStore } from "@repo/ui/dialog";
 import { Typography } from "@repo/ui/typography";
 import type { Meta, StoryObj } from "@storybook/react";
-import { useRef } from "react";
 
 function DialogDemo({
   type,
@@ -11,11 +10,11 @@ function DialogDemo({
   type?: "center" | "aside";
   title: string;
 }) {
-  const ref = useRef<HTMLDialogElement>(null);
+  const dialog = useDialogStore({ onClose: () => console.log("I closed it")});
   return (
     <>
-      <Button onClick={() => ref.current?.showModal()}>Open dialog</Button>
-      <Dialog ref={ref} type={type} title={title}>
+      <Button onClick={dialog.open}>Open dialog</Button>
+      <Dialog store={dialog} type={type} title={title}>
         <Typography>
           This is the dialog content. Press Escape or click outside to close.
         </Typography>
