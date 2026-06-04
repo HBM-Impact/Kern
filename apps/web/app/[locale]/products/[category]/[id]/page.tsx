@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
+import { Breadcrumbs } from "@/features/layout/breadcrumbs";
 import { ProductDetails } from "./_components/product-details";
 
 export async function generateMetadata({
@@ -36,5 +37,22 @@ export default async function ProductDetailRoute({
 
   const relatedProducts = categoryProducts.filter((p) => p.id !== numId);
 
-  return <ProductDetails product={product} relatedProducts={relatedProducts} />;
+  return (
+    <>
+      <Breadcrumbs
+        items={[
+          { href: "/products", label: "Products" },
+          {
+            href: {
+              pathname: "/products/[category]",
+              params: { category },
+            },
+            label: category,
+          },
+          { label: product.title },
+        ]}
+      />
+      <ProductDetails product={product} relatedProducts={relatedProducts} />
+    </>
+  );
 }

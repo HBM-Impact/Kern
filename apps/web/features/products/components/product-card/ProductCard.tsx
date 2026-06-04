@@ -66,9 +66,11 @@ export function ProductCard({
         <Typography as="p" variant="label" className={styles.description}>
           {description}
         </Typography>
-        <Typography as="span" variant="body">
-          ${price.toFixed(2)}
-        </Typography>
+        <div className={styles.meta}>
+          <Typography as="span" variant="body">
+            ${price.toFixed(2)}
+          </Typography>
+        </div>
       </div>
     </article>
   );

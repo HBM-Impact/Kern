@@ -1,28 +1,15 @@
-"use client";
-
 import { ChevronRight, House } from "lucide-react";
-import { IntlLink, usePathname } from "@/i18n/navigation";
+import type { ComponentProps } from "react";
+import { IntlLink } from "@/i18n/navigation";
 import styles from "./Breadcrumbs.module.css";
 
-function buildHref(segments: string[], upToIndex: number) {
-  const s = segments.slice(0, upToIndex + 1);
-  const [, category, id] = s;
-  if (id)
-    return {
-      pathname: "/products/[category]/[id]" as const,
-      params: { category: category!, id },
-    };
-  if (category)
-    return {
-      pathname: "/products/[category]" as const,
-      params: { category },
-    };
-  return "/products" as const;
-}
+type Href = ComponentProps<typeof IntlLink>["href"];
 
-export function Breadcrumbs() {
-  const path = usePathname();
-  const segments = path.split("/").filter(Boolean);
+type Props = {
+  items: { href?: Href; label: string }[];
+};
+
+export function Breadcrumbs({ items }: Props) {
   return (
     <nav aria-label="Breadcrumb">
       <ol className={styles.list}>
@@ -31,21 +18,18 @@ export function Breadcrumbs() {
             <House />
           </IntlLink>
         </li>
-        {segments.map((segment, index) => {
-          const stringHref = `/${segments.slice(0, index + 1).join("/")}`;
-          const href = buildHref(segments, index);
-          const isLast = index === segments.length - 1;
-          const label = decodeURIComponent(segment).replaceAll("-", " ");
+        {items.map((item, index) => {
+          const isLast = index === items.length - 1;
           return (
-            <li key={stringHref} className={styles.item}>
+            <li key={item.label} className={styles.item}>
               <ChevronRight />
-              {isLast ? (
+              {isLast || !item.href ? (
                 <span aria-current="page" className={styles.current}>
-                  {label}
+                  {item.label}
                 </span>
               ) : (
-                <IntlLink href={href} className={styles.link}>
-                  {label}
+                <IntlLink href={item.href} className={styles.link}>
+                  {item.label}
                 </IntlLink>
               )}
             </li>

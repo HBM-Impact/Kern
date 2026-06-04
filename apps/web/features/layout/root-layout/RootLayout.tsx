@@ -1,6 +1,5 @@
 import type { Messages } from "next-intl";
 import { NextIntlClientProvider } from "next-intl";
-import { Breadcrumbs } from "@/features/layout/breadcrumbs";
 import { Footer } from "@/features/layout/footer";
 import { Header } from "@/features/layout/header";
 import { Providers } from "@/features/layout/providers";
@@ -22,7 +21,6 @@ export function RootLayout({ locale, messages, children }: Props) {
           <Providers>
             <Header />
             <main id="main-content" className={styles.main}>
-              <Breadcrumbs />
               {children}
             </main>
             <Footer />
