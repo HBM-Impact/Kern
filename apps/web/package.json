@@ -14,6 +14,7 @@
     "@repo/services": "workspace:*",
     "@repo/ui": "workspace:*",
     "@repo/utils": "workspace:*",
+    "@tanstack/react-query": "catalog:",
     "clsx": "catalog:",
     "lucide-react": "^1.17.0",
     "next": "catalog:",
@@ -21,15 +22,17 @@
     "open-props": "^1.7.23",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "usehooks-ts": "catalog:",
-    "@tanstack/react-query": "catalog:"
+    "usehooks-ts": "catalog:"
   },
   "devDependencies": {
+    "@csstools/postcss-global-data": "^4.0.0",
     "@repo/typescript-config": "workspace:*",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "autoprefixer": "^10.5.0",
     "babel-plugin-react-compiler": "catalog:",
+    "postcss-custom-media": "^12.0.1",
     "typescript": "catalog:"
   }
 }

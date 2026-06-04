@@ -4,8 +4,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { Breadcrumbs } from "@/features/layout/breadcrumbs";
-import { ProductDetails } from "./_components/product-details";
+import { Breadcrumbs } from "@/shell/breadcrumbs";
+import { ProductDetails } from "./_components/ProductDetails";
 
 export async function generateMetadata({
   params,
@@ -19,7 +19,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProductDetailRoute({
+export default async function ProductDetailPage({
   params,
 }: PageProps<"/[locale]/products/[category]/[id]">) {
   const { locale, category, id } = await params;

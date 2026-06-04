@@ -10,7 +10,7 @@ Consistency, strong types, less is more. Match existing patterns exactly — sam
 pnpm dev           # all apps (Turborepo)
 pnpm build         # build all
 pnpm lint          # biome check (via turbo)
-pnpm format        # biome format --write .
+pnpm format        # biome check --write --unsafe (format + sort imports)
 pnpm check         # lint + format check
 pnpm check-types   # tsc --noEmit all packages
 cd apps/web && pnpm dev  # single app

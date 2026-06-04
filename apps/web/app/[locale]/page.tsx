@@ -3,8 +3,8 @@ import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
 import type { Locale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { FeaturedProducts } from "@/features/home/components/featured-products";
-import { Hero } from "@/features/home/components/hero";
+import { Hero } from "@/app/[locale]/_components/hero";
+import { FeaturedProducts } from "@/features/products/components/featured-products";
 
 export async function generateMetadata({
   params,

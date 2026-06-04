@@ -1,9 +1,9 @@
 import type { Messages } from "next-intl";
 import { NextIntlClientProvider } from "next-intl";
-import { Footer } from "@/features/layout/footer";
-import { Header } from "@/features/layout/header";
-import { Providers } from "@/features/layout/providers";
-import { SkipLink } from "@/features/layout/skip-link";
+import { Footer } from "@/shell/footer";
+import { Header } from "@/shell/header";
+import { Providers } from "@/shell/providers";
+import { SkipLink } from "@/shell/skip-link";
 import styles from "./RootLayout.module.css";
 
 type Props = {

@@ -1,5 +1,5 @@
 import { Display } from "@repo/ui/display";
-import { Link } from "@/components/link";
+import { Link } from "@/primitives/link";
 import styles from "./Header.module.css";
 
 export function Header() {

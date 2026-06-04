@@ -1,7 +1,7 @@
 import type { Product } from "@repo/services/commerce/commerce-types";
 import { Typography } from "@repo/ui/typography";
-import { OptimizedImage } from "@/components/optimized-image";
 import { IntlLink } from "@/i18n/navigation";
+import { OptimizedImage } from "@/primitives/optimized-image";
 import styles from "./ProductCard.module.css";
 
 type Props = Pick<

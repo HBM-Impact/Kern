@@ -62,7 +62,7 @@
   transform: translateX(0);
 }
 
-@media only screen and (max-width: 480px) {
+@media (width <= 480px) {
   .aside {
     width: 100vw;
     height: 80vh;

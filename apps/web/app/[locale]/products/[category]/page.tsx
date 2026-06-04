@@ -3,9 +3,9 @@ import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
 import type { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { Breadcrumbs } from "@/features/layout/breadcrumbs";
-import { PageHeader } from "@/features/layout/page-header";
 import { routingConfig } from "@/i18n/routing";
+import { Breadcrumbs } from "@/shell/breadcrumbs";
+import { PageHeader } from "@/shell/page-header";
 import { ProductCatalog } from "./[id]/_components/ProductCatalog";
 
 export async function generateStaticParams() {
@@ -31,7 +31,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function CategoryRoute({
+export default async function CategoryPage({
   params,
   searchParams,
 }: PageProps<"/[locale]/products/[category]">) {

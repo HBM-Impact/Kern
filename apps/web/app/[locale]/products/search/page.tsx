@@ -2,16 +2,16 @@ import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
 import type { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { PageHeader } from "@/features/layout/page-header";
 import { SearchForm } from "@/features/products/components/search-form";
-import { SearchResults } from "./_components/search-results";
+import { PageHeader } from "@/shell/page-header";
+import { SearchResults } from "./_components/SearchResults";
 
 export const metadata = {
   title: "Search Products",
   description: "Find products by name, brand, or description.",
 } satisfies Metadata;
 
-export default async function SearchRoute({
+export default async function SearchPage({
   params,
   searchParams,
 }: PageProps<"/[locale]/products/search">) {

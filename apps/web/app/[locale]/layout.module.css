@@ -16,7 +16,7 @@
   width: 100%;
   margin-inline: auto;
 
-  @media (max-width: 480px) {
+  @media (width <= 480px) {
     padding-inline: var(--size-3);
   }
 }

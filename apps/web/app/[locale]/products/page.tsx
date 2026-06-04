@@ -4,8 +4,8 @@ import { Link } from "@repo/ui/link";
 import type { Metadata } from "next";
 import type { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { PageHeader } from "@/features/layout/page-header";
 import { CategoryList } from "@/features/products/components/category-list";
+import { PageHeader } from "@/shell/page-header";
 
 export const metadata = {
   title: "Products",

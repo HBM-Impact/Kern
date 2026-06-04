@@ -3,7 +3,7 @@
 import { IconButton } from "@repo/ui/buttons/icon-button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useState } from "react";
-import { OptimizedImage } from "@/components/optimized-image";
+import { OptimizedImage } from "@/primitives/optimized-image";
 import styles from "./ProductGallery.module.css";
 
 type Props = { images: string[]; title: string };
