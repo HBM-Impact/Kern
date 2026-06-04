@@ -34,11 +34,7 @@ export function Select({ options, label, name, className, ...rest }: Props) {
           const value = getOptionValue(option);
           const optionLabel = getOptionLabel(option);
           return (
-            <option
-              key={value}
-              value={value}
-              selected={rest?.value === value || rest?.defaultValue === value}
-            >
+            <option key={value} value={value}>
               {optionLabel}
             </option>
           );
