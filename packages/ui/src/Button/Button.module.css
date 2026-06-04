@@ -1,0 +1,79 @@
+.base {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
+  padding-inline: var(--size-3);
+  cursor: pointer;
+  width: fit-content;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  border-width: var(--border-size-1);
+  border-style: solid;
+  border-color: var(--color-border);
+  border-radius: var(--radius-2);
+  transition:
+    background-color 0.15s ease-out,
+    border-color 0.15s ease-out;
+  gap: var(--size-2);
+  flex-shrink: 0;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-1);
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.base:hover {
+  background-color: var(--color-hover-bg);
+  border-color: var(--color-text-muted);
+}
+
+.base:active {
+  background-color: var(--color-active-bg);
+}
+
+.base > svg {
+  height: var(--size-3);
+  width: var(--size-3);
+}
+
+.reverse {
+  flex-direction: row-reverse;
+}
+
+.fill {
+  width: 100%;
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  height: 2.5rem;
+  width: 2.5rem;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  border-width: var(--border-size-1);
+  border-style: solid;
+  border-color: var(--color-border);
+  border-radius: var(--radius-2);
+  transition:
+    background-color 0.15s ease-out,
+    border-color 0.15s ease-out;
+  flex-shrink: 0;
+}
+
+.iconButton:hover {
+  background-color: var(--color-hover-bg);
+  border-color: var(--color-text-muted);
+}
+
+.iconButton:active {
+  background-color: var(--color-active-bg);
+}
+
+.iconButton > svg {
+  height: var(--size-3);
+  width: var(--size-3);
+}

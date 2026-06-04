@@ -1,0 +1,36 @@
+.container {
+  overflow-x: auto;
+  overflow: hidden;
+  border: var(--border-size-1) solid var(--color-border);
+  border-radius: var(--radius-2);
+}
+
+.table {
+  width: 100%;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+.table thead {
+  background-color: var(--color-bg-muted);
+}
+
+.table thead tr th {
+  white-space: nowrap;
+  text-align: left;
+  padding: var(--size-3);
+}
+
+.table tr {
+  border-bottom: var(--border-size-1) solid var(--color-border);
+}
+
+.table tr:last-child {
+  border-bottom: none;
+}
+
+.table tbody tr td {
+  white-space: nowrap;
+  text-align: left;
+  padding: var(--size-3);
+}
