@@ -1,0 +1,20 @@
+.reviews {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-3);
+}
+
+.review {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-1);
+  padding: var(--size-3);
+  border: 1px solid var(--color-border-muted);
+  border-radius: var(--radius-2);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

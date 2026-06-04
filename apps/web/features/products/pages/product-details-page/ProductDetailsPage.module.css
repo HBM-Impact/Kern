@@ -1,0 +1,21 @@
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--size-5);
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-3);
+}
+
+.priceRow {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2);
+}

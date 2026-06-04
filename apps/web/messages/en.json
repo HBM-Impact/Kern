@@ -9,6 +9,14 @@
       "title": "Page Not Found",
       "description": "The page you are looking for does not exist",
       "backHome": "Back to Home"
+    },
+    "Products": {
+      "title": "Products",
+      "description": "Browse products by category or search for something specific."
+    },
+    "ProductSearch": {
+      "title": "Search Products",
+      "description": "Find products by name, brand, or description."
     }
   }
 }
