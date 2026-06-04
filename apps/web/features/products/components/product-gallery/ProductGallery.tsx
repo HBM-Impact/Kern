@@ -1,6 +1,7 @@
 "use client";
 
 import { IconButton } from "@repo/ui/buttons/icon-button";
+import clsx from "clsx";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { OptimizedImage } from "@/primitives/optimized-image";
@@ -56,11 +57,10 @@ export function ProductGallery({ images, title }: Props) {
             <li key={image}>
               <button
                 type="button"
-                className={
-                  index === activeIndex
-                    ? `${styles.thumbButton} ${styles.active}`
-                    : styles.thumbButton
-                }
+                className={clsx(
+                  styles.thumbButton,
+                  index === activeIndex && styles.active,
+                )}
                 onClick={() => setActiveIndex(index)}
                 aria-label={`View image ${index + 1}`}
                 aria-current={index === activeIndex ? true : undefined}

@@ -1,26 +1,24 @@
 import clsx from "clsx";
-import type { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
+import type { ComponentPropsWithoutRef, ElementType } from "react";
 import styles from "./Typography.module.css";
 
-type OwnProps = {
-  as?: ElementType;
+type Props<T extends ElementType = "p"> = {
+  as?: T;
   variant?: "body" | "label";
   uppercase?: boolean;
-  children?: ReactNode;
-};
+} & ComponentPropsWithoutRef<T>;
 
-type Props = OwnProps & Omit<ComponentPropsWithoutRef<"p">, keyof OwnProps>;
-
-export function Typography({
-  as: Element = "p",
+export function Typography<T extends ElementType = "p">({
+  as,
   variant = "body",
   uppercase = false,
   className,
   children,
   ...rest
-}: Props) {
+}: Props<T>) {
+  const Tag = (as ?? "p") as ElementType;
   return (
-    <Element
+    <Tag
       className={clsx(
         styles.base,
         variant === "body" && styles.body,
@@ -31,6 +29,6 @@ export function Typography({
       {...rest}
     >
       {children}
-    </Element>
+    </Tag>
   );
 }

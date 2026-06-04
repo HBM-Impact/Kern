@@ -1,5 +1,3 @@
-"use client";
-
 import type { Product } from "@repo/services/commerce/commerce-types";
 import { Display } from "@repo/ui/display";
 import { Typography } from "@repo/ui/typography";

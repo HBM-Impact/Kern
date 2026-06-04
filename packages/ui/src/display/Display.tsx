@@ -1,26 +1,24 @@
 import clsx from "clsx";
-import type { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
+import type { ComponentPropsWithoutRef, ElementType } from "react";
 import styles from "./Display.module.css";
 
-type OwnProps = {
-  as?: ElementType;
+type Props<T extends ElementType = "h2"> = {
+  as?: T;
   variant?: "display1" | "display2" | "display3" | "display4";
   uppercase?: boolean;
-  children?: ReactNode;
-};
+} & ComponentPropsWithoutRef<T>;
 
-type Props = OwnProps & Omit<ComponentPropsWithoutRef<"h2">, keyof OwnProps>;
-
-export function Display({
-  as: Element = "h2",
+export function Display<T extends ElementType = "h2">({
+  as,
   variant = "display2",
   uppercase = false,
   className,
   children,
   ...rest
-}: Props) {
+}: Props<T>) {
+  const Tag = (as ?? "h2") as ElementType;
   return (
-    <Element
+    <Tag
       className={clsx(
         styles.base,
         variant === "display1" && styles.display1,
@@ -33,6 +31,6 @@ export function Display({
       {...rest}
     >
       {children}
-    </Element>
+    </Tag>
   );
 }

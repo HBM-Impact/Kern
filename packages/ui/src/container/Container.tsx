@@ -1,23 +1,21 @@
 import clsx from "clsx";
-import type { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
+import type { ComponentPropsWithoutRef, ElementType } from "react";
 import styles from "./Container.module.css";
 
-type OwnProps = {
-  as?: ElementType;
-  children?: ReactNode;
-};
+type Props<T extends ElementType = "div"> = {
+  as?: T;
+} & ComponentPropsWithoutRef<T>;
 
-type Props = OwnProps & Omit<ComponentPropsWithoutRef<"div">, keyof OwnProps>;
-
-export function Container({
-  as: Element = "div",
+export function Container<T extends ElementType = "div">({
+  as,
   className,
   children,
   ...rest
-}: Props) {
+}: Props<T>) {
+  const Tag = (as ?? "div") as ElementType;
   return (
-    <Element className={clsx(styles.container, className)} {...rest}>
+    <Tag className={clsx(styles.container, className)} {...rest}>
       {children}
-    </Element>
+    </Tag>
   );
 }

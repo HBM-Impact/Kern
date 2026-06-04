@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { type ReactNode, useState } from "react";
+import { type ReactNode, useId, useState } from "react";
 import { Typography } from "../typography";
 import styles from "./Tabs.module.css";
 
@@ -12,6 +12,7 @@ type Props = {
 
 export function Tabs({ tabs, defaultTab = 0 }: Props) {
   const [activeTab, setActiveTab] = useState(defaultTab);
+  const id = useId();
 
   return (
     <div className={styles.container}>
@@ -26,9 +27,9 @@ export function Tabs({ tabs, defaultTab = 0 }: Props) {
               type="button"
               onClick={() => setActiveTab(index)}
               role="tab"
-              aria-controls={`tab-content-${index}`}
+              aria-controls={`${id}-panel-${index}`}
               aria-selected={activeTab === index}
-              id={`tab-${index}`}
+              id={`${id}-tab-${index}`}
             >
               <Typography as="span" variant="body">
                 {tab.label}
@@ -41,9 +42,9 @@ export function Tabs({ tabs, defaultTab = 0 }: Props) {
         <div
           key={tab.label}
           className={clsx(styles.panel, activeTab === index && styles.active)}
-          id={`tab-content-${index}`}
+          id={`${id}-panel-${index}`}
           role="tabpanel"
-          aria-labelledby={`tab-${index}`}
+          aria-labelledby={`${id}-tab-${index}`}
         >
           {tab.content}
         </div>

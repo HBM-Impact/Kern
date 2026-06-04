@@ -4,7 +4,6 @@ import { Button } from "@repo/ui/buttons";
 import { Input } from "@repo/ui/form/input";
 import { useRouter } from "next/navigation";
 import { useLocale } from "next-intl";
-import { useState } from "react";
 import styles from "./SearchForm.module.css";
 
 type Props = { q?: string };
@@ -12,10 +11,9 @@ type Props = { q?: string };
 export function SearchForm({ q }: Props) {
   const router = useRouter();
   const locale = useLocale();
-  const [value, setValue] = useState(q ?? "");
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
+  function handleAction(formData: FormData) {
+    const value = formData.get("q") as string;
     const params = new URLSearchParams();
     if (value) params.set("q", value);
     const qs = params.toString();
@@ -23,13 +21,12 @@ export function SearchForm({ q }: Props) {
   }
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={styles.form} action={handleAction}>
       <Input
         label="Search products"
         name="q"
         placeholder="Search for phones, laptops, groceries…"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
+        defaultValue={q ?? ""}
       />
       <Button type="submit">Search</Button>
     </form>
