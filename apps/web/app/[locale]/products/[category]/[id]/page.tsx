@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { parseProductSlug } from "@/lib/slug/parseProductSlug";
+import { parseProductSlug } from "@/lib/slug/parse-product-slug";
 import { Breadcrumbs } from "@/shell/breadcrumbs";
 import { ProductDetails } from "./_components/ProductDetails";
 

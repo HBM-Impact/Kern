@@ -1,7 +1,7 @@
 import type { Product } from "@repo/services/commerce/commerce-types";
 import { Typography } from "@repo/ui/typography";
 import { IntlLink } from "@/i18n/navigation";
-import { createProductSlug } from "@/lib/slug/createProductSlug";
+import { createProductSlug } from "@/lib/slug/create-product-slug";
 import { OptimizedImage } from "@/primitives/optimized-image";
 import styles from "./ProductCard.module.css";
 
