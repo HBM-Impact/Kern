@@ -14,9 +14,7 @@ export const metadata = {
 
 export default async function ProductsPage({
   params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+}: PageProps<"/[locale]/products">) {
   const { locale } = await params;
   setRequestLocale(locale as Locale);
 

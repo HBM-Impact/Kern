@@ -1,7 +1,10 @@
+import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
 import type { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { SearchPage } from "@/features/products/pages/search-page";
+import { PageHeader } from "@/features/layout/page-header";
+import { SearchForm } from "@/features/products/components/search-form";
+import { SearchResults } from "./_components/search-results";
 
 export const metadata = {
   title: "Search Products",
@@ -11,18 +14,22 @@ export const metadata = {
 export default async function SearchRoute({
   params,
   searchParams,
-}: {
-  params: Promise<{ locale: string }>;
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
-}) {
+}: PageProps<"/[locale]/products/search">) {
   const { locale } = await params;
   const { q, sort } = await searchParams;
   setRequestLocale(locale as Locale);
 
+  const query = typeof q === "string" ? q : undefined;
+  const sortStr = typeof sort === "string" ? sort : undefined;
+
   return (
-    <SearchPage
-      q={typeof q === "string" ? q : undefined}
-      sort={typeof sort === "string" ? sort : undefined}
-    />
+    <Container as="section">
+      <PageHeader
+        title="Search"
+        description="Find products by name, brand, or description."
+      />
+      <SearchForm q={query} />
+      {query ? <SearchResults q={query} sort={sortStr} /> : null}
+    </Container>
   );
 }

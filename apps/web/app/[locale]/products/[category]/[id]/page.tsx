@@ -4,13 +4,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { ProductDetailsPage } from "@/features/products/pages/product-details-page";
+import { ProductDetails } from "./_components/product-details";
 
 export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ locale: string; slug: string; id: string }>;
-}): Promise<Metadata> {
+}: PageProps<"/[locale]/products/[category]/[id]">): Promise<Metadata> {
   const { id } = await params;
   const product = await getProductById({ id });
   if (!product) return {};
@@ -22,10 +20,8 @@ export async function generateMetadata({
 
 export default async function ProductDetailRoute({
   params,
-}: {
-  params: Promise<{ locale: string; slug: string; id: string }>;
-}) {
-  const { locale, slug, id } = await params;
+}: PageProps<"/[locale]/products/[category]/[id]">) {
+  const { locale, category, id } = await params;
   setRequestLocale(locale as Locale);
 
   const numId = Number(id);
@@ -33,14 +29,12 @@ export default async function ProductDetailRoute({
 
   const [product, { products: categoryProducts }] = await Promise.all([
     getProductById({ id }),
-    getProductByCategory({ category: slug, skip: 0, limit: 12 }),
+    getProductByCategory({ category, skip: 0, limit: 12 }),
   ]);
 
   if (!product) notFound();
 
   const relatedProducts = categoryProducts.filter((p) => p.id !== numId);
 
-  return (
-    <ProductDetailsPage product={product} relatedProducts={relatedProducts} />
-  );
+  return <ProductDetails product={product} relatedProducts={relatedProducts} />;
 }

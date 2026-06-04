@@ -7,14 +7,14 @@ import { ProductCard } from "@/features/products/components/product-card";
 import { ProductGallery } from "@/features/products/components/product-gallery";
 import { ProductReviews } from "@/features/products/components/product-reviews";
 import { ProductSpecs } from "@/features/products/components/product-specs";
-import styles from "./ProductDetailsPage.module.css";
+import styles from "./product-details.module.css";
 
 type Props = {
   product: Product;
   relatedProducts: Product[];
 };
 
-export function ProductDetailsPage({ product, relatedProducts }: Props) {
+export function ProductDetails({ product, relatedProducts }: Props) {
   return (
     <Container as="article">
       <div className={styles.layout}>

@@ -1,8 +1,6 @@
 "use client";
 
 import type { Product } from "@repo/services/commerce/commerce-types";
-import { Container } from "@repo/ui/container";
-import { PageHeader } from "@/features/layout/page-header";
 import { useProductByCategory } from "@/features/products/api/queries/use-product-by-category";
 import { ProductGrid } from "@/features/products/components/product-grid";
 import { SortControl } from "@/features/products/components/sort-control";
@@ -17,21 +15,17 @@ const SORT_MAP: Record<string, SortEntry> = {
   "title-asc": { sortBy: "title", order: "asc" },
 };
 
-function formatSlug(slug: string) {
-  return slug.replaceAll("-", " ").replace(/\b\w/g, (l) => l.toUpperCase());
-}
-
 type Props = {
-  slug: string;
+  category: string;
   sort?: string;
 };
 
-export function ProductListPage({ slug, sort }: Props) {
+export function ProductCatalog({ category, sort }: Props) {
   const sortEntry = sort ? SORT_MAP[sort] : undefined;
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useProductByCategory({
-      category: slug,
+      category,
       limit: 12,
       sortBy: sortEntry?.sortBy,
       order: sortEntry?.order,
@@ -40,11 +34,7 @@ export function ProductListPage({ slug, sort }: Props) {
   const products = data?.pages.flatMap((p) => p.products) ?? [];
 
   return (
-    <Container as="section">
-      <PageHeader
-        title={formatSlug(slug)}
-        description={`Browse all products in the ${formatSlug(slug)} category.`}
-      />
+    <>
       <SortControl sort={sort} />
       <ProductGrid
         products={products}
@@ -52,6 +42,6 @@ export function ProductListPage({ slug, sort }: Props) {
         isFetchingMore={isFetchingNextPage}
         onLoadMore={() => fetchNextPage()}
       />
-    </Container>
+    </>
   );
 }
