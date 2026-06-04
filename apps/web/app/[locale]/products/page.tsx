@@ -5,6 +5,9 @@ import type { Metadata } from "next";
 import type { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { CategoryList } from "@/features/products/components/category-list";
+import { getBaseUrl } from "@/lib/seo/get-base-url";
+import { generateItemListJsonLd } from "@/lib/seo/item-list";
+import { JsonLdScript } from "@/lib/seo/json-ld-script";
 import { PageHeader } from "@/shell/page-header";
 
 export const metadata = {
@@ -18,16 +21,27 @@ export default async function ProductsPage({
   const { locale } = await params;
   setRequestLocale(locale as Locale);
 
+  const baseUrl = getBaseUrl();
   const categories = await getCategories();
 
   return (
-    <Container as="article">
-      <PageHeader
-        title="Products"
-        description="Browse products by category or search for something specific."
+    <>
+      <JsonLdScript
+        data={generateItemListJsonLd(
+          categories.map((category) => ({
+            name: category.name,
+            url: `${baseUrl}/${locale}/products/${category.slug}`,
+          })),
+        )}
       />
-      <Link href="/products/search">Search products →</Link>
-      <CategoryList categories={categories} />
-    </Container>
+      <Container as="article">
+        <PageHeader
+          title="Products"
+          description="Browse products by category or search for something specific."
+        />
+        <Link href="/products/search">Search products →</Link>
+        <CategoryList categories={categories} />
+      </Container>
+    </>
   );
 }

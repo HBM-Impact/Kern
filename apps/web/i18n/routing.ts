@@ -5,6 +5,8 @@ export const routingConfig = {
   defaultLocale: "en",
   pathnames: {
     "/": "/",
+    "/cart": "/cart",
+    "/favorites": "/favorites",
     "/products": "/products",
     "/products/search": "/products/search",
     "/products/[category]": "/products/[category]",

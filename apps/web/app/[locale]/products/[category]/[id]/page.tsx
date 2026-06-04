@@ -4,6 +4,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
+import { getBaseUrl } from "@/lib/seo/get-base-url";
+import { JsonLdScript } from "@/lib/seo/json-ld-script";
+import { generateProductJsonLd } from "@/lib/seo/product";
 import { parseProductSlug } from "@/lib/slug/parse-product-slug";
 import { Breadcrumbs } from "@/shell/breadcrumbs";
 import { ProductDetails } from "./_components/ProductDetails";
@@ -38,11 +41,14 @@ export default async function ProductDetailPage({
 
   if (!product) notFound();
 
+  const baseUrl = getBaseUrl();
+  const productUrl = `${baseUrl}/${locale}/products/${category}/${id}`;
   const relatedProducts = categoryProducts.filter((p) => p.id !== numId);
 
   return (
     <>
       <Breadcrumbs
+        locale={locale}
         items={[
           { href: "/products", label: "Products" },
           {
@@ -55,6 +61,7 @@ export default async function ProductDetailPage({
           { label: product.title },
         ]}
       />
+      <JsonLdScript data={generateProductJsonLd(product, productUrl)} />
       <ProductDetails product={product} relatedProducts={relatedProducts} />
     </>
   );

@@ -22,6 +22,7 @@
     "open-props": "^1.7.23",
     "react": "catalog:",
     "react-dom": "catalog:",
+    "schema-dts": "^2.0.0",
     "usehooks-ts": "catalog:"
   },
   "devDependencies": {

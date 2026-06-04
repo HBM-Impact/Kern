@@ -5,6 +5,9 @@ import type { Locale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Hero } from "@/app/[locale]/_components/hero";
 import { FeaturedProducts } from "@/features/products/components/featured-products";
+import { getBaseUrl } from "@/lib/seo/get-base-url";
+import { JsonLdScript } from "@/lib/seo/json-ld-script";
+import { generateWebSiteJsonLd } from "@/lib/seo/web-site";
 
 export async function generateMetadata({
   params,
@@ -21,6 +24,8 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   setRequestLocale(locale as Locale);
 
+  const baseUrl = getBaseUrl();
+
   const { products } = await getProductByCategory({
     category: "smartphones",
     skip: 0,
@@ -28,9 +33,19 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   });
 
   return (
-    <Container as="article">
-      <Hero />
-      <FeaturedProducts products={products} />
-    </Container>
+    <>
+      <JsonLdScript
+        data={generateWebSiteJsonLd({
+          name: "Kern",
+          url: baseUrl,
+          searchUrl: `${baseUrl}/${locale}/products/search`,
+          inLanguage: locale,
+        })}
+      />
+      <Container as="article">
+        <Hero />
+        <FeaturedProducts products={products} />
+      </Container>
+    </>
   );
 }
