@@ -1,4 +1,4 @@
-import { getHoursInSeconds } from "@repo/utils/getTime";
+import { hoursToSeconds } from "@repo/utils/time";
 import type { FetcherArgs } from "../../serviceTypes";
 import { commerceClient } from "../commerceClient";
 import type { Product } from "../commerceTypes";
@@ -12,7 +12,7 @@ export const getProductById = async ({ id, signal }: Args) => {
     .get(`products/${id}`, {
       ...(signal !== undefined && { signal }),
       next: {
-        revalidate: getHoursInSeconds(24),
+        revalidate: hoursToSeconds(24),
         tags: [`product-${id}`, "products"],
       },
     })

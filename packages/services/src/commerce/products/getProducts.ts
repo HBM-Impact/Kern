@@ -1,4 +1,4 @@
-import { getHoursInSeconds } from "@repo/utils/getTime";
+import { hoursToSeconds } from "@repo/utils/time";
 import type { FetcherArgs } from "../../serviceTypes";
 import { commerceClient } from "../commerceClient";
 import type { Product, ProductResponse } from "../commerceTypes";
@@ -27,7 +27,7 @@ export async function getProducts({
         ...(order && { order }),
       },
       next: {
-        revalidate: getHoursInSeconds(24),
+        revalidate: hoursToSeconds(24),
         tags: ["products"],
       },
     })

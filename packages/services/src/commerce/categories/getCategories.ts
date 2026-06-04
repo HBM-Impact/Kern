@@ -1,4 +1,4 @@
-import { getHoursInSeconds } from "@repo/utils/getTime";
+import { hoursToSeconds } from "@repo/utils/time";
 import type { FetcherArgs } from "../../serviceTypes";
 import { commerceClient } from "../commerceClient";
 import type { CategoryResponse } from "../commerceTypes";
@@ -10,7 +10,7 @@ export async function getCategories({ signal }: Args = {}) {
     .get("products/categories", {
       ...(signal !== undefined && { signal }),
       next: {
-        revalidate: getHoursInSeconds(24),
+        revalidate: hoursToSeconds(24),
         tags: ["categories"],
       },
     })
