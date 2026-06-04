@@ -3,15 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./commerce/client": "./commerce/commerceClient.ts",
-    "./commerce/types": "./commerce/commerceTypes.ts",
-    "./commerce/products/getCategories": "./commerce/products/getCategories.ts",
-    "./commerce/products/getProductByCategory": "./commerce/products/getProductByCategory.ts",
-    "./commerce/products/getProductById": "./commerce/products/getProductById.ts",
-    "./commerce/products/getProducts": "./commerce/products/getProducts.ts",
-    "./commerce/products/getProductsByQuery": "./commerce/products/getProductsByQuery.ts",
-    "./commerce/utils/isProduct": "./commerce/utils/isProduct.ts",
-    "./types": "./serviceTypes.ts"
+    "./*": "./src/*.ts"
   },
   "scripts": {
     "lint": "biome check .",

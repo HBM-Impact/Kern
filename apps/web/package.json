@@ -21,7 +21,8 @@
     "open-props": "^1.7.23",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "usehooks-ts": "catalog:"
+    "usehooks-ts": "catalog:",
+    "@tanstack/react-query": "catalog:"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
