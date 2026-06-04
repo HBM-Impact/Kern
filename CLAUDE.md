@@ -20,11 +20,19 @@ cd apps/web && pnpm dev  # single app
 
 Turborepo monorepo:
 
-- `apps/web` — Next.js 16, App Router, React 19
-- `packages/ui` — shared components as `@repo/ui`
+- `apps/web` — Next.js 16, App Router, React 19, React Compiler enabled
+- `packages/ui` — shared React components as `@repo/ui`
+- `packages/services` — commerce API client as `@repo/services`
+- `packages/utils` — shared utilities as `@repo/utils`
 - `packages/typescript-config` — shared tsconfig bases
 
-`packages/ui` exports from source, no build step. Import as `@repo/ui/button`, not from a barrel.
+All packages export from source, no build step. Import by specific path, never from a barrel:
+
+- `@repo/ui/button` → `packages/ui/src/button/index.ts`
+- `@repo/services/commerce/products/getProducts` → individual service file
+- `@repo/utils/weakKey` → `packages/utils/src/weakKey.ts`
+
+`apps/web` uses `next-intl` for i18n. App Router routes live under `app/[locale]/`. Config in `i18n/` (routing, navigation, request).
 
 ## Linting & Formatting
 
