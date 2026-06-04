@@ -1,5 +1,6 @@
 "use client";
 
+import { weakKey } from "@repo/utils/weakKey";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { type ReactNode, useRef } from "react";
 import { IconButton } from "../Buttons/IconButton";
@@ -54,9 +55,15 @@ export function Carousel({ children, title, description }: Props) {
         </div>
       </header>
       <ol ref={listRef} className={styles.list}>
-        {items.map((child, index) => (
-          // biome-ignore lint/suspicious/noArrayIndexKey: children have no stable identity
-          <li key={index} className={styles.listItem}>
+        {items.map((child) => (
+          <li
+            key={
+              typeof child === "object" && child !== null
+                ? weakKey(child)
+                : String(child)
+            }
+            className={styles.listItem}
+          >
             {child}
           </li>
         ))}

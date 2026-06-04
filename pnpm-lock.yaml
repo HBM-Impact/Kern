@@ -65,6 +65,9 @@ importers:
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@repo/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       clsx:
         specifier: 'catalog:'
         version: 2.1.1
@@ -113,6 +116,9 @@ importers:
 
   packages/ui:
     dependencies:
+      '@repo/utils':
+        specifier: workspace:*
+        version: link:../utils
       clsx:
         specifier: 'catalog:'
         version: 2.1.1
@@ -138,6 +144,15 @@ importers:
       '@types/react-dom':
         specifier: 'catalog:'
         version: 19.2.3(@types/react@19.2.16)
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
+
+  packages/utils:
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
