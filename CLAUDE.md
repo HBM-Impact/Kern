@@ -64,3 +64,11 @@ A PostToolUse hook auto-runs `biome check --write --unsafe` on any file Claude e
 
 - `/review` — reviews changed files against Next.js/React best practices and project conventions
 - `/performance-review` — checks changed files for data locality, parallelism, caching, and N+1 patterns
+
+## Reference Files
+
+- `.claude/skills/typescript.md` — TypeScript patterns (satisfies, discriminated unions, inference, as const, Zod, etc.)
+- `.claude/agents/patterns.md` — code style, component, data fetching, and TypeScript conventions
+- `.claude/agents/architecture.md` — directory structure and key architectural rules
+- `.claude/commands/review.md` — full `/review` skill definition
+- `.claude/commands/performance-review.md` — full `/performance-review` skill definition

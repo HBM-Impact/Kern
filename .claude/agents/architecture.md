@@ -15,5 +15,5 @@ packages/typescript-config/  # Shared tsconfig bases (base, nextjs, react-librar
 - `@repo/ui` exports directly from source — no build step (`"./button": "./src/button.tsx"`)
 - Import as `@repo/ui/button`, never from a barrel
 - Server Components by default; add `"use client"` only for hooks, forms, or interactivity
-- Biome (not ESLint/Prettier) handles linting and formatting — auto-applied via PostToolUse hook
+- Biome handles linting and formatting — auto-applied via PostToolUse hook
 - TypeScript strict mode + `noUncheckedIndexedAccess` everywhere
