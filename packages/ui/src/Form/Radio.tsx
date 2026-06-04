@@ -1,5 +1,5 @@
+import { Dot } from "lucide-react";
 import type { InputHTMLAttributes } from "react";
-import { Dot } from "../Icons/Dot";
 import styles from "./Form.module.css";
 import type { InputProps } from "./types";
 

@@ -1,5 +1,5 @@
+import { Check } from "lucide-react";
 import type { InputHTMLAttributes } from "react";
-import { Check } from "../Icons/Check";
 import styles from "./Form.module.css";
 import type { InputProps } from "./types";
 

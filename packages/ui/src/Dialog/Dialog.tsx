@@ -1,16 +1,19 @@
+"use client";
+
 import clsx from "clsx";
-import type { DialogHTMLAttributes, ReactNode } from "react";
+import { X } from "lucide-react";
+import type { DialogHTMLAttributes, ReactNode, Ref } from "react";
+import { useId } from "react";
 import { IconButton } from "../Button/IconButton";
 import { Display } from "../Display/Display";
-import { X } from "../Icons/X";
 import styles from "./Dialog.module.css";
 
 type Props = {
-  ref: string;
+  ref?: Ref<HTMLDialogElement>;
   type?: "center" | "aside";
   title: string;
   children?: ReactNode;
-} & DialogHTMLAttributes<HTMLDialogElement>;
+} & Omit<DialogHTMLAttributes<HTMLDialogElement>, "ref">;
 
 export function Dialog({
   children,
@@ -19,11 +22,19 @@ export function Dialog({
   title,
   ...rest
 }: Props) {
-  const titleId = `${ref}-title`;
+  const id = useId();
+  const titleId = `${id}-title`;
+
   return (
     <dialog
-      x-ref={ref}
-      {...{ "x-on:click": "$event.target === $el && $el.close()" }}
+      ref={ref}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) e.currentTarget.close();
+      }}
+      onKeyDown={(e) => {
+        if (e.target === e.currentTarget && e.key === "Enter")
+          e.currentTarget.close();
+      }}
       className={clsx(
         styles.dialog,
         type === "center" ? styles.center : styles.aside,
@@ -37,7 +48,11 @@ export function Dialog({
           {title}
         </Display>
         <IconButton
-          {...{ "x-on:click": "$el.closest('dialog')?.close()" }}
+          onClick={(e) =>
+            (
+              e.currentTarget.closest("dialog") as HTMLDialogElement | null
+            )?.close()
+          }
           icon={<X />}
           aria-label="Close"
         />

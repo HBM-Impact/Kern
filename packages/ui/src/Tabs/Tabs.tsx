@@ -1,36 +1,33 @@
+"use client";
+
 import clsx from "clsx";
-import type { ReactNode } from "react";
+import { type ReactNode, useState } from "react";
 import { Typography } from "../Typography/Typography";
 import styles from "./Tabs.module.css";
 
 type Props = {
   tabs: { label: string; content: ReactNode }[];
-  activeTab?: number;
+  defaultTab?: number;
 };
 
-export function Tabs({ tabs, activeTab = 0 }: Props) {
+export function Tabs({ tabs, defaultTab = 0 }: Props) {
+  const [activeTab, setActiveTab] = useState(defaultTab);
+
   return (
-    <div
-      className={styles.container}
-      x-data={`{ activeTab: ${activeTab}, setActiveTab(index) { this.activeTab = index } }`}
-    >
+    <div className={styles.container}>
       <ul className={styles.tabs}>
         {tabs.map((tab, index) => (
           <li
             key={tab.label}
             className={clsx(styles.tab, activeTab === index && styles.active)}
             role="presentation"
-            {...{ ":class": `{ '${styles.active}': activeTab === ${index} }` }}
           >
             <button
               type="button"
-              {...{ "x-on:click": `setActiveTab(${index})` }}
+              onClick={() => setActiveTab(index)}
               role="tab"
               aria-controls={`tab-content-${index}`}
               aria-selected={activeTab === index}
-              {...{
-                "x-bind:aria-selected": `(activeTab === ${index}).toString()`,
-              }}
               id={`tab-${index}`}
             >
               <Typography as="span" variant="body">
@@ -47,7 +44,6 @@ export function Tabs({ tabs, activeTab = 0 }: Props) {
           id={`tab-content-${index}`}
           role="tabpanel"
           aria-labelledby={`tab-${index}`}
-          {...{ ":class": `{ '${styles.active}': activeTab === ${index} }` }}
         >
           {tab.content}
         </div>

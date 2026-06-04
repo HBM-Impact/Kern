@@ -116,18 +116,6 @@
   width: 0;
 }
 
-.checkboxLabel > input:checked ~ .checkbox {
-  background-color: inherit;
-}
-
-.checkboxLabel > input:checked ~ .checkbox > svg {
-  opacity: 1;
-}
-
-.checkboxLabel > input:focus ~ .checkbox {
-  outline: var(--border-size-3) auto -webkit-focus-ring-color;
-}
-
 .checkbox {
   width: var(--size-3);
   height: var(--size-3);
@@ -150,6 +138,18 @@
   color: var(--color-text);
 }
 
+.checkboxLabel > input:checked ~ .checkbox {
+  background-color: inherit;
+}
+
+.checkboxLabel > input:checked ~ .checkbox > svg {
+  opacity: 1;
+}
+
+.checkboxLabel > input:focus ~ .checkbox {
+  outline: var(--border-size-3) auto -webkit-focus-ring-color;
+}
+
 .radioLabel {
   position: relative;
   display: flex;
@@ -167,18 +167,6 @@
   cursor: pointer;
   height: 0;
   width: 0;
-}
-
-.radioLabel > input:checked ~ .radio {
-  background-color: inherit;
-}
-
-.radioLabel > input:checked ~ .radio > svg {
-  opacity: 1;
-}
-
-.radioLabel > input:focus ~ .radio {
-  outline: var(--border-size-3) auto -webkit-focus-ring-color;
 }
 
 .radio {
@@ -201,6 +189,18 @@
   width: var(--size-3);
   height: var(--size-3);
   fill: var(--color-text);
+}
+
+.radioLabel > input:checked ~ .radio {
+  background-color: inherit;
+}
+
+.radioLabel > input:checked ~ .radio > svg {
+  opacity: 1;
+}
+
+.radioLabel > input:focus ~ .radio {
+  outline: var(--border-size-3) auto -webkit-focus-ring-color;
 }
 
 .group {

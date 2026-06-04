@@ -1,6 +1,6 @@
 import clsx from "clsx";
+import { ChevronDown } from "lucide-react";
 import type { SelectHTMLAttributes } from "react";
-import { ChevronDown } from "../Icons/Chevron/Down";
 import styles from "./Form.module.css";
 import type { InputProps } from "./types";
 

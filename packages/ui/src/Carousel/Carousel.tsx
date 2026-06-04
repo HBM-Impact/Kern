@@ -1,8 +1,9 @@
-import { type ReactNode, useId } from "react";
+"use client";
+
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { type ReactNode, useRef } from "react";
 import { IconButton } from "../Button/IconButton";
 import { Display } from "../Display/Display";
-import { ArrowLeft } from "../Icons/Arrow/Left";
-import { ArrowRight } from "../Icons/Arrow/Right";
 import { Typography } from "../Typography/Typography";
 import styles from "./Carousel.module.css";
 
@@ -13,9 +14,18 @@ type Props = {
 };
 
 export function Carousel({ children, title, description }: Props) {
-  const rawId = useId().replace(/:/g, "");
-  const listId = `carousel-${rawId}`;
+  const listRef = useRef<HTMLOListElement>(null);
   const items = Array.isArray(children) ? children : [children];
+
+  function scroll(direction: "left" | "right") {
+    const el = listRef.current;
+    const item = el?.querySelector("li");
+    if (!el || !item) return;
+    el.scrollBy({
+      left: direction === "left" ? -item.offsetWidth : item.offsetWidth,
+      behavior: "smooth",
+    });
+  }
 
   return (
     <section className={styles.container}>
@@ -32,23 +42,20 @@ export function Carousel({ children, title, description }: Props) {
         </div>
         <div className={styles.buttonGroup}>
           <IconButton
-            {...{
-              "x-on:click": `(() => { const el = document.getElementById('${listId}'); const item = el?.querySelector('li'); if (el && item) el.scrollBy({ left: -item.offsetWidth, behavior: 'smooth' }); })()`,
-            }}
+            onClick={() => scroll("left")}
             icon={<ArrowLeft />}
             aria-label="Scroll left"
           />
           <IconButton
-            {...{
-              "x-on:click": `(() => { const el = document.getElementById('${listId}'); const item = el?.querySelector('li'); if (el && item) el.scrollBy({ left: item.offsetWidth, behavior: 'smooth' }); })()`,
-            }}
+            onClick={() => scroll("right")}
             icon={<ArrowRight />}
             aria-label="Scroll right"
           />
         </div>
       </header>
-      <ol id={listId} className={styles.list}>
+      <ol ref={listRef} className={styles.list}>
         {items.map((child, index) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: children have no stable identity
           <li key={index} className={styles.listItem}>
             {child}
           </li>

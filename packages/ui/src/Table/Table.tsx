@@ -27,6 +27,7 @@ export function Table<T extends Record<string, unknown>>({
         <thead>
           <tr>
             {columns.map((column, index) => (
+              // biome-ignore lint/suspicious/noArrayIndexKey: generic data has no stable column key
               <th scope="col" key={`${String(column.label)}-${index}`}>
                 {wrapPrimitive(column.label)}
               </th>
@@ -35,8 +36,10 @@ export function Table<T extends Record<string, unknown>>({
         </thead>
         <tbody>
           {data.map((row, index) => (
+            // biome-ignore lint/suspicious/noArrayIndexKey: generic data has no stable row key
             <tr key={index}>
               {columns.map((column, colIndex) => (
+                // biome-ignore lint/suspicious/noArrayIndexKey: generic data has no stable column key
                 <td key={`${String(column.label)}-${colIndex}`}>
                   {wrapPrimitive(column.value(row))}
                 </td>

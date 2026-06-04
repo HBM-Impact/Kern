@@ -1,5 +1,5 @@
+import { ChevronDown } from "lucide-react";
 import type { DetailsHTMLAttributes, ReactNode } from "react";
-import { ChevronDown } from "../Icons/Chevron/Down";
 import { Typography } from "../Typography/Typography";
 import styles from "./Accordion.module.css";
 

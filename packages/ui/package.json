@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "clsx": "catalog:",
+    "lucide-react": "^1.17.0",
     "react": "catalog:",
     "react-dom": "catalog:"
   },
