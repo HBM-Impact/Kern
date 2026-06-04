@@ -16,14 +16,15 @@ type Props = {
 
 export function Carousel({ children, title, description }: Props) {
   const listRef = useRef<HTMLOListElement>(null);
+  const firstItemRef = useRef<HTMLLIElement>(null);
   const items = Array.isArray(children) ? children : [children];
 
   function scroll(direction: "left" | "right") {
     const el = listRef.current;
-    const item = el?.querySelector("li");
-    if (!el || !item) return;
+    const itemWidth = firstItemRef.current?.offsetWidth;
+    if (!el || !itemWidth) return;
     el.scrollBy({
-      left: direction === "left" ? -item.offsetWidth : item.offsetWidth,
+      left: direction === "left" ? -itemWidth : itemWidth,
       behavior: "smooth",
     });
   }
@@ -55,8 +56,9 @@ export function Carousel({ children, title, description }: Props) {
         </div>
       </header>
       <ol ref={listRef} className={styles.list}>
-        {items.map((child) => (
+        {items.map((child, index) => (
           <li
+            ref={index === 0 ? firstItemRef : null}
             key={
               typeof child === "object" && child !== null
                 ? weakKey(child)
