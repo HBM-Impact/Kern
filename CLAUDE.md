@@ -32,8 +32,8 @@ Turborepo monorepo:
 
 All packages export from source, no build step. Import by specific path, never from a barrel:
 
-- `@repo/ui/button` → `packages/ui/src/button/index.ts` (dirs are kebab-case)
-- `@repo/services/commerce/products/getProducts` → individual service file
+- `@repo/ui/buttons` → `packages/ui/src/buttons/index.ts` (dirs are kebab-case)
+- `@repo/services/commerce/products/get-products` → individual service file
 - `@repo/utils/weak-key` → `packages/utils/src/weak-key.ts`
 
 `apps/web` uses `next-intl` for i18n. App Router routes live under `app/[locale]/`. Config in `i18n/` (routing, navigation, request).

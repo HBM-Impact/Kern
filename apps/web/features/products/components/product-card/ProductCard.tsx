@@ -1,6 +1,7 @@
 import type { Product } from "@repo/services/commerce/commerce-types";
 import { Typography } from "@repo/ui/typography";
 import { IntlLink } from "@/i18n/navigation";
+import { createProductSlug } from "@/lib/slug/createProductSlug";
 import { OptimizedImage } from "@/primitives/optimized-image";
 import styles from "./ProductCard.module.css";
 
@@ -29,7 +30,7 @@ export function ProductCard({
 }: Props) {
   const href = {
     pathname: "/products/[category]/[id]" as const,
-    params: { category, id: String(id) },
+    params: { category, id: createProductSlug(id, title) },
   };
 
   return (

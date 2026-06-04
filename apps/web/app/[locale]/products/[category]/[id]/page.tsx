@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
+import { parseProductSlug } from "@/lib/slug/parseProductSlug";
 import { Breadcrumbs } from "@/shell/breadcrumbs";
 import { ProductDetails } from "./_components/ProductDetails";
 
@@ -11,7 +12,9 @@ export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/products/[category]/[id]">): Promise<Metadata> {
   const { id } = await params;
-  const product = await getProductById({ id });
+  const numId = parseProductSlug(id);
+  if (!numId) return {};
+  const product = await getProductById({ id: String(numId) });
   if (!product) return {};
   return {
     title: product.title,
@@ -25,11 +28,11 @@ export default async function ProductDetailPage({
   const { locale, category, id } = await params;
   setRequestLocale(locale as Locale);
 
-  const numId = Number(id);
-  if (!Number.isInteger(numId) || numId <= 0) notFound();
+  const numId = parseProductSlug(id);
+  if (!numId || numId <= 0) notFound();
 
   const [product, { products: categoryProducts }] = await Promise.all([
-    getProductById({ id }),
+    getProductById({ id: String(numId) }),
     getProductByCategory({ category, skip: 0, limit: 12 }),
   ]);
 
