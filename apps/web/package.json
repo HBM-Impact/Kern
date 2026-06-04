@@ -4,23 +4,26 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "bun run --bun next dev",
-    "build": "bun run --bun next build",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
     "lint": "biome check .",
     "check-types": "next typegen && tsc --noEmit"
   },
   "dependencies": {
-    "@repo/ui": "*",
-    "next": "16.2.7",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "@repo/ui": "workspace:*",
+    "clsx": "catalog:",
+    "next": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "usehooks-ts": "catalog:"
   },
   "devDependencies": {
-    "@repo/typescript-config": "*",
-    "@types/node": "^25.9.1",
-    "@types/react": "19.2.16",
-    "@types/react-dom": "19.2.3",
-    "typescript": "6.0.3"
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "babel-plugin-react-compiler": "catalog:",
+    "typescript": "catalog:"
   }
 }

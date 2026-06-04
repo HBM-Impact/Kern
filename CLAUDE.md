@@ -5,22 +5,22 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-bun dev           # run all apps in dev mode (Turborepo)
-bun build         # build all apps
-bun lint          # biome check across all packages (via turbo)
-bun format        # biome format --write .
-bun check         # biome check . (lint + format check)
-bun check-types   # tsc --noEmit across all packages
+pnpm dev           # run all apps in dev mode (Turborepo)
+pnpm build         # build all apps
+pnpm lint          # biome check across all packages (via turbo)
+pnpm format        # biome format --write .
+pnpm check         # biome check . (lint + format check)
+pnpm check-types   # tsc --noEmit across all packages
 ```
 
 Run a single app:
 ```bash
-cd apps/web && bun dev
+cd apps/web && pnpm dev
 ```
 
 ## Package Manager
 
-Always use `bun`. Never `npm`, `pnpm`, or `yarn`.
+Always use `pnpm`. Never `bun`, `npm`, or `yarn`.
 
 ## Architecture
 

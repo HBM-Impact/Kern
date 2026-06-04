@@ -13,7 +13,7 @@ fi
 # Only format supported file types
 case "$FILE_PATH" in
   *.ts|*.tsx|*.js|*.jsx|*.json|*.css)
-    cd "$CLAUDE_PROJECT_DIR" && bunx biome check --write --unsafe "$FILE_PATH" 2>/dev/null
+    cd "$CLAUDE_PROJECT_DIR" && pnpm exec biome check --write --unsafe "$FILE_PATH" 2>/dev/null
     ;;
 esac
 

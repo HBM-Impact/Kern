@@ -11,23 +11,23 @@ Turborepo monorepo.
 ## Development
 
 ```sh
-bun dev          # all apps
-bun dev --filter=web  # single app
+pnpm dev          # all apps
+pnpm dev --filter=web  # single app
 ```
 
 ## Build & Checks
 
 ```sh
-bun build        # build all apps
-bun check-types  # TypeScript across all packages
-bun lint         # Biome lint (via turbo)
-bun format       # Biome format --write
-bun check        # Biome lint + format check
+pnpm build        # build all apps
+pnpm check-types  # TypeScript across all packages
+pnpm lint         # Biome lint (via turbo)
+pnpm format       # Biome format --write
+pnpm check        # Biome lint + format check
 ```
 
 ## Tooling
 
-- [Bun](https://bun.sh) — package manager
+- [pnpm](https://pnpm.io) — package manager
 - [Turborepo](https://turborepo.dev) — task orchestration
 - [Biome](https://biomejs.dev) — linting and formatting
 - [TypeScript](https://www.typescriptlang.org/) — strict mode everywhere

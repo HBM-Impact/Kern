@@ -10,15 +10,16 @@
     "generate:component": "turbo gen react-component",
     "check-types": "tsc --noEmit"
   },
-  "devDependencies": {
-    "@repo/typescript-config": "*",
-    "@types/node": "^25.9.1",
-    "@types/react": "19.2.16",
-    "@types/react-dom": "19.2.3",
-    "typescript": "6.0.3"
-  },
   "dependencies": {
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "clsx": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "typescript": "catalog:"
   }
 }
