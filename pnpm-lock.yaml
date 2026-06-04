@@ -68,6 +68,9 @@ importers:
       next:
         specifier: 'catalog:'
         version: 16.2.7(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      open-props:
+        specifier: ^1.7.23
+        version: 1.7.23
       react:
         specifier: 'catalog:'
         version: 19.2.7
@@ -507,6 +510,9 @@ packages:
       sass:
         optional: true
 
+  open-props@1.7.23:
+    resolution: {integrity: sha512-+xyrJmxV9QUBFbSwPROYhOg/FLXry+uuPr4R+B5EaE4556Oc18/8ZC/fL5A+/lbRSwNvA0Alh+C0KpyFWLmLZg==}
+
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
@@ -826,6 +832,8 @@ snapshots:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
+
+  open-props@1.7.23: {}
 
   picocolors@1.1.1: {}
 

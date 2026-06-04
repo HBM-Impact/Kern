@@ -14,6 +14,7 @@
     "@repo/ui": "workspace:*",
     "clsx": "catalog:",
     "next": "catalog:",
+    "open-props": "^1.7.23",
     "react": "catalog:",
     "react-dom": "catalog:",
     "usehooks-ts": "catalog:"
