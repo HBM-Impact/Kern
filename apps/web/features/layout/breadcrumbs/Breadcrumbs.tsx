@@ -1,8 +1,24 @@
 "use client";
 
 import { ChevronRight, House } from "lucide-react";
-import { usePathname } from "@/i18n/navigation";
+import { IntlLink, usePathname } from "@/i18n/navigation";
 import styles from "./Breadcrumbs.module.css";
+
+function buildHref(segments: string[], upToIndex: number) {
+  const s = segments.slice(0, upToIndex + 1);
+  const [, category, id] = s;
+  if (id)
+    return {
+      pathname: "/products/[category]/[id]" as const,
+      params: { category: category!, id },
+    };
+  if (category)
+    return {
+      pathname: "/products/[category]" as const,
+      params: { category },
+    };
+  return "/products" as const;
+}
 
 export function Breadcrumbs() {
   const path = usePathname();
@@ -11,25 +27,26 @@ export function Breadcrumbs() {
     <nav aria-label="Breadcrumb">
       <ol className={styles.list}>
         <li className={styles.item}>
-          <a href="/" aria-label="Home" className={styles.link}>
+          <IntlLink href="/" aria-label="Home" className={styles.link}>
             <House />
-          </a>
+          </IntlLink>
         </li>
         {segments.map((segment, index) => {
-          const href = `/${segments.slice(0, index + 1).join("/")}`;
+          const stringHref = `/${segments.slice(0, index + 1).join("/")}`;
+          const href = buildHref(segments, index);
           const isLast = index === segments.length - 1;
           const label = decodeURIComponent(segment).replaceAll("-", " ");
           return (
-            <li key={href} className={styles.item}>
+            <li key={stringHref} className={styles.item}>
               <ChevronRight />
               {isLast ? (
                 <span aria-current="page" className={styles.current}>
                   {label}
                 </span>
               ) : (
-                <a href={href} className={styles.link}>
+                <IntlLink href={href} className={styles.link}>
                   {label}
-                </a>
+                </IntlLink>
               )}
             </li>
           );

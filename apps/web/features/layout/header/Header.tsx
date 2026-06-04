@@ -6,11 +6,13 @@ export function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.content}>
-        <a href="/" className={styles.logo} title="Kern">
-          <Display uppercase as="span" variant="display4">
-            Kern
-          </Display>
-        </a>
+        <div className={styles.logo}>
+          <Link href="/" title="Kern">
+            <Display uppercase as="span" variant="display4">
+              Kern
+            </Display>
+          </Link>
+        </div>
         <nav className={styles.nav} aria-label="Main">
           <Link href="/products">Products</Link>
         </nav>

@@ -1,6 +1,7 @@
 import type { Product } from "@repo/services/commerce/commerce-types";
 import { Typography } from "@repo/ui/typography";
 import { OptimizedImage } from "@/components/optimized-image";
+import { IntlLink } from "@/i18n/navigation";
 import styles from "./ProductCard.module.css";
 
 type Props = Pick<
@@ -26,12 +27,15 @@ export function ProductCard({
   images,
   priority,
 }: Props) {
-  const href = `/products/${category}/${id}`;
+  const href = {
+    pathname: "/products/[category]/[id]" as const,
+    params: { category, id: String(id) },
+  };
 
   return (
     <article className={styles.card}>
       <div className={styles.imageLink}>
-        <a href={href}>
+        <IntlLink href={href}>
           <OptimizedImage
             src={images[0] ?? "/fallback.png"}
             alt={title}
@@ -41,7 +45,7 @@ export function ProductCard({
             priority={priority}
             breakpointSizes={{ sm: "50vw", lg: "33vw", default: "25vw" }}
           />
-        </a>
+        </IntlLink>
         {discountPercentage > 0 ? (
           <span
             className={styles.badge}
@@ -57,7 +61,7 @@ export function ProductCard({
           {category}
         </Typography>
         <Typography as="h2" variant="body" className={styles.title}>
-          <a href={href}>{title}</a>
+          <IntlLink href={href}>{title}</IntlLink>
         </Typography>
         <Typography as="p" variant="label" className={styles.description}>
           {description}
