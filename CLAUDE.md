@@ -1,5 +1,9 @@
 # CLAUDE.md
 
+## Philosophy
+
+Consistency, strong types, less is more. Match existing patterns exactly — same file structure, same naming, same abstractions. No new patterns without reason. No duplicate types. No code that doesn't need to exist.
+
 ## Commands
 
 ```bash
