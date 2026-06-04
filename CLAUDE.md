@@ -1,74 +1,56 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
 ## Commands
 
 ```bash
-pnpm dev           # run all apps in dev mode (Turborepo)
-pnpm build         # build all apps
-pnpm lint          # biome check across all packages (via turbo)
+pnpm dev           # all apps (Turborepo)
+pnpm build         # build all
+pnpm lint          # biome check (via turbo)
 pnpm format        # biome format --write .
-pnpm check         # biome check . (lint + format check)
-pnpm check-types   # tsc --noEmit across all packages
-```
-
-Run a single app:
-```bash
-cd apps/web && pnpm dev
+pnpm check         # lint + format check
+pnpm check-types   # tsc --noEmit all packages
+cd apps/web && pnpm dev  # single app
 ```
 
 ## Package Manager
 
-Always use `pnpm`. Never `bun`, `npm`, or `yarn`.
+`pnpm` only. Never bun, npm, or yarn.
 
 ## Architecture
 
 Turborepo monorepo:
 
-- `apps/web` — Next.js 16 app (App Router, React 19)
-- `packages/ui` — shared React components, consumed as `@repo/ui`
-- `packages/typescript-config` — shared `tsconfig` bases (`base.json`, `nextjs.json`, `react-library.json`)
+- `apps/web` — Next.js 16, App Router, React 19
+- `packages/ui` — shared components as `@repo/ui`
+- `packages/typescript-config` — shared tsconfig bases
 
-`packages/ui` exports directly from source (`"./button": "./src/button.tsx"`) — no build step. Import as `@repo/ui/button`, not from a barrel.
+`packages/ui` exports from source, no build step. Import as `@repo/ui/button`, not from a barrel.
 
 ## Linting & Formatting
 
-Biome 2.x handles both. Config in `biome.json` at root with `next` and `react` domains enabled.
+Biome 2.x. PostToolUse hook auto-runs `biome check --write --unsafe` on edited files.
 
-A PostToolUse hook auto-runs `biome check --write --unsafe` on any file Claude edits — no need to manually format after edits.
+## TypeScript
 
-## TypeScript Conventions
+- `strict: true` + `noUncheckedIndexedAccess: true`
+- `unknown` over `any`; `satisfies` over `as`
+- Derive types from values — don't duplicate
+- Discriminated unions + exhaustive `never` checks
+- `as const` for configs and constant arrays
+- Zod at runtime boundaries
+- No `enum` — use `as const` unions
 
-- `strict: true` + `noUncheckedIndexedAccess: true` everywhere
-- Prefer `unknown` over `any`
-- Use `satisfies` over `as` for type assertions
-- Derive types from values (`typeof`, `[number]`, utility types) — don't duplicate
-- Model impossible states with discriminated unions + exhaustive `never` checks
-- `as const` for config objects and constant arrays
-- Validate external/API data with Zod at runtime boundaries
-- No `enum` — use `as const` unions instead
+## React / Next.js
 
-## React / Next.js Conventions
+- No `useCallback`, `useMemo`, `React.memo` — React Compiler handles it
+- No barrel files; one component per file
+- No boolean props — use composition or variants
+- Ternary not `&&` for conditional JSX
+- No `forwardRef` — refs are plain props in React 19
+- `Promise.all` for independent async ops
+- Never pass `className` to custom components
 
-- No `useCallback`, `useMemo`, or `React.memo` — React Compiler handles memoization
-- No barrel files — import directly from source file
-- One component per file
-- No boolean props to customize behavior — use composition or variants
-- Use ternary (`condition ? <A /> : <B />`) not `&&` for conditional JSX
-- No `forwardRef` in React 19 — refs are plain props
-- Independent async operations use `Promise.all`, never sequential `await`
-- Never pass `className` as a prop to custom components
+## Skills
 
-## Custom Commands
-
-- `/review` — reviews changed files against Next.js/React best practices and project conventions
-- `/performance-review` — checks changed files for data locality, parallelism, caching, and N+1 patterns
-
-## Reference Files
-
-- `.claude/skills/typescript.md` — TypeScript patterns (satisfies, discriminated unions, inference, as const, Zod, etc.)
-- `.claude/agents/patterns.md` — code style, component, data fetching, and TypeScript conventions
-- `.claude/agents/architecture.md` — directory structure and key architectural rules
-- `.claude/commands/review.md` — full `/review` skill definition
-- `.claude/commands/performance-review.md` — full `/performance-review` skill definition
+- `/review` — Next.js/React best practices review
+- `/performance-review` — data locality, parallelism, caching, N+1 patterns
