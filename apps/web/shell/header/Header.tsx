@@ -1,7 +1,6 @@
-import { Display } from "@repo/ui/display";
-import { Heart, ShoppingCart } from "lucide-react";
 import { IntlLink } from "@/i18n/navigation";
 import { Link } from "@/primitives/link";
+import { Display } from "@repo/ui/display";
 import styles from "./Header.module.css";
 
 export function Header() {
@@ -22,10 +21,10 @@ export function Header() {
             aria-label="Favorites"
             className={styles.iconLink}
           >
-            <Heart />
+            Favorites
           </IntlLink>
           <IntlLink href="/cart" aria-label="Cart" className={styles.iconLink}>
-            <ShoppingCart />
+            Cart
           </IntlLink>
         </nav>
       </div>

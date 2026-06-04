@@ -12,20 +12,20 @@ import styles from "./CartView.module.css";
 export function CartView() {
   const { items } = useCart();
 
+  const entries = [...items.entries()];
+
   const productQueries = useQueries({
-    queries: items.map((item) =>
-      productByIdQueryOptions({ id: String(item.productId) }),
+    queries: entries.map(([productId]) =>
+      productByIdQueryOptions({ id: String(productId) }),
     ),
   });
 
-  const cartWithProducts = items.flatMap((item, i) => {
+  const cartWithProducts = entries.flatMap(([productId, quantity], i) => {
     const product = productQueries[i]?.data;
-    return product
-      ? [{ productId: item.productId, quantity: item.quantity, product }]
-      : [];
+    return product ? [{ productId, quantity, product }] : [];
   });
 
-  if (items.length === 0) {
+  if (items.size === 0) {
     return (
       <div className={styles.empty}>
         <Typography>Your cart is empty.</Typography>

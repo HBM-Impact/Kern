@@ -1,46 +1,9 @@
 "use client";
 
-import { createContext, use, useEffect, useReducer } from "react";
-
-type CartItem = { productId: number; quantity: number };
-
-type CartAction =
-  | { type: "INIT"; items: CartItem[] }
-  | { type: "ADD"; productId: number }
-  | { type: "REMOVE"; productId: number }
-  | { type: "SET_QTY"; productId: number; quantity: number };
-
-function cartReducer(state: CartItem[], action: CartAction): CartItem[] {
-  switch (action.type) {
-    case "INIT":
-      return action.items;
-    case "ADD": {
-      const existing = state.find((i) => i.productId === action.productId);
-      if (existing) {
-        return state.map((i) =>
-          i.productId === action.productId
-            ? { ...i, quantity: i.quantity + 1 }
-            : i,
-        );
-      }
-      return [...state, { productId: action.productId, quantity: 1 }];
-    }
-    case "REMOVE":
-      return state.filter((i) => i.productId !== action.productId);
-    case "SET_QTY": {
-      if (action.quantity <= 0)
-        return state.filter((i) => i.productId !== action.productId);
-      return state.map((i) =>
-        i.productId === action.productId
-          ? { ...i, quantity: action.quantity }
-          : i,
-      );
-    }
-  }
-}
+import { createContext, use, useEffect, useState } from "react";
 
 type CartContextValue = {
-  items: CartItem[];
+  items: Map<number, number>;
   add: (productId: number) => void;
   remove: (productId: number) => void;
   setQty: (productId: number, quantity: number) => void;
@@ -50,30 +13,40 @@ type CartContextValue = {
 const CartContext = createContext<CartContextValue | null>(null);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [items, dispatch] = useReducer(cartReducer, []);
+  const [items, setItems] = useState<Map<number, number>>(new Map());
 
   useEffect(() => {
     const stored = localStorage.getItem("kern-cart");
     if (!stored) return;
     try {
-      dispatch({ type: "INIT", items: JSON.parse(stored) as CartItem[] });
+      setItems(new Map(JSON.parse(stored) as [number, number][]));
     } catch {}
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("kern-cart", JSON.stringify(items));
+    localStorage.setItem("kern-cart", JSON.stringify([...items]));
   }, [items]);
+
+  function mutate(fn: (m: Map<number, number>) => void) {
+    setItems((prev) => {
+      const next = new Map(prev);
+      fn(next);
+      return next;
+    });
+  }
 
   return (
     <CartContext
       value={{
         items,
-        add: (productId) => dispatch({ type: "ADD", productId }),
-        remove: (productId) => dispatch({ type: "REMOVE", productId }),
+        add: (productId) =>
+          mutate((m) => m.set(productId, (m.get(productId) ?? 0) + 1)),
+        remove: (productId) => mutate((m) => m.delete(productId)),
         setQty: (productId, quantity) =>
-          dispatch({ type: "SET_QTY", productId, quantity }),
-        getQty: (productId) =>
-          items.find((i) => i.productId === productId)?.quantity ?? 0,
+          mutate((m) =>
+            quantity <= 0 ? m.delete(productId) : m.set(productId, quantity),
+          ),
+        getQty: (productId) => items.get(productId) ?? 0,
       }}
     >
       {children}

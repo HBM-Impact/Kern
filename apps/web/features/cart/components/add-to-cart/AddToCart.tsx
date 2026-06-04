@@ -24,7 +24,7 @@ export function AddToCart({ productId }: Props) {
   }
 
   return (
-    <div className={styles.stepper} role="group" aria-label="Cart quantity">
+    <fieldset className={styles.stepper} aria-label="Cart quantity">
       <button
         type="button"
         className={styles.stepBtn}
@@ -44,6 +44,6 @@ export function AddToCart({ productId }: Props) {
       >
         <Plus />
       </button>
-    </div>
+    </fieldset>
   );
 }

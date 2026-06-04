@@ -1,9 +1,9 @@
 "use client";
 
-import { LinkButton } from "@/primitives/link";
 import type { Product } from "@repo/services/commerce/commerce-types";
 import { Display } from "@repo/ui/display";
 import { Typography } from "@repo/ui/typography";
+import { LinkButton } from "@/primitives/link";
 import styles from "./CartSummary.module.css";
 
 type CartItemWithProduct = {
