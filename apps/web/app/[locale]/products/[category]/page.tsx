@@ -6,7 +6,7 @@ import { setRequestLocale } from "next-intl/server";
 import { Breadcrumbs } from "@/features/layout/breadcrumbs";
 import { PageHeader } from "@/features/layout/page-header";
 import { routingConfig } from "@/i18n/routing";
-import { ProductCatalog } from "./[id]/_components/product-catalog";
+import { ProductCatalog } from "./[id]/_components/ProductCatalog";
 
 export async function generateStaticParams() {
   const categories = await getCategories();

@@ -7,7 +7,7 @@ import { ProductCard } from "@/features/products/components/product-card";
 import { ProductGallery } from "@/features/products/components/product-gallery";
 import { ProductReviews } from "@/features/products/components/product-reviews";
 import { ProductSpecs } from "@/features/products/components/product-specs";
-import styles from "./product-details.module.css";
+import styles from "./ProductDetails.module.css"
 
 type Props = {
   product: Product;
