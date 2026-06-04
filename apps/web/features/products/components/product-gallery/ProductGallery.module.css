@@ -10,7 +10,7 @@
 
 .mainImage {
   width: 100%;
-  aspect-ratio: 1;
+  max-height: 650px;
   object-fit: contain;
   border-radius: var(--radius-2);
   background: var(--color-bg-muted);

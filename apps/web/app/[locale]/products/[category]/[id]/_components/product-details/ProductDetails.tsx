@@ -1,13 +1,12 @@
 import type { Product } from "@repo/services/commerce/commerce-types";
-import { Carousel } from "@repo/ui/carousel";
 import { Container } from "@repo/ui/container";
 import { Display } from "@repo/ui/display";
 import { Typography } from "@repo/ui/typography";
-import { ProductCard } from "@/features/products/components/product-card";
+import { ProductCarousel } from "@/features/products/components/product-carousel";
 import { ProductGallery } from "@/features/products/components/product-gallery";
 import { ProductReviews } from "@/features/products/components/product-reviews";
 import { ProductSpecs } from "@/features/products/components/product-specs";
-import styles from "./ProductDetails.module.css"
+import styles from "./ProductDetails.module.css";
 
 type Props = {
   product: Product;
@@ -41,25 +40,11 @@ export function ProductDetails({ product, relatedProducts }: Props) {
           <ProductReviews reviews={product.reviews} />
         </div>
       </div>
-      {relatedProducts.length > 0 ? (
-        <Carousel
-          title="More from this category"
-          description="Other products you might like."
-        >
-          {relatedProducts.map((p) => (
-            <ProductCard
-              key={p.id}
-              id={p.id}
-              title={p.title}
-              description={p.description}
-              price={p.price}
-              discountPercentage={p.discountPercentage}
-              category={p.category}
-              images={p.images}
-            />
-          ))}
-        </Carousel>
-      ) : null}
+      <ProductCarousel
+        products={relatedProducts}
+        title="More from this category"
+        description="Other products you might like."
+      />
     </Container>
   );
 }
