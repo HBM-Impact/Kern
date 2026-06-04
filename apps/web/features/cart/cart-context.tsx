@@ -1,37 +1,29 @@
 "use client";
 
-import { createContext, use, useEffect, useState } from "react";
+import { createContext, use } from "react";
+import { useLocalStorage } from "usehooks-ts";
 
 type CartContextValue = {
   items: Map<number, number>;
-  add: (productId: number) => void;
-  remove: (productId: number) => void;
-  setQty: (productId: number, quantity: number) => void;
-  getQty: (productId: number) => number;
+  add: (id: number) => void;
+  remove: (id: number) => void;
+  setQuantity: (id: number, quantity: number) => void;
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [items, setItems] = useState<Map<number, number>>(new Map());
+  const [entries, setEntries] = useLocalStorage<[number, number][]>(
+    "kern-cart",
+    [],
+  );
+  const items = new Map(entries);
 
-  useEffect(() => {
-    const stored = localStorage.getItem("kern-cart");
-    if (!stored) return;
-    try {
-      setItems(new Map(JSON.parse(stored) as [number, number][]));
-    } catch {}
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("kern-cart", JSON.stringify([...items]));
-  }, [items]);
-
-  function mutate(fn: (m: Map<number, number>) => void) {
-    setItems((prev) => {
-      const next = new Map(prev);
-      fn(next);
-      return next;
+  function mutate(fn: (draft: Map<number, number>) => void) {
+    setEntries((prev) => {
+      const draft = new Map(prev);
+      fn(draft);
+      return [...draft];
     });
   }
 
@@ -39,14 +31,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     <CartContext
       value={{
         items,
-        add: (productId) =>
-          mutate((m) => m.set(productId, (m.get(productId) ?? 0) + 1)),
-        remove: (productId) => mutate((m) => m.delete(productId)),
-        setQty: (productId, quantity) =>
-          mutate((m) =>
-            quantity <= 0 ? m.delete(productId) : m.set(productId, quantity),
+        add: (id) => mutate((draft) => draft.set(id, (draft.get(id) ?? 0) + 1)),
+        remove: (id) => mutate((draft) => draft.delete(id)),
+        setQuantity: (id, quantity) =>
+          mutate((draft) =>
+            quantity <= 0 ? draft.delete(id) : draft.set(id, quantity),
           ),
-        getQty: (productId) => items.get(productId) ?? 0,
       }}
     >
       {children}

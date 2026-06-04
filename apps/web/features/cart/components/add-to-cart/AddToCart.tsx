@@ -10,8 +10,8 @@ type Props = {
 };
 
 export function AddToCart({ productId }: Props) {
-  const { getQty, add, remove, setQty } = useCart();
-  const qty = getQty(productId);
+  const { items, add, remove, setQuantity } = useCart();
+  const qty = items.get(productId) ?? 0;
 
   if (qty === 0) {
     return (
@@ -30,7 +30,7 @@ export function AddToCart({ productId }: Props) {
         className={styles.stepBtn}
         aria-label="Decrease quantity"
         onClick={() =>
-          qty === 1 ? remove(productId) : setQty(productId, qty - 1)
+          qty === 1 ? remove(productId) : setQuantity(productId, qty - 1)
         }
       >
         <Minus />
@@ -40,7 +40,7 @@ export function AddToCart({ productId }: Props) {
         type="button"
         className={styles.stepBtn}
         aria-label="Increase quantity"
-        onClick={() => setQty(productId, qty + 1)}
+        onClick={() => setQuantity(productId, qty + 1)}
       >
         <Plus />
       </button>

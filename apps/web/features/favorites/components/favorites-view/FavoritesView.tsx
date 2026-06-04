@@ -9,17 +9,15 @@ import { LinkButton } from "@/primitives/link";
 import styles from "./FavoritesView.module.css";
 
 export function FavoritesView() {
-  const { favoriteIds } = useFavorites();
+  const { ids } = useFavorites();
 
   const productQueries = useQueries({
-    queries: favoriteIds.map((id) =>
-      productByIdQueryOptions({ id: String(id) }),
-    ),
+    queries: ids.map((id) => productByIdQueryOptions({ id: String(id) })),
   });
 
   const products = productQueries.flatMap((q) => (q.data ? [q.data] : []));
 
-  if (favoriteIds.length === 0) {
+  if (ids.length === 0) {
     return (
       <div className={styles.empty}>
         <Typography>Your favorites list is empty.</Typography>

@@ -1,47 +1,33 @@
 "use client";
 
-import { createContext, use, useEffect, useState } from "react";
+import { createContext, use } from "react";
+import { useLocalStorage } from "usehooks-ts";
 
 type FavoritesContextValue = {
-  favoriteIds: number[];
-  isFavorite: (productId: number) => boolean;
-  toggle: (productId: number) => void;
+  ids: number[];
+  isFavorite: (id: number) => boolean;
+  toggle: (id: number) => void;
 };
 
 const FavoritesContext = createContext<FavoritesContextValue | null>(null);
 
 export function FavoritesProvider({ children }: { children: React.ReactNode }) {
-  const [favorites, setFavorites] = useState<Set<number>>(new Set());
+  const [favoriteIds, setFavoriteIds] = useLocalStorage<number[]>(
+    "kern-favorites",
+    [],
+  );
 
-  useEffect(() => {
-    const stored = localStorage.getItem("kern-favorites");
-    if (!stored) return;
-    try {
-      setFavorites(new Set(JSON.parse(stored) as number[]));
-    } catch {}
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("kern-favorites", JSON.stringify([...favorites]));
-  }, [favorites]);
-
-  function toggle(productId: number) {
-    setFavorites((prev) => {
-      const next = new Set(prev);
-      if (next.has(productId)) {
-        next.delete(productId);
-      } else {
-        next.add(productId);
-      }
-      return next;
-    });
+  function toggle(id: number) {
+    setFavoriteIds((prev) =>
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id],
+    );
   }
 
   return (
     <FavoritesContext
       value={{
-        favoriteIds: [...favorites],
-        isFavorite: (productId) => favorites.has(productId),
+        ids: favoriteIds,
+        isFavorite: (id) => favoriteIds.includes(id),
         toggle,
       }}
     >
