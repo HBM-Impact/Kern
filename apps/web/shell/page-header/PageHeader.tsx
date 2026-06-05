@@ -12,7 +12,7 @@ export function PageHeader({ title, description }: Props) {
       <Display as="h1" variant="display2">
         {title}
       </Display>
-      {description ? <Prose>{description}</Prose> : null}
+      {description ? <Prose muted>{description}</Prose> : null}
     </hgroup>
   );
 }
