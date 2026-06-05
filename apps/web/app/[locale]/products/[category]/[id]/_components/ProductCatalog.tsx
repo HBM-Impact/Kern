@@ -23,7 +23,7 @@ type Props = {
 export function ProductCatalog({ category, sort }: Props) {
   const sortEntry = sort ? SORT_MAP[sort] : undefined;
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isPending } =
     useProductByCategory({
       category,
       limit: 12,
@@ -39,6 +39,7 @@ export function ProductCatalog({ category, sort }: Props) {
       <ProductGrid
         products={products}
         hasMore={hasNextPage ?? false}
+        isLoading={isPending}
         isFetchingMore={isFetchingNextPage}
         onLoadMore={() => fetchNextPage()}
       />

@@ -1,0 +1,58 @@
+.base {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-elevated) 25%,
+    var(--color-bg-muted) 50%,
+    var(--color-bg-elevated) 75%
+  );
+  background-size: 200% 100%;
+  border-radius: var(--radius-2);
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.circle {
+  border-radius: var(--radius-round);
+}
+
+.body {
+  height: calc(var(--font-size-1) * var(--font-lineheight-3));
+}
+
+.label {
+  height: calc(0.875rem * var(--font-lineheight-2));
+}
+
+.display1 {
+  height: calc(var(--font-size-6) * var(--font-lineheight-0));
+}
+
+.display2 {
+  height: calc(var(--font-size-5) * var(--font-lineheight-0));
+}
+
+.display3 {
+  height: calc(var(--font-size-4) * var(--font-lineheight-1));
+}
+
+.display4 {
+  height: calc(var(--font-size-3) * var(--font-lineheight-1));
+}
+
+.button {
+  height: 2.5rem;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .base {
+    animation: none;
+  }
+}

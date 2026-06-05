@@ -1,24 +1,44 @@
-"use client";
-
 import type { Product } from "@repo/services/commerce/commerce-types";
 import { Button } from "@repo/ui/buttons";
 import { Typography } from "@repo/ui/typography";
-import { ProductCard } from "../product-card";
+import { ProductCard, ProductCardSkeleton } from "../product-card";
 import styles from "./ProductGrid.module.css";
 
 type Props = {
   products: Product[];
   hasMore: boolean;
+  isLoading: boolean;
   isFetchingMore: boolean;
   onLoadMore: () => void;
+  skeletonCount?: number;
 };
+
+const SKELETON_KEYS = Array.from({ length: 12 }, (_, i) => i);
+
+function SkeletonList({ count }: { count: number }) {
+  return SKELETON_KEYS.slice(0, count).map((i) => (
+    <li key={`skeleton-${i}`}>
+      <ProductCardSkeleton />
+    </li>
+  ));
+}
 
 export function ProductGrid({
   products,
   hasMore,
+  isLoading,
   isFetchingMore,
   onLoadMore,
+  skeletonCount = 12,
 }: Props) {
+  if (isLoading) {
+    return (
+      <ul className={styles.grid}>
+        <SkeletonList count={skeletonCount} />
+      </ul>
+    );
+  }
+
   if (products.length === 0) {
     return <Typography>No products found.</Typography>;
   }
@@ -40,11 +60,12 @@ export function ProductGrid({
             />
           </li>
         ))}
+        {isFetchingMore ? <SkeletonList count={skeletonCount} /> : null}
       </ul>
-      {hasMore ? (
-        <Button onClick={onLoadMore} disabled={isFetchingMore}>
-          {isFetchingMore ? "Loading…" : "Load more"}
-        </Button>
+      {hasMore && !isFetchingMore ? (
+        <div className={styles.loadMore}>
+          <Button onClick={onLoadMore}>Load more</Button>
+        </div>
       ) : null}
     </div>
   );

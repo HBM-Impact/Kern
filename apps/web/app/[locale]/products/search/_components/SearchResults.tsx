@@ -10,7 +10,7 @@ type Props = {
 };
 
 export function SearchResults({ q, sort }: Props) {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isPending } =
     useProductsByQuery({
       query: q,
       limit: 12,
@@ -24,6 +24,7 @@ export function SearchResults({ q, sort }: Props) {
       <ProductGrid
         products={products}
         hasMore={hasNextPage ?? false}
+        isLoading={isPending}
         isFetchingMore={isFetchingNextPage}
         onLoadMore={() => fetchNextPage()}
       />
