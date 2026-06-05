@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import type { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { SearchForm } from "@/features/products/components/search-form";
+import { Breadcrumbs } from "@/shell/breadcrumbs";
 import { PageHeader } from "@/shell/page-header";
 import { SearchResults } from "./_components/SearchResults";
 
@@ -24,6 +25,10 @@ export default async function SearchPage({
 
   return (
     <Container as="section">
+      <Breadcrumbs
+        locale={locale}
+        items={[{ href: "/products", label: "Products" }, { label: "Search" }]}
+      />
       <PageHeader
         title="Search"
         description="Find products by name, brand, or description."

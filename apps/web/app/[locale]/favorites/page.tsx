@@ -1,20 +1,27 @@
 import { Container } from "@repo/ui/container";
-import { Display } from "@repo/ui/display";
 import type { Metadata } from "next";
-import { FavoritesView } from "@/features/favorites/components/favorites-view";
+import type { Locale } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
+import { FavoritesOverview } from "@/features/favorites/components/favorites-view";
+import { Breadcrumbs } from "@/shell/breadcrumbs";
+import { PageHeader } from "@/shell/page-header";
 
 export const metadata: Metadata = {
   title: "Favorites",
   description: "Your saved products.",
 };
 
-export default function FavoritesPage() {
+export default async function FavoritesPage({
+  params,
+}: PageProps<"/[locale]/favorites">) {
+  const { locale } = await params;
+  setRequestLocale(locale as Locale);
+
   return (
     <Container as="section">
-      <Display as="h1" variant="display2">
-        Favorites
-      </Display>
-      <FavoritesView />
+      <Breadcrumbs locale={locale} items={[{ label: "Favorites" }]} />
+      <PageHeader title="Favorites" description="Your saved products." />
+      <FavoritesOverview />
     </Container>
   );
 }

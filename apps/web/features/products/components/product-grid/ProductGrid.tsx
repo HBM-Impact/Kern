@@ -9,7 +9,7 @@ type Props = {
   hasMore: boolean;
   isLoading: boolean;
   isFetchingMore: boolean;
-  onLoadMore: () => void;
+  onLoadMore?: () => void;
   skeletonCount?: number;
 };
 

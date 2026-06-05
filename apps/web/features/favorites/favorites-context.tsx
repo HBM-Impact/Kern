@@ -18,6 +18,8 @@ export function FavoritesProvider({ children }: PropsWithChildren) {
     { initializeWithValue: false },
   );
 
+  const ids = favoriteIds ?? [];
+
   function toggle(id: number) {
     setFavoriteIds((prev) =>
       prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id],
@@ -27,8 +29,8 @@ export function FavoritesProvider({ children }: PropsWithChildren) {
   return (
     <FavoritesContext
       value={{
-        ids: favoriteIds,
-        isFavorite: (id) => favoriteIds.includes(id),
+        ids,
+        isFavorite: (id) => ids.includes(id),
         toggle,
       }}
     >

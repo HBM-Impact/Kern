@@ -1,19 +1,26 @@
 import { Container } from "@repo/ui/container";
-import { Display } from "@repo/ui/display";
 import type { Metadata } from "next";
+import type { Locale } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 import { CartView } from "@/features/cart/components/cart-view";
+import { Breadcrumbs } from "@/shell/breadcrumbs";
+import { PageHeader } from "@/shell/page-header";
 
 export const metadata: Metadata = {
   title: "Cart",
   description: "Your shopping cart.",
 };
 
-export default function CartPage() {
+export default async function CartPage({
+  params,
+}: PageProps<"/[locale]/cart">) {
+  const { locale } = await params;
+  setRequestLocale(locale as Locale);
+
   return (
     <Container as="section">
-      <Display as="h1" variant="display2">
-        Cart
-      </Display>
+      <Breadcrumbs locale={locale} items={[{ label: "Cart" }]} />
+      <PageHeader title="Cart" description="Your shopping cart." />
       <CartView />
     </Container>
   );

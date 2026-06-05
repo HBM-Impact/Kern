@@ -8,6 +8,7 @@ import { CategoryList } from "@/features/products/components/category-list";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { generateItemListJsonLd } from "@/lib/seo/item-list";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
+import { Breadcrumbs } from "@/shell/breadcrumbs";
 import { PageHeader } from "@/shell/page-header";
 
 export const metadata = {
@@ -35,6 +36,7 @@ export default async function ProductsPage({
         )}
       />
       <Container as="article">
+        <Breadcrumbs locale={locale} items={[{ label: "Products" }]} />
         <PageHeader
           title="Products"
           description="Browse products by category or search for something specific."
