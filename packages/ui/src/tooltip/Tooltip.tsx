@@ -5,23 +5,13 @@ import styles from "./Tooltip.module.css";
 type Props = {
   content: string;
   position?: "top" | "bottom";
-  className?: string;
   children?: ReactNode;
 };
 
-export function Tooltip({
-  content,
-  position = "top",
-  className,
-  children,
-}: Props) {
+export function Tooltip({ content, position = "top", children }: Props) {
   return (
     <span
-      className={clsx(
-        styles.tooltip,
-        position === "bottom" && styles.bottom,
-        className,
-      )}
+      className={clsx(styles.tooltip, position === "bottom" && styles.bottom)}
       data-tooltip={content}
     >
       {children}

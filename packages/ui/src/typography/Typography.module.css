@@ -1,5 +1,6 @@
 .base {
   font-family: var(--font-sans);
+  margin: 0;
 }
 
 .body {
@@ -16,4 +17,22 @@
 
 .uppercase {
   text-transform: uppercase;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.muted {
+  color: var(--color-text-muted);
+}
+
+.noWrap {
+  white-space: nowrap;
+}
+
+.bold {
+  font-weight: var(--font-weight-7);
 }

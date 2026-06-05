@@ -1,8 +1,8 @@
-.active {
+.active button {
   border-color: var(--color-accent);
   color: var(--color-accent);
 }
 
-.active > svg {
+.active svg {
   fill: currentColor;
 }

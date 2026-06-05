@@ -58,16 +58,20 @@ export function ProductCard({
             -{discountPercentage.toFixed(0)}%
           </span>
         ) : null}
-        <AddToFavorite productId={id} className={styles.favoriteBtn} />
+        <div className={styles.favoriteBtn}>
+          <AddToFavorite productId={id} />
+        </div>
       </div>
       <div className={styles.body}>
         <Typography as="span" variant="label" uppercase>
           {category}
         </Typography>
-        <Typography as="h2" variant="body" className={styles.title}>
-          <IntlLink href={href}>{title}</IntlLink>
+        <Typography as="h2" variant="body" truncate>
+          <IntlLink href={href} className={styles.titleLink}>
+            {title}
+          </IntlLink>
         </Typography>
-        <Typography as="p" variant="label" className={styles.description}>
+        <Typography as="p" variant="label" muted lines={2}>
           {description}
         </Typography>
         <div className={styles.meta}>

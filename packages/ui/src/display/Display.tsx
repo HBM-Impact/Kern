@@ -1,18 +1,29 @@
 import clsx from "clsx";
-import type { ComponentPropsWithoutRef, ElementType } from "react";
+import type {
+  ComponentPropsWithoutRef,
+  CSSProperties,
+  ElementType,
+} from "react";
 import styles from "./Display.module.css";
 
 type Props<T extends ElementType = "h2"> = {
   as?: T;
   variant?: "display1" | "display2" | "display3" | "display4";
   uppercase?: boolean;
-} & ComponentPropsWithoutRef<T>;
+  truncate?: boolean;
+  lines?: number;
+  muted?: boolean;
+  noWrap?: boolean;
+} & Omit<ComponentPropsWithoutRef<T>, "className">;
 
 export function Display<T extends ElementType = "h2">({
   as,
   variant = "display2",
   uppercase = false,
-  className,
+  truncate = false,
+  lines,
+  muted = false,
+  noWrap = false,
   children,
   ...rest
 }: Props<T>) {
@@ -26,8 +37,20 @@ export function Display<T extends ElementType = "h2">({
         variant === "display3" && styles.display3,
         variant === "display4" && styles.display4,
         uppercase && styles.uppercase,
-        className,
+        truncate && styles.truncate,
+        muted && styles.muted,
+        noWrap && styles.noWrap,
       )}
+      style={
+        lines
+          ? ({
+              display: "-webkit-box",
+              WebkitLineClamp: lines,
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+            } as CSSProperties)
+          : undefined
+      }
       {...rest}
     >
       {children}

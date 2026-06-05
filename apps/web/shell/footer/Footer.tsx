@@ -16,21 +16,17 @@ export function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.left}>
-        <Typography variant="label" className={styles.muted}>
+        <Typography variant="label" muted>
           © {currentYear} Hannibal B. Moulvad
         </Typography>
         <div className={styles.stack}>
-          <Typography variant="label" className={styles.muted}>
+          <Typography variant="label" muted>
             Built with
           </Typography>
           <ul className={styles.pills} aria-label="Tech stack">
             {STACK.map(({ label, href }) => (
               <li key={label}>
-                <Link
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link href={href} target="_blank" rel="noopener noreferrer">
                   {label}
                 </Link>
               </li>
@@ -39,7 +35,7 @@ export function Footer() {
         </div>
       </div>
       <div className={styles.right}>
-        <Typography variant="label" className={styles.muted} as="h2">
+        <Typography variant="label" as="h2" muted>
           Reach out
         </Typography>
         <nav className={styles.links} aria-label="Contact">

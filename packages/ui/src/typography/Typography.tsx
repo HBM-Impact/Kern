@@ -1,18 +1,31 @@
 import clsx from "clsx";
-import type { ComponentPropsWithoutRef, ElementType } from "react";
+import type {
+  ComponentPropsWithoutRef,
+  CSSProperties,
+  ElementType,
+} from "react";
 import styles from "./Typography.module.css";
 
 type Props<T extends ElementType = "p"> = {
   as?: T;
   variant?: "body" | "label";
   uppercase?: boolean;
-} & ComponentPropsWithoutRef<T>;
+  truncate?: boolean;
+  lines?: number;
+  muted?: boolean;
+  noWrap?: boolean;
+  bold?: boolean;
+} & Omit<ComponentPropsWithoutRef<T>, "className">;
 
 export function Typography<T extends ElementType = "p">({
   as,
   variant = "body",
   uppercase = false,
-  className,
+  truncate = false,
+  lines,
+  muted = false,
+  noWrap = false,
+  bold = false,
   children,
   ...rest
 }: Props<T>) {
@@ -24,8 +37,21 @@ export function Typography<T extends ElementType = "p">({
         variant === "body" && styles.body,
         variant === "label" && styles.label,
         uppercase && styles.uppercase,
-        className,
+        truncate && styles.truncate,
+        muted && styles.muted,
+        noWrap && styles.noWrap,
+        bold && styles.bold,
       )}
+      style={
+        lines
+          ? ({
+              display: "-webkit-box",
+              WebkitLineClamp: lines,
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+            } as CSSProperties)
+          : undefined
+      }
       {...rest}
     >
       {children}

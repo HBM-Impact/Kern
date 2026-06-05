@@ -34,19 +34,12 @@
   min-width: 0;
 }
 
-.title {
-  margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.titleLink {
+  text-decoration: none;
+  color: inherit;
 
-  & > a {
-    text-decoration: none;
-    color: inherit;
-
-    &:hover {
-      color: var(--color-accent);
-    }
+  &:hover {
+    color: var(--color-accent);
   }
 }
 
@@ -62,9 +55,4 @@
   display: flex;
   align-items: center;
   gap: var(--size-3);
-}
-
-.subtotal {
-  font-weight: var(--font-weight-7);
-  white-space: nowrap;
 }

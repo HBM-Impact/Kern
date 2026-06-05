@@ -42,8 +42,10 @@ export function CartItemRow({ productId, quantity, product }: Props) {
         <Typography as="span" variant="label" uppercase>
           {product.category}
         </Typography>
-        <Typography as="h3" variant="body" className={styles.title}>
-          <IntlLink href={href}>{product.title}</IntlLink>
+        <Typography as="h3" variant="body" truncate>
+          <IntlLink href={href} className={styles.titleLink}>
+            {product.title}
+          </IntlLink>
         </Typography>
         <Typography as="span" variant="body">
           ${product.price.toFixed(2)}
@@ -52,7 +54,7 @@ export function CartItemRow({ productId, quantity, product }: Props) {
       <div className={styles.actions}>
         <AddToCart productId={productId} />
         <div className={styles.subtotalRow}>
-          <Typography as="span" variant="body" className={styles.subtotal}>
+          <Typography as="span" variant="body" noWrap bold>
             ${(product.price * quantity).toFixed(2)}
           </Typography>
           <Button

@@ -10,7 +10,7 @@ import type { useDialogStore } from "./use-dialog-store";
 
 type Props = {
   store: ReturnType<typeof useDialogStore>;
-  type?: "center" | "aside";
+  variant?: "center" | "aside";
   title: string;
   children?: ReactNode;
 } & Omit<DialogHTMLAttributes<HTMLDialogElement>, "ref">;
@@ -18,7 +18,7 @@ type Props = {
 export function Dialog({
   children,
   store,
-  type = "center",
+  variant = "center",
   title,
   ...rest
 }: Props) {
@@ -35,7 +35,7 @@ export function Dialog({
       }}
       className={clsx(
         styles.dialog,
-        type === "center" ? styles.center : styles.aside,
+        variant === "center" ? styles.center : styles.aside,
       )}
       aria-modal="true"
       aria-label={title}
