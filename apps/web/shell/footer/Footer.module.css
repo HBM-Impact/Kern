@@ -1,12 +1,61 @@
 .footer {
-  padding-block: var(--size-3);
+  padding-block: var(--size-5);
   padding-inline: var(--size-5);
   border-top: 1px solid var(--color-border-muted);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   flex-wrap: wrap;
+  gap: var(--size-5);
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
   gap: var(--size-2);
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-2);
+  align-items: flex-end;
+}
+
+.stack {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2);
+  flex-wrap: wrap;
+}
+
+.pills {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: var(--size-2);
+  flex-wrap: wrap;
+}
+
+.pill {
+  padding-block: 2px;
+  padding-inline: var(--size-2);
+  border: 1px solid var(--color-border-muted);
+  border-radius: 4px;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition:
+    border-color 0.15s,
+    color 0.15s;
+}
+
+.pill:hover {
+  border-color: var(--color-border);
+  color: var(--color-text);
 }
 
 .links {
@@ -14,7 +63,6 @@
   gap: var(--size-3);
 }
 
-.builtWith {
+.muted {
   color: var(--color-text-muted);
-  text-align: center;
 }

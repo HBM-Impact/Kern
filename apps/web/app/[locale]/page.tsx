@@ -8,6 +8,8 @@ import { FeaturedProducts } from "@/features/products/components/featured-produc
 import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
 import { generateWebSiteJsonLd } from "@/lib/seo/web-site";
+import { Breadcrumbs } from "@/shell/breadcrumbs";
+import { PageHeader } from "@/shell/page-header";
 
 export async function generateMetadata({
   params,
@@ -24,6 +26,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   setRequestLocale(locale as Locale);
 
+  const t = await getTranslations({ locale: locale as Locale });
   const baseUrl = getBaseUrl();
 
   const { products } = await getProductByCategory({
@@ -43,6 +46,11 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
         })}
       />
       <Container as="article">
+        <Breadcrumbs locale={locale} items={[]} />
+        <PageHeader
+          title={t("Pages.Home.title")}
+          description={t("Pages.Home.description")}
+        />
         <Hero />
         <FeaturedProducts products={products} />
       </Container>

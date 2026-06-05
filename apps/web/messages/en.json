@@ -2,8 +2,8 @@
   "Title": "Kern",
   "Pages": {
     "Home": {
-      "title": "Home",
-      "description": "Welcome to Kern"
+      "title": "Kern",
+      "description": "A Next.js storefront starter built for clean conventions, consistency, and simplicity."
     },
     "NotFound": {
       "title": "Page Not Found",

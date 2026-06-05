@@ -6,9 +6,10 @@ import { useFavorites } from "@/features/favorites/favorites-context";
 import { productByIdQueryOptions } from "@/features/products/api/options/product-by-id-query-options";
 import { ProductGrid } from "@/features/products/components/product-grid";
 import { LinkButton } from "@/primitives/link";
-import styles from "./FavoritesOverview.module.css";
+import styles from "./FavoritesView.module.css";
+import { FavoritesViewSkeleton } from "./FavoritesViewSkeleton";
 
-export function FavoritesOverview() {
+export function FavoritesView() {
   const { ids } = useFavorites();
 
   const { products, isLoading } = useQueries({
@@ -19,17 +20,6 @@ export function FavoritesOverview() {
     }),
   });
 
-  if (isLoading) {
-    return (
-      <ProductGrid
-        products={[]}
-        hasMore={false}
-        isLoading={true}
-        isFetchingMore={false}
-      />
-    );
-  }
-
   if (ids.length === 0) {
     return (
       <div className={styles.empty}>
@@ -37,6 +27,10 @@ export function FavoritesOverview() {
         <LinkButton href="/products">Browse products</LinkButton>
       </div>
     );
+  }
+
+  if (isLoading) {
+    return <FavoritesViewSkeleton count={ids.length} />;
   }
 
   if (products.length === 0) {
