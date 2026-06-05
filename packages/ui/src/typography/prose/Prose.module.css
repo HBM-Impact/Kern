@@ -1,0 +1,15 @@
+.body {
+  font-size: var(--font-size-1);
+  font-weight: 400;
+  line-height: var(--font-lineheight-3);
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: var(--font-lineheight-2);
+}
+
+.bold {
+  font-weight: var(--font-weight-7);
+}

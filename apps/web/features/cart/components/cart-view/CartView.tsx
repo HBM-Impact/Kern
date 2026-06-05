@@ -1,6 +1,6 @@
 "use client";
 
-import { Typography } from "@repo/ui/typography";
+import { Prose } from "@repo/ui/typography/prose";
 import { useQueries } from "@tanstack/react-query";
 import { useCart } from "@/features/cart/cart-context";
 import { CartItemRow } from "@/features/cart/components/cart-item-row";
@@ -30,7 +30,7 @@ export function CartView() {
   if (items.size === 0) {
     return (
       <div className={styles.empty}>
-        <Typography>Your cart is empty.</Typography>
+        <Prose>Your cart is empty.</Prose>
         <LinkButton href="/products">Browse products</LinkButton>
       </div>
     );

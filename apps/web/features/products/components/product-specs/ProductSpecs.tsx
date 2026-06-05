@@ -1,5 +1,5 @@
 import type { Product } from "@repo/services/commerce/commerce-types";
-import { Typography } from "@repo/ui/typography";
+import { Prose } from "@repo/ui/typography/prose";
 import styles from "./ProductSpecs.module.css";
 
 type Props = { product: Product };
@@ -31,14 +31,14 @@ function SpecRow({ label, value }: { label: string; value: string }) {
   return (
     <div className={styles.row}>
       <dt>
-        <Typography as="span" variant="label">
+        <Prose as="span" variant="label">
           {label}
-        </Typography>
+        </Prose>
       </dt>
       <dd>
-        <Typography as="span" variant="body">
+        <Prose as="span" variant="body">
           {value}
-        </Typography>
+        </Prose>
       </dd>
     </div>
   );

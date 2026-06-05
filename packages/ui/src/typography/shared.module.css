@@ -3,18 +3,6 @@
   margin: 0;
 }
 
-.body {
-  font-size: var(--font-size-1);
-  font-weight: 400;
-  line-height: var(--font-lineheight-3);
-}
-
-.label {
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: var(--font-lineheight-2);
-}
-
 .uppercase {
   text-transform: uppercase;
 }
@@ -31,8 +19,4 @@
 
 .noWrap {
   white-space: nowrap;
-}
-
-.bold {
-  font-weight: var(--font-weight-7);
 }

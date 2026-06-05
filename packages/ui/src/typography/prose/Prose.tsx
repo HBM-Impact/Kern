@@ -1,23 +1,15 @@
 import clsx from "clsx";
-import type {
-  ComponentPropsWithoutRef,
-  CSSProperties,
-  ElementType,
-} from "react";
-import styles from "./Typography.module.css";
+import type { CSSProperties, ElementType } from "react";
+import shared from "../shared.module.css";
+import type { TypographyBaseProps } from "../types";
+import styles from "./Prose.module.css";
 
-type Props<T extends ElementType = "p"> = {
-  as?: T;
+type Props<T extends ElementType = "p"> = TypographyBaseProps<T> & {
   variant?: "body" | "label";
-  uppercase?: boolean;
-  truncate?: boolean;
-  lines?: number;
-  muted?: boolean;
-  noWrap?: boolean;
   bold?: boolean;
-} & Omit<ComponentPropsWithoutRef<T>, "className">;
+};
 
-export function Typography<T extends ElementType = "p">({
+export function Prose<T extends ElementType = "p">({
   as,
   variant = "body",
   uppercase = false,
@@ -33,13 +25,13 @@ export function Typography<T extends ElementType = "p">({
   return (
     <Tag
       className={clsx(
-        styles.base,
+        shared.base,
         variant === "body" && styles.body,
         variant === "label" && styles.label,
-        uppercase && styles.uppercase,
-        truncate && styles.truncate,
-        muted && styles.muted,
-        noWrap && styles.noWrap,
+        uppercase && shared.uppercase,
+        truncate && shared.truncate,
+        muted && shared.muted,
+        noWrap && shared.noWrap,
         bold && styles.bold,
       )}
       style={

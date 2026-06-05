@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import { type ReactNode, useId, useState } from "react";
-import { Typography } from "../typography";
+import { Prose } from "../typography/prose";
 import styles from "./Tabs.module.css";
 
 type Props = {
@@ -31,9 +31,9 @@ export function Tabs({ tabs, defaultTab = 0 }: Props) {
               aria-selected={activeTab === index}
               id={`${id}-tab-${index}`}
             >
-              <Typography as="span" variant="body">
+              <Prose as="span" variant="body">
                 {tab.label}
-              </Typography>
+              </Prose>
             </button>
           </li>
         ))}

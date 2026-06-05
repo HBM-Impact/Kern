@@ -1,5 +1,5 @@
-import { Display } from "@repo/ui/display";
-import { Typography } from "@repo/ui/typography";
+import { Display } from "@repo/ui/typography/display";
+import { Prose } from "@repo/ui/typography/prose";
 
 type Props = {
   title: string;
@@ -12,7 +12,7 @@ export function PageHeader({ title, description }: Props) {
       <Display as="h1" variant="display2">
         {title}
       </Display>
-      {description ? <Typography>{description}</Typography> : null}
+      {description ? <Prose>{description}</Prose> : null}
     </hgroup>
   );
 }

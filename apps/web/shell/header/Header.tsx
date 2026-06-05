@@ -1,6 +1,6 @@
 import { IntlLink } from "@/i18n/navigation";
 import { Link } from "@/primitives/link";
-import { Display } from "@repo/ui/display";
+import { Display } from "@repo/ui/typography/display";
 import styles from "./Header.module.css";
 
 export function Header() {

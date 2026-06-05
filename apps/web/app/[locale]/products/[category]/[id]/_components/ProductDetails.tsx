@@ -1,7 +1,7 @@
 import type { Product } from "@repo/services/commerce/commerce-types";
 import { Container } from "@repo/ui/container";
-import { Display } from "@repo/ui/display";
-import { Typography } from "@repo/ui/typography";
+import { Display } from "@repo/ui/typography/display";
+import { Prose } from "@repo/ui/typography/prose";
 import { AddToCart } from "@/features/cart/components/add-to-cart";
 import { AddToFavorite } from "@/features/favorites/components/add-to-favorite";
 import { ProductCarousel } from "@/features/products/components/product-carousel";
@@ -22,24 +22,24 @@ export function ProductDetails({ product, relatedProducts }: Props) {
         <ProductGallery images={product.images} title={product.title} />
         <div className={styles.details}>
           <div className={styles.detailsHeader}>
-            <Typography as="span" variant="label" uppercase>
+            <Prose as="span" variant="label" uppercase>
               {product.category}
-            </Typography>
+            </Prose>
             <AddToFavorite productId={product.id} />
           </div>
           <Display as="h1" variant="display2">
             {product.title}
           </Display>
-          <Typography>{product.description}</Typography>
+          <Prose>{product.description}</Prose>
           <div className={styles.priceRow}>
             <div className={styles.priceGroup}>
               <Display as="span" variant="display3">
                 ${product.price.toFixed(2)}
               </Display>
               {product.discountPercentage > 0 ? (
-                <Typography as="span" variant="label">
+                <Prose as="span" variant="label">
                   -{product.discountPercentage.toFixed(0)}%
-                </Typography>
+                </Prose>
               ) : null}
             </div>
             <AddToCart productId={product.id} />

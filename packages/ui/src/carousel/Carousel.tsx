@@ -4,8 +4,8 @@ import { weakKey } from "@repo/utils/weak-key";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { type ReactNode, useRef } from "react";
 import { IconButton } from "../buttons/icon-button";
-import { Display } from "../display/Display";
-import { Typography } from "../typography";
+import { Display } from "../typography/display/Display";
+import { Prose } from "../typography/prose";
 import styles from "./Carousel.module.css";
 
 type Props = {
@@ -37,9 +37,9 @@ export function Carousel({ children, title, description }: Props) {
             {title}
           </Display>
           {description ? (
-            <Typography as="p" variant="label">
+            <Prose as="p" variant="label">
               {description}
-            </Typography>
+            </Prose>
           ) : null}
         </div>
         <div className={styles.buttonGroup}>

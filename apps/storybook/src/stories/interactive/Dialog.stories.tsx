@@ -1,6 +1,6 @@
 import { Button } from "@repo/ui/buttons";
 import { Dialog, useDialogStore } from "@repo/ui/dialog";
-import { Typography } from "@repo/ui/typography";
+import { Prose } from "@repo/ui/typography/prose";
 import type { Meta, StoryObj } from "@storybook/react";
 
 function DialogDemo({
@@ -15,9 +15,9 @@ function DialogDemo({
     <>
       <Button onClick={dialog.open}>Open dialog</Button>
       <Dialog store={dialog} variant={variant} title={title}>
-        <Typography>
+        <Prose>
           This is the dialog content. Press Escape or click outside to close.
-        </Typography>
+        </Prose>
       </Dialog>
     </>
   );

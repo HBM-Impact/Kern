@@ -1,6 +1,6 @@
 import type { Product } from "@repo/services/commerce/commerce-types";
 import { Button } from "@repo/ui/buttons";
-import { Typography } from "@repo/ui/typography";
+import { Prose } from "@repo/ui/typography/prose";
 import { ProductCard, ProductCardSkeleton } from "../product-card";
 import styles from "./ProductGrid.module.css";
 
@@ -40,7 +40,7 @@ export function ProductGrid({
   }
 
   if (products.length === 0) {
-    return <Typography>No products found.</Typography>;
+    return <Prose>No products found.</Prose>;
   }
 
   return (
@@ -56,7 +56,7 @@ export function ProductGrid({
               discountPercentage={product.discountPercentage}
               category={product.category}
               images={product.images}
-              priority={index === 0}
+              priority={index < 4}
             />
           </li>
         ))}

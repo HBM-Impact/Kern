@@ -1,5 +1,5 @@
 import { Tabs } from "@repo/ui/tabs";
-import { Typography } from "@repo/ui/typography";
+import { Prose } from "@repo/ui/typography/prose";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
@@ -9,15 +9,15 @@ const meta = {
     tabs: [
       {
         label: "Overview",
-        content: <Typography>Product overview content goes here.</Typography>,
+        content: <Prose>Product overview content goes here.</Prose>,
       },
       {
         label: "Specifications",
-        content: <Typography>Technical specifications go here.</Typography>,
+        content: <Prose>Technical specifications go here.</Prose>,
       },
       {
         label: "Reviews",
-        content: <Typography>Customer reviews go here.</Typography>,
+        content: <Prose>Customer reviews go here.</Prose>,
       },
     ],
   },

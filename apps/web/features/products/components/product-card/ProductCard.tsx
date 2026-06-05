@@ -1,5 +1,5 @@
 import type { Product } from "@repo/services/commerce/commerce-types";
-import { Typography } from "@repo/ui/typography";
+import { Prose } from "@repo/ui/typography/prose";
 import { AddToCart } from "@/features/cart/components/add-to-cart";
 import { AddToFavorite } from "@/features/favorites/components/add-to-favorite";
 import { IntlLink } from "@/i18n/navigation";
@@ -63,21 +63,21 @@ export function ProductCard({
         </div>
       </div>
       <div className={styles.body}>
-        <Typography as="span" variant="label" uppercase>
+        <Prose as="span" variant="label" uppercase>
           {category}
-        </Typography>
-        <Typography as="h2" variant="body" truncate>
+        </Prose>
+        <Prose as="h2" variant="body" truncate>
           <IntlLink href={href} className={styles.titleLink}>
             {title}
           </IntlLink>
-        </Typography>
-        <Typography as="p" variant="label" muted lines={2}>
+        </Prose>
+        <Prose as="p" variant="label" muted lines={2}>
           {description}
-        </Typography>
+        </Prose>
         <div className={styles.meta}>
-          <Typography as="span" variant="body">
+          <Prose as="span" variant="body">
             ${price.toFixed(2)}
-          </Typography>
+          </Prose>
           <AddToCart productId={id} />
         </div>
       </div>

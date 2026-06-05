@@ -1,20 +1,12 @@
 import clsx from "clsx";
-import type {
-  ComponentPropsWithoutRef,
-  CSSProperties,
-  ElementType,
-} from "react";
+import type { CSSProperties, ElementType } from "react";
+import shared from "../shared.module.css";
+import type { TypographyBaseProps } from "../types";
 import styles from "./Display.module.css";
 
-type Props<T extends ElementType = "h2"> = {
-  as?: T;
+type Props<T extends ElementType = "h2"> = TypographyBaseProps<T> & {
   variant?: "display1" | "display2" | "display3" | "display4";
-  uppercase?: boolean;
-  truncate?: boolean;
-  lines?: number;
-  muted?: boolean;
-  noWrap?: boolean;
-} & Omit<ComponentPropsWithoutRef<T>, "className">;
+};
 
 export function Display<T extends ElementType = "h2">({
   as,
@@ -31,15 +23,16 @@ export function Display<T extends ElementType = "h2">({
   return (
     <Tag
       className={clsx(
+        shared.base,
         styles.base,
         variant === "display1" && styles.display1,
         variant === "display2" && styles.display2,
         variant === "display3" && styles.display3,
         variant === "display4" && styles.display4,
-        uppercase && styles.uppercase,
-        truncate && styles.truncate,
-        muted && styles.muted,
-        noWrap && styles.noWrap,
+        uppercase && shared.uppercase,
+        truncate && shared.truncate,
+        muted && shared.muted,
+        noWrap && shared.noWrap,
       )}
       style={
         lines

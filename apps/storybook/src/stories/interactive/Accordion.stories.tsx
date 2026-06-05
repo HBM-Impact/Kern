@@ -1,5 +1,5 @@
 import { Accordion } from "@repo/ui/accordion";
-import { Typography } from "@repo/ui/typography";
+import { Prose } from "@repo/ui/typography/prose";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
@@ -8,9 +8,9 @@ const meta = {
   args: {
     title: "What is your return policy?",
     children: (
-      <Typography>
+      <Prose>
         We offer a 30-day return policy on all items in original condition.
-      </Typography>
+      </Prose>
     ),
   },
 } satisfies Meta<typeof Accordion>;

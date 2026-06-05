@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { X } from "lucide-react";
 import type { DialogHTMLAttributes, ReactNode } from "react";
 import { IconButton } from "../buttons/icon-button";
-import { Display } from "../display/Display";
+import { Display } from "../typography/display/Display";
 import styles from "./Dialog.module.css";
 import type { useDialogStore } from "./use-dialog-store";
 

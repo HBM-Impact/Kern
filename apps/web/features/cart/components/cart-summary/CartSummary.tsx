@@ -1,6 +1,6 @@
 import type { Product } from "@repo/services/commerce/commerce-types";
-import { Display } from "@repo/ui/display";
-import { Typography } from "@repo/ui/typography";
+import { Display } from "@repo/ui/typography/display";
+import { Prose } from "@repo/ui/typography/prose";
 import { LinkButton } from "@/primitives/link";
 import styles from "./CartSummary.module.css";
 
@@ -28,20 +28,20 @@ export function CartSummary({ items }: Props) {
       </Display>
       <dl className={styles.details}>
         <div className={styles.detailRow}>
-          <Typography as="dt" variant="body">
+          <Prose as="dt" variant="body">
             Items
-          </Typography>
-          <Typography as="dd" variant="body">
+          </Prose>
+          <Prose as="dd" variant="body">
             {totalItems}
-          </Typography>
+          </Prose>
         </div>
         <div className={styles.detailRow}>
-          <Typography as="dt" variant="body">
+          <Prose as="dt" variant="body">
             Subtotal
-          </Typography>
-          <Typography as="dd" variant="body">
+          </Prose>
+          <Prose as="dd" variant="body">
             ${subtotal.toFixed(2)}
-          </Typography>
+          </Prose>
         </div>
       </dl>
       <div className={styles.totalRow}>

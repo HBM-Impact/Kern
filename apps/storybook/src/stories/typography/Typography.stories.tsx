@@ -1,13 +1,13 @@
-import { Typography } from "@repo/ui/typography";
+import { Prose } from "@repo/ui/typography/prose";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
-  title: "Typography/Typography",
-  component: Typography,
+  title: "Typography/Prose",
+  component: Prose,
   args: {
     children: "The quick brown fox jumps over the lazy dog.",
   },
-} satisfies Meta<typeof Typography>;
+} satisfies Meta<typeof Prose>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

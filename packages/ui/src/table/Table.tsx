@@ -1,6 +1,6 @@
 import { weakKey } from "@repo/utils/weak-key";
 import type { ReactNode } from "react";
-import { Typography } from "../typography";
+import { Prose } from "../typography/prose";
 import styles from "./Table.module.css";
 
 type Column<T> = {
@@ -10,7 +10,7 @@ type Column<T> = {
 
 function wrapPrimitive(content: ReactNode) {
   if (typeof content === "object") return content;
-  return <Typography>{String(content)}</Typography>;
+  return <Prose>{String(content)}</Prose>;
 }
 
 type Props<T> = {

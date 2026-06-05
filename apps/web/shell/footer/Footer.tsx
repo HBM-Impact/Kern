@@ -1,5 +1,5 @@
 import { Link } from "@repo/ui/link";
-import { Typography } from "@repo/ui/typography";
+import { Prose } from "@repo/ui/typography/prose";
 import styles from "./Footer.module.css";
 
 const STACK = [
@@ -16,13 +16,13 @@ export function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.left}>
-        <Typography variant="label" muted>
+        <Prose variant="label" muted>
           © {currentYear} Hannibal B. Moulvad
-        </Typography>
+        </Prose>
         <div className={styles.stack}>
-          <Typography variant="label" muted>
+          <Prose variant="label" muted>
             Built with
-          </Typography>
+          </Prose>
           <ul className={styles.pills} aria-label="Tech stack">
             {STACK.map(({ label, href }) => (
               <li key={label}>
@@ -35,9 +35,9 @@ export function Footer() {
         </div>
       </div>
       <div className={styles.right}>
-        <Typography variant="label" as="h2" muted>
+        <Prose variant="label" as="h2" muted>
           Reach out
-        </Typography>
+        </Prose>
         <nav className={styles.links} aria-label="Contact">
           <Link href="mailto:hmoulvad@hotmail.com">hmoulvad@hotmail.com</Link>
           <Link

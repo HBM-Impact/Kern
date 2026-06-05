@@ -1,6 +1,6 @@
 import type { Product } from "@repo/services/commerce/commerce-types";
-import { Display } from "@repo/ui/display";
-import { Typography } from "@repo/ui/typography";
+import { Display } from "@repo/ui/typography/display";
+import { Prose } from "@repo/ui/typography/prose";
 import styles from "./ProductReviews.module.css";
 
 type Props = { reviews: Product["reviews"] };
@@ -19,18 +19,18 @@ export function ProductReviews({ reviews }: Props) {
           className={styles.review}
         >
           <div className={styles.header}>
-            <Typography as="span" variant="body">
+            <Prose as="span" variant="body">
               {review.reviewerName}
-            </Typography>
-            <Typography
+            </Prose>
+            <Prose
               as="span"
               variant="label"
               aria-label={`Rating: ${review.rating} out of 5`}
             >
               {review.rating} ★
-            </Typography>
+            </Prose>
           </div>
-          <Typography>{review.comment}</Typography>
+          <Prose>{review.comment}</Prose>
         </article>
       ))}
     </section>

@@ -1,6 +1,6 @@
 import { LinkButton } from "@repo/ui/buttons";
-import { Display } from "@repo/ui/display";
-import { Typography } from "@repo/ui/typography";
+import { Display } from "@repo/ui/typography/display";
+import { Prose } from "@repo/ui/typography/prose";
 import { ArrowRight } from "lucide-react";
 import styles from "./Hero.module.css";
 
@@ -11,9 +11,9 @@ export function Hero() {
         Quality products, delivered fast
       </Display>
       <div className={styles.subtitle}>
-        <Typography as="p" variant="body" muted>
+        <Prose as="p" variant="body" muted>
           Browse our curated collection of electronics, fashion, and more.
-        </Typography>
+        </Prose>
       </div>
       <LinkButton href="/products" icon={<ArrowRight />}>
         Browse Products

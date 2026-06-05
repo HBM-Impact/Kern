@@ -1,8 +1,6 @@
 .base {
-  font-family: var(--font-sans);
   font-weight: 600;
   letter-spacing: -0.025em;
-  margin: 0;
 }
 
 .display1 {
@@ -23,22 +21,4 @@
 .display4 {
   font-size: var(--font-size-3);
   line-height: var(--font-lineheight-1);
-}
-
-.uppercase {
-  text-transform: uppercase;
-}
-
-.truncate {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.muted {
-  color: var(--color-text-muted);
-}
-
-.noWrap {
-  white-space: nowrap;
 }

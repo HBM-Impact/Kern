@@ -1,6 +1,6 @@
 "use client";
 
-import { Typography } from "@repo/ui/typography";
+import { Prose } from "@repo/ui/typography/prose";
 import { useQueries } from "@tanstack/react-query";
 import { useFavorites } from "@/features/favorites/favorites-context";
 import { productByIdQueryOptions } from "@/features/products/api/options/product-by-id-query-options";
@@ -23,7 +23,7 @@ export function FavoritesView() {
   if (ids.length === 0) {
     return (
       <div className={styles.empty}>
-        <Typography>Your favorites list is empty.</Typography>
+        <Prose>Your favorites list is empty.</Prose>
         <LinkButton href="/products">Browse products</LinkButton>
       </div>
     );
@@ -36,7 +36,7 @@ export function FavoritesView() {
   if (products.length === 0) {
     return (
       <div className={styles.empty}>
-        <Typography>No results found.</Typography>
+        <Prose>No results found.</Prose>
         <LinkButton href="/products">Browse products</LinkButton>
       </div>
     );

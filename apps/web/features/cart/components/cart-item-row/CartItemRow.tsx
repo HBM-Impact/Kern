@@ -2,7 +2,7 @@
 
 import type { Product } from "@repo/services/commerce/commerce-types";
 import { Button } from "@repo/ui/buttons";
-import { Typography } from "@repo/ui/typography";
+import { Prose } from "@repo/ui/typography/prose";
 import { useCart } from "@/features/cart/cart-context";
 import { AddToCart } from "@/features/cart/components/add-to-cart";
 import { IntlLink } from "@/i18n/navigation";
@@ -39,24 +39,24 @@ export function CartItemRow({ productId, quantity, product }: Props) {
         />
       </IntlLink>
       <div className={styles.body}>
-        <Typography as="span" variant="label" uppercase>
+        <Prose as="span" variant="label" uppercase>
           {product.category}
-        </Typography>
-        <Typography as="h3" variant="body" truncate>
+        </Prose>
+        <Prose as="h3" variant="body" truncate>
           <IntlLink href={href} className={styles.titleLink}>
             {product.title}
           </IntlLink>
-        </Typography>
-        <Typography as="span" variant="body">
+        </Prose>
+        <Prose as="span" variant="body">
           ${product.price.toFixed(2)}
-        </Typography>
+        </Prose>
       </div>
       <div className={styles.actions}>
         <AddToCart productId={productId} />
         <div className={styles.subtotalRow}>
-          <Typography as="span" variant="body" noWrap bold>
+          <Prose as="span" variant="body" noWrap bold>
             ${(product.price * quantity).toFixed(2)}
-          </Typography>
+          </Prose>
           <Button
             aria-label={`Remove ${product.title}`}
             onClick={() => remove(productId)}

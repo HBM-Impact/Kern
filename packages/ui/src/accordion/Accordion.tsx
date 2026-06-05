@@ -1,6 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import type { DetailsHTMLAttributes, ReactNode } from "react";
-import { Typography } from "../typography";
+import { Prose } from "../typography/prose";
 import styles from "./Accordion.module.css";
 
 type Props = {
@@ -12,7 +12,7 @@ export function Accordion({ title, children, ...rest }: Props) {
   return (
     <details className={styles.details} {...rest}>
       <summary className={styles.summary}>
-        <Typography>{title}</Typography>
+        <Prose>{title}</Prose>
         <ChevronDown className={styles.icon} />
       </summary>
       <div className={styles.content}>{children}</div>

@@ -1,4 +1,4 @@
-import { Display } from "@repo/ui/display";
+import { Display } from "@repo/ui/typography/display";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
