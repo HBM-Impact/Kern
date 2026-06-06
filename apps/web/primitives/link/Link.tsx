@@ -4,6 +4,6 @@ import { IntlLink } from "@/i18n/navigation";
 
 type Props = Omit<ComponentProps<typeof IntlLink>, "className" | "as">;
 
-export function Link(props: Props) {
-  return <UILink as={IntlLink} {...props} />;
+export function Link({prefetch = false, ...props}: Props) {
+  return <UILink prefetch={prefetch} as={IntlLink} {...props} />;
 }

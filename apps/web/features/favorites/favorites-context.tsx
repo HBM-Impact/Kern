@@ -18,7 +18,9 @@ export function FavoritesProvider({ children }: PropsWithChildren) {
     { initializeWithValue: false },
   );
 
-  const ids = favoriteIds ?? [];
+  const ids = (favoriteIds ?? []).filter(
+    (id): id is number => typeof id === "number",
+  );
 
   function toggle(id: number) {
     setFavoriteIds((prev) =>

@@ -1,15 +1,13 @@
 "use client";
 
+import { parseAsString, useQueryState } from "nuqs";
 import { useProductsByQuery } from "@/features/products/api/queries/use-products-by-query";
 import { ProductGrid } from "@/features/products/components/product-grid";
 import { SortControl } from "@/features/products/components/sort-control";
 
-type Props = {
-  q: string;
-  sort?: string;
-};
+export function SearchResults() {
+  const [q] = useQueryState("q", parseAsString.withDefault(""));
 
-export function SearchResults({ q, sort }: Props) {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isPending } =
     useProductsByQuery({
       query: q,
@@ -20,7 +18,7 @@ export function SearchResults({ q, sort }: Props) {
 
   return (
     <>
-      <SortControl sort={sort} preserveParams={{ q }} />
+      <SortControl />
       <ProductGrid
         products={products}
         hasMore={hasNextPage ?? false}

@@ -1,27 +1,16 @@
 "use client";
 
-import type { Product } from "@repo/services/commerce/commerce-types";
+import { parseAsString, useQueryState } from "nuqs";
 import { useProductByCategory } from "@/features/products/api/queries/use-product-by-category";
 import { ProductGrid } from "@/features/products/components/product-grid";
 import { SortControl } from "@/features/products/components/sort-control";
+import { SORT_OPTIONS } from "@/features/products/sort-map";
 
-type SortKey = Extract<keyof Product, "price" | "rating" | "title">;
-type SortEntry = { sortBy: SortKey; order: "asc" | "desc" };
+type Props = { category: string };
 
-const SORT_MAP: Record<string, SortEntry> = {
-  "price-asc": { sortBy: "price", order: "asc" },
-  "price-desc": { sortBy: "price", order: "desc" },
-  "rating-desc": { sortBy: "rating", order: "desc" },
-  "title-asc": { sortBy: "title", order: "asc" },
-};
-
-type Props = {
-  category: string;
-  sort?: string;
-};
-
-export function ProductCatalog({ category, sort }: Props) {
-  const sortEntry = sort ? SORT_MAP[sort] : undefined;
+export function ProductCatalog({ category }: Props) {
+  const [sort] = useQueryState("sort", parseAsString);
+  const sortEntry = sort ? SORT_OPTIONS[sort] : undefined;
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isPending } =
     useProductByCategory({
@@ -35,7 +24,7 @@ export function ProductCatalog({ category, sort }: Props) {
 
   return (
     <>
-      <SortControl sort={sort} />
+      <SortControl />
       <ProductGrid
         products={products}
         hasMore={hasNextPage ?? false}

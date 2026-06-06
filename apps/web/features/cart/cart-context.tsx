@@ -18,7 +18,9 @@ export function CartProvider({ children }: PropsWithChildren) {
     [],
     { initializeWithValue: false },
   );
-  const items = new Map(entries);
+  const items = new Map(
+    entries.filter((e): e is [number, number] => typeof e[0] === "number"),
+  );
 
   function mutate(fn: (draft: Map<number, number>) => void) {
     setEntries((prev) => {

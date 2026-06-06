@@ -1,32 +1,16 @@
 "use client";
 
 import { Select } from "@repo/ui/form/select";
-import { usePathname, useRouter } from "next/navigation";
+import { parseAsString, useQueryState } from "nuqs";
 import type { ChangeEvent } from "react";
+import { SORT_OPTIONS } from "../../sort-map";
 import styles from "./SortControl.module.css";
 
-const SORT_OPTIONS = [
-  { value: "", label: "Default" },
-  { value: "price-asc", label: "Price: Low to High" },
-  { value: "price-desc", label: "Price: High to Low" },
-  { value: "rating-desc", label: "Rating: High to Low" },
-  { value: "title-asc", label: "Name: A to Z" },
-];
-
-type Props = {
-  sort?: string;
-  preserveParams?: Record<string, string>;
-};
-
-export function SortControl({ sort, preserveParams }: Props) {
-  const router = useRouter();
-  const pathname = usePathname();
+export function SortControl() {
+  const [sort, setSort] = useQueryState("sort", parseAsString.withDefault(""));
 
   function handleChange(e: ChangeEvent<HTMLSelectElement>) {
-    const params = new URLSearchParams(preserveParams);
-    if (e.target.value) params.set("sort", e.target.value);
-    const qs = params.toString();
-    router.push(qs ? `${pathname}?${qs}` : pathname);
+    setSort(e.target.value || null);
   }
 
   return (
@@ -34,8 +18,14 @@ export function SortControl({ sort, preserveParams }: Props) {
       <Select
         label="Sort by"
         name="sort"
-        options={SORT_OPTIONS}
-        defaultValue={sort ?? ""}
+        options={[
+          { value: "", label: "Default" },
+          ...Object.entries(SORT_OPTIONS).map(([value, { label }]) => ({
+            value,
+            label,
+          })),
+        ]}
+        value={sort}
         onChange={handleChange}
       />
     </div>

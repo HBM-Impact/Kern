@@ -1,6 +1,5 @@
-import { IntlLink } from "@/i18n/navigation";
-import { Link } from "@/primitives/link";
 import { Display } from "@repo/ui/typography/display";
+import { Link } from "@/primitives/link";
 import styles from "./Header.module.css";
 
 export function Header() {
@@ -16,16 +15,8 @@ export function Header() {
         </div>
         <nav className={styles.nav} aria-label="Main">
           <Link href="/products">Products</Link>
-          <IntlLink
-            href="/favorites"
-            aria-label="Favorites"
-            className={styles.iconLink}
-          >
-            Favorites
-          </IntlLink>
-          <IntlLink href="/cart" aria-label="Cart" className={styles.iconLink}>
-            Cart
-          </IntlLink>
+          <Link href="/favorites">Favorites</Link>
+          <Link href="/cart">Cart</Link>
         </nav>
       </div>
     </header>

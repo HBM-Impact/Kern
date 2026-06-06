@@ -14,11 +14,13 @@
     "@repo/services": "workspace:*",
     "@repo/ui": "workspace:*",
     "@repo/utils": "workspace:*",
+    "@tanstack/react-form": "^1.33.0",
     "@tanstack/react-query": "catalog:",
     "clsx": "catalog:",
     "lucide-react": "catalog:",
     "next": "catalog:",
     "next-intl": "catalog:",
+    "nuqs": "^2.8.9",
     "react": "catalog:",
     "react-dom": "catalog:",
     "usehooks-ts": "catalog:"

@@ -5,7 +5,7 @@ import { JsonLdScript } from "@/lib/seo/json-ld-script";
 import { generateOrganizationJsonLd } from "@/lib/seo/organization";
 import { Footer } from "@/shell/footer";
 import { Header } from "@/shell/header";
-import { Providers } from "@/shell/providers";
+import { Providers } from "@/shell/Providers";
 import { SkipLink } from "@/shell/skip-link";
 import styles from "./RootLayout.module.css";
 

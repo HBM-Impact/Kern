@@ -4,6 +4,7 @@ import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
 import type { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
+import { Suspense } from "react";
 import { routingConfig } from "@/i18n/routing";
 import { generateCollectionPageJsonLd } from "@/lib/seo/collection-page";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
@@ -38,10 +39,8 @@ export async function generateMetadata({
 
 export default async function CategoryPage({
   params,
-  searchParams,
 }: PageProps<"/[locale]/products/[category]">) {
   const { locale, category } = await params;
-  const { sort } = await searchParams;
   setRequestLocale(locale as Locale);
 
   const baseUrl = getBaseUrl();
@@ -72,10 +71,9 @@ export default async function CategoryPage({
         title={name}
         description={`Browse all products in the ${name} category.`}
       />
-      <ProductCatalog
-        category={category}
-        sort={typeof sort === "string" ? sort : undefined}
-      />
+      <Suspense>
+        <ProductCatalog category={category} />
+      </Suspense>
     </Container>
   );
 }

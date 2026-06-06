@@ -33,15 +33,3 @@
   align-items: center;
   gap: var(--size-3);
 }
-
-.iconLink {
-  display: inline-flex;
-  align-items: center;
-  padding: var(--size-2);
-  border-radius: var(--radius-2);
-  transition: background-color 0.15s var(--ease-2);
-
-  &:hover {
-    background-color: var(--color-hover-bg);
-  }
-}
