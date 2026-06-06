@@ -3,7 +3,7 @@ import type { ComponentProps } from "react";
 import { generateBreadcrumbJsonLd } from "@/lib/seo/breadcrumb";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
-import { BareLink } from "@/primitives/link";
+import { BareLink } from "@/primitives/link/BareLink";
 import styles from "./Breadcrumbs.module.css";
 
 type Href = ComponentProps<typeof BareLink>["href"];

@@ -1,7 +1,7 @@
 import { Display } from "@repo/ui/typography/display";
 import { Prose } from "@repo/ui/typography/prose";
 import { ArrowRight } from "lucide-react";
-import { LinkButton } from "@/primitives/link";
+import { LinkButton } from "@/primitives/link/LinkButton";
 import styles from "./Hero.module.css";
 
 export function Hero() {

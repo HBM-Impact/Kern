@@ -3,8 +3,8 @@
 import { useRef, useState } from "react";
 
 type Params = {
-  onClose?: () => void
-}
+  onClose?: () => void;
+};
 
 export function useDialogStore({ onClose }: Params = {}) {
   const ref = useRef<HTMLDialogElement>(null);

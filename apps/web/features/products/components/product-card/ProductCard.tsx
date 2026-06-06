@@ -3,7 +3,7 @@ import { Prose } from "@repo/ui/typography/prose";
 import { AddToCart } from "@/features/cart/components/add-to-cart";
 import { AddToFavorite } from "@/features/favorites/components/add-to-favorite";
 import { createProductSlug } from "@/lib/slug/create-product-slug";
-import { BareLink } from "@/primitives/link";
+import { BareLink } from "@/primitives/link/BareLink";
 import { OptimizedImage } from "@/primitives/optimized-image";
 import styles from "./ProductCard.module.css";
 

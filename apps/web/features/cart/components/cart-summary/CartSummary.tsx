@@ -1,7 +1,7 @@
 import type { Product } from "@repo/services/commerce/commerce-types";
 import { Display } from "@repo/ui/typography/display";
 import { Prose } from "@repo/ui/typography/prose";
-import { LinkButton } from "@/primitives/link";
+import { LinkButton } from "@/primitives/link/LinkButton";
 import styles from "./CartSummary.module.css";
 
 type CartItemWithProduct = {

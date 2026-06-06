@@ -1,5 +1,5 @@
 import type { Category } from "@repo/services/commerce/commerce-types";
-import { Link } from "@/primitives/link";
+import { Link } from "@/primitives/link/Link";
 import styles from "./CategoryList.module.css";
 
 type Props = { categories: Category[] };

@@ -7,7 +7,7 @@ import { CategoryList } from "@/features/products/components/category-list";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { generateItemListJsonLd } from "@/lib/seo/item-list";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
-import { Link } from "@/primitives/link";
+import { Link } from "@/primitives/link/Link";
 import { Breadcrumbs } from "@/shell/breadcrumbs";
 import { PageHeader } from "@/shell/page-header";
 

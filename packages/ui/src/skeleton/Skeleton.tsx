@@ -2,16 +2,16 @@ import clsx from "clsx";
 import type { ComponentPropsWithoutRef, CSSProperties } from "react";
 import styles from "./Skeleton.module.css";
 
-
 type Props = {
   shape?: "rect" | "circle";
-  variant?: | "body"
-  | "label"
-  | "display1"
-  | "display2"
-  | "display3"
-  | "display4"
-  | "button";
+  variant?:
+    | "body"
+    | "label"
+    | "display1"
+    | "display2"
+    | "display3"
+    | "display4"
+    | "button";
   width?: CSSProperties["width"];
 } & ComponentPropsWithoutRef<"div">;
 

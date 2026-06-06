@@ -27,6 +27,7 @@ const meta = {
     title: "Featured Products",
     description: "Scroll to explore",
     children: Array.from({ length: 6 }, (_, i) => (
+      // biome-ignore lint/suspicious/noArrayIndexKey: static demo array, order never changes
       <Card key={i} label={`Item ${i + 1}`} />
     )),
   },

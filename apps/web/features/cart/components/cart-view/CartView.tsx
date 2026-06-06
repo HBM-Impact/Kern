@@ -8,7 +8,7 @@ import { CartItemRowSkeleton } from "@/features/cart/components/cart-item-row/Ca
 import { CartSummary } from "@/features/cart/components/cart-summary";
 import { CartSummarySkeleton } from "@/features/cart/components/cart-summary/CartSummarySkeleton";
 import { productByIdQueryOptions } from "@/features/products/api/options/product-by-id-query-options";
-import { LinkButton } from "@/primitives/link";
+import { LinkButton } from "@/primitives/link/LinkButton";
 import styles from "./CartView.module.css";
 
 export function CartView() {

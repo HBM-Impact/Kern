@@ -19,9 +19,7 @@ export default function GlobalError({ error, reset }: Props) {
             <Display variant="display1" as="h1">
               Something went wrong!
             </Display>
-            <Prose>
-              {error.message || "An unexpected error occurred"}
-            </Prose>
+            <Prose>{error.message || "An unexpected error occurred"}</Prose>
           </hgroup>
           <Button onClick={reset}>Try again</Button>
         </section>

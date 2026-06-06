@@ -2,7 +2,7 @@ import { Display } from "@repo/ui/typography/display";
 import { Prose } from "@repo/ui/typography/prose";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { LinkButton } from "@/primitives/link";
+import { LinkButton } from "@/primitives/link/LinkButton";
 
 export const metadata: Metadata = {
   title: "Not Found",

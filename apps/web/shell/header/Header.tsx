@@ -1,5 +1,5 @@
 import { Display } from "@repo/ui/typography/display";
-import { Link } from "@/primitives/link";
+import { Link } from "@/primitives/link/Link";
 import styles from "./Header.module.css";
 
 export function Header() {

@@ -17,6 +17,7 @@ Only three link sources allowed:
 | `Link` from `@/primitives/link` | Internal navigation links (with UI styles) |
 | `LinkButton` from `@/primitives/link` | Internal navigation styled as button |
 | `BareLink` from `@/primitives/link` | Internal navigation without UI styles (image wrappers, custom-styled anchors) |
+| `ExternalLink` from `@/primitives/link` | External links (non-`IntlLink`, plain `<a>` with UI styles) |
 
 Never import `Link` from `@repo/ui/link`, `LinkButton` from `@repo/ui/buttons`, `IntlLink` from `@/i18n/navigation`, or `Link` from `next/link` directly. The primitives wrap these with `prefetch={false}` and locale-aware routing — bypassing them breaks i18n.
 

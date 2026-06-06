@@ -6,7 +6,7 @@ import { Prose } from "@repo/ui/typography/prose";
 import { useCart } from "@/features/cart/cart-context";
 import { AddToCart } from "@/features/cart/components/add-to-cart";
 import { createProductSlug } from "@/lib/slug/create-product-slug";
-import { BareLink } from "@/primitives/link";
+import { BareLink } from "@/primitives/link/BareLink";
 import { OptimizedImage } from "@/primitives/optimized-image";
 import styles from "./CartItemRow.module.css";
 

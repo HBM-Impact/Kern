@@ -1,5 +1,5 @@
 import { Prose } from "@repo/ui/typography/prose";
-import { Link } from "@/primitives/link";
+import { ExternalLink } from "@/primitives/link/ExternalLink";
 import styles from "./Footer.module.css";
 
 const STACK = [
@@ -26,9 +26,13 @@ export function Footer() {
           <ul className={styles.pills} aria-label="Tech stack">
             {STACK.map(({ label, href }) => (
               <li key={label}>
-                <Link href={href} target="_blank" rel="noopener noreferrer">
+                <ExternalLink
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {label}
-                </Link>
+                </ExternalLink>
               </li>
             ))}
           </ul>
@@ -39,21 +43,23 @@ export function Footer() {
           Reach out
         </Prose>
         <nav className={styles.links} aria-label="Contact">
-          <Link href="mailto:hmoulvad@hotmail.com">hmoulvad@hotmail.com</Link>
-          <Link
+          <ExternalLink href="mailto:hmoulvad@hotmail.com">
+            hmoulvad@hotmail.com
+          </ExternalLink>
+          <ExternalLink
             href="https://github.com/hmoulvad"
             target="_blank"
             rel="noopener noreferrer"
           >
             GitHub
-          </Link>
-          <Link
+          </ExternalLink>
+          <ExternalLink
             href="https://kern-storybook.vercel.app"
             target="_blank"
             rel="noopener noreferrer"
           >
             Storybook
-          </Link>
+          </ExternalLink>
         </nav>
       </div>
     </footer>

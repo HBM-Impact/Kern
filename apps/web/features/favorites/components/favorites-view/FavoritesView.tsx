@@ -5,7 +5,7 @@ import { useQueries } from "@tanstack/react-query";
 import { useFavorites } from "@/features/favorites/favorites-context";
 import { productByIdQueryOptions } from "@/features/products/api/options/product-by-id-query-options";
 import { ProductGrid } from "@/features/products/components/product-grid";
-import { LinkButton } from "@/primitives/link";
+import { LinkButton } from "@/primitives/link/LinkButton";
 import styles from "./FavoritesView.module.css";
 import { FavoritesViewSkeleton } from "./FavoritesViewSkeleton";
 
