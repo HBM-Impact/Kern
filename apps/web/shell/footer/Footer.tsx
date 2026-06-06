@@ -1,5 +1,5 @@
-import { Link } from "@repo/ui/link";
 import { Prose } from "@repo/ui/typography/prose";
+import { Link } from "@/primitives/link";
 import styles from "./Footer.module.css";
 
 const STACK = [

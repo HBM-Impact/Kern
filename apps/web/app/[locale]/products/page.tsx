@@ -1,6 +1,5 @@
 import { getCategories } from "@repo/services/commerce/categories/get-categories";
 import { Container } from "@repo/ui/container";
-import { Link } from "@repo/ui/link";
 import type { Metadata } from "next";
 import type { Locale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
@@ -8,6 +7,7 @@ import { CategoryList } from "@/features/products/components/category-list";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { generateItemListJsonLd } from "@/lib/seo/item-list";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
+import { Link } from "@/primitives/link";
 import { Breadcrumbs } from "@/shell/breadcrumbs";
 import { PageHeader } from "@/shell/page-header";
 

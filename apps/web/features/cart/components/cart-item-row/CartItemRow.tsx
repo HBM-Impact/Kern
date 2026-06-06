@@ -5,8 +5,8 @@ import { Button } from "@repo/ui/buttons";
 import { Prose } from "@repo/ui/typography/prose";
 import { useCart } from "@/features/cart/cart-context";
 import { AddToCart } from "@/features/cart/components/add-to-cart";
-import { IntlLink } from "@/i18n/navigation";
 import { createProductSlug } from "@/lib/slug/create-product-slug";
+import { BareLink } from "@/primitives/link";
 import { OptimizedImage } from "@/primitives/optimized-image";
 import styles from "./CartItemRow.module.css";
 
@@ -28,7 +28,7 @@ export function CartItemRow({ productId, quantity, product }: Props) {
 
   return (
     <li className={styles.row}>
-      <IntlLink prefetch={false} href={href} className={styles.imageLink}>
+      <BareLink href={href} className={styles.imageLink}>
         <OptimizedImage
           src={product.thumbnail}
           alt={product.title}
@@ -37,15 +37,15 @@ export function CartItemRow({ productId, quantity, product }: Props) {
           className={styles.thumb}
           sizes="96px"
         />
-      </IntlLink>
+      </BareLink>
       <div className={styles.body}>
         <Prose as="span" variant="label" uppercase>
           {product.category}
         </Prose>
         <Prose as="h3" variant="body" truncate>
-          <IntlLink href={href} className={styles.titleLink}>
+          <BareLink href={href} className={styles.titleLink}>
             {product.title}
-          </IntlLink>
+          </BareLink>
         </Prose>
         <Prose as="span" variant="body">
           ${product.price.toFixed(2)}

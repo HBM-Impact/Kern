@@ -1,8 +1,8 @@
-import { LinkButton } from "@repo/ui/buttons";
 import { Display } from "@repo/ui/typography/display";
 import { Prose } from "@repo/ui/typography/prose";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { LinkButton } from "@/primitives/link";
 
 export const metadata: Metadata = {
   title: "Not Found",

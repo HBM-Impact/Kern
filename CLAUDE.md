@@ -52,6 +52,21 @@ Biome 2.x. PostToolUse hook auto-runs `biome check --write --unsafe` on edited f
 - Zod at runtime boundaries
 - No `enum` — use `as const` unions
 
+## Links
+
+In `apps/web`, only three link sources are allowed:
+
+| Import | Use for |
+|---|---|
+| `Link` from `@/primitives/link` | Internal navigation links (with UI styles) |
+| `LinkButton` from `@/primitives/link` | Internal navigation styled as button |
+| `BareLink` from `@/primitives/link` | Internal navigation without UI styles (image wrappers, custom-styled anchors) |
+| `IntlLink` from `@/i18n/navigation` | Never — use the primitives above |
+
+Never import `Link` from `@repo/ui/link`, `LinkButton` from `@repo/ui/buttons`, `IntlLink` from `@/i18n/navigation`, or `Link` from `next/link` directly inside `apps/web`. The primitives wrap these with `prefetch={false}` and locale-aware routing — bypassing them breaks i18n.
+
+Exceptions: raw `<a>` for anchor-only navigation (e.g. skip links), `router.push()` for programmatic navigation after form submission.
+
 ## React / Next.js
 
 - No `useCallback`, `useMemo`, `React.memo` — React Compiler handles it

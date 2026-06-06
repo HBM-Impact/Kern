@@ -2,8 +2,8 @@ import type { Product } from "@repo/services/commerce/commerce-types";
 import { Prose } from "@repo/ui/typography/prose";
 import { AddToCart } from "@/features/cart/components/add-to-cart";
 import { AddToFavorite } from "@/features/favorites/components/add-to-favorite";
-import { IntlLink } from "@/i18n/navigation";
 import { createProductSlug } from "@/lib/slug/create-product-slug";
+import { BareLink } from "@/primitives/link";
 import { OptimizedImage } from "@/primitives/optimized-image";
 import styles from "./ProductCard.module.css";
 
@@ -38,7 +38,7 @@ export function ProductCard({
   return (
     <article className={styles.card}>
       <div className={styles.imageLink}>
-        <IntlLink prefetch={false} href={href}>
+        <BareLink href={href}>
           <OptimizedImage
             src={images[0] ?? "/fallback.png"}
             alt={title}
@@ -48,7 +48,7 @@ export function ProductCard({
             priority={priority}
             breakpointSizes={{ sm: "50vw", lg: "33vw", default: "25vw" }}
           />
-        </IntlLink>
+        </BareLink>
         {discountPercentage > 0 ? (
           <span
             className={styles.badge}
@@ -67,9 +67,9 @@ export function ProductCard({
           {category}
         </Prose>
         <Prose as="h2" variant="body" truncate>
-          <IntlLink href={href} className={styles.titleLink}>
+          <BareLink href={href} className={styles.titleLink}>
             {title}
-          </IntlLink>
+          </BareLink>
         </Prose>
         <Prose as="p" variant="label" muted lines={2}>
           {description}

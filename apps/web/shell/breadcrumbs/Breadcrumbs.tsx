@@ -1,12 +1,12 @@
 import { ChevronRight, House } from "lucide-react";
 import type { ComponentProps } from "react";
-import { IntlLink } from "@/i18n/navigation";
 import { generateBreadcrumbJsonLd } from "@/lib/seo/breadcrumb";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
+import { BareLink } from "@/primitives/link";
 import styles from "./Breadcrumbs.module.css";
 
-type Href = ComponentProps<typeof IntlLink>["href"];
+type Href = ComponentProps<typeof BareLink>["href"];
 
 type Props = {
   items: { href?: Href; label: string }[];
@@ -35,9 +35,9 @@ export function Breadcrumbs({ items, locale }: Props) {
       <nav aria-label="Breadcrumb">
         <ol className={styles.list}>
           <li className={styles.item}>
-            <IntlLink prefetch={false} href="/" aria-label="Home" className={styles.link}>
+            <BareLink href="/" aria-label="Home" className={styles.link}>
               <House />
-            </IntlLink>
+            </BareLink>
           </li>
           {items.map((item, index) => {
             const isLast = index === items.length - 1;
@@ -49,9 +49,9 @@ export function Breadcrumbs({ items, locale }: Props) {
                     {item.label}
                   </span>
                 ) : (
-                  <IntlLink href={item.href} className={styles.link}>
+                  <BareLink href={item.href} className={styles.link}>
                     {item.label}
-                  </IntlLink>
+                  </BareLink>
                 )}
               </li>
             );
