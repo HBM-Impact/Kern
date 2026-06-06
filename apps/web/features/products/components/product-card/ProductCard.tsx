@@ -38,7 +38,7 @@ export function ProductCard({
   return (
     <article className={styles.card}>
       <div className={styles.imageLink}>
-        <IntlLink href={href}>
+        <IntlLink prefetch={false} href={href}>
           <OptimizedImage
             src={images[0] ?? "/fallback.png"}
             alt={title}

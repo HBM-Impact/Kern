@@ -28,7 +28,7 @@ export function CartItemRow({ productId, quantity, product }: Props) {
 
   return (
     <li className={styles.row}>
-      <IntlLink href={href} className={styles.imageLink}>
+      <IntlLink prefetch={false} href={href} className={styles.imageLink}>
         <OptimizedImage
           src={product.thumbnail}
           alt={product.title}

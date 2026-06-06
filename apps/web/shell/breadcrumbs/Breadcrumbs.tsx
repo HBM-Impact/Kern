@@ -35,7 +35,7 @@ export function Breadcrumbs({ items, locale }: Props) {
       <nav aria-label="Breadcrumb">
         <ol className={styles.list}>
           <li className={styles.item}>
-            <IntlLink href="/" aria-label="Home" className={styles.link}>
+            <IntlLink prefetch={false} href="/" aria-label="Home" className={styles.link}>
               <House />
             </IntlLink>
           </li>
