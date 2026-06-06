@@ -4,7 +4,9 @@ import styles from "./CartItemRow.module.css";
 export function CartItemRowSkeleton() {
   return (
     <li className={styles.row}>
-      <Skeleton style={{ width: "6rem", height: "4.5rem", flexShrink: 0 }} />
+      <div className={styles.imageLink}>
+        <Skeleton style={{ width: "7rem", alignSelf: "stretch" }} />
+      </div>
       <div className={styles.body}>
         <Skeleton variant="label" width="var(--size-10)" />
         <Skeleton variant="body" width="75%" />
