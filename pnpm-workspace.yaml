@@ -31,5 +31,7 @@ catalog:
   lucide-react: "^1.17.0"
   open-props: "^1.7.23"
   schema-dts: "^2.0.0"
+  nuqs: "^2.8.9"
+  "@tanstack/react-form": "^1.33.0"
   storybook: "^10.4.2"
   vite: "^8.0.16"
