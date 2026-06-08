@@ -16,6 +16,7 @@
     "@repo/utils": "workspace:*",
     "@tanstack/react-form": "catalog:",
     "@tanstack/react-query": "catalog:",
+    "@vercel/speed-insights": "^2.0.0",
     "clsx": "catalog:",
     "lucide-react": "catalog:",
     "next": "catalog:",
