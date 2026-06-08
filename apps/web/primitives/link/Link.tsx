@@ -7,7 +7,7 @@ import { IntlLink } from "@/i18n/navigation";
 
 type Props = Omit<ComponentProps<typeof IntlLink>, "className" | "as">;
 
-export function Link({ href, onPointerEnter, ...props }: Props) {
+export function Link({ href, onPointerDown, ...props }: Props) {
   const [active, setActive] = useState(false);
 
   return (
@@ -17,7 +17,7 @@ export function Link({ href, onPointerEnter, ...props }: Props) {
       prefetch={active ? null : false}
       onPointerDown={(e) => {
         setActive(true);
-        onPointerEnter?.(e);
+        onPointerDown?.(e);
       }}
       {...props}
     />
