@@ -1,20 +1,14 @@
 #!/bin/bash
-# Format files after Claude edits them using Biome
+# Format all files edited this turn
 
-# Read JSON input from stdin
-INPUT=$(cat)
-FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // empty')
+QUEUE="$CLAUDE_PROJECT_DIR/.claude/hooks/.format-queue"
 
-# Exit if no file path
-if [ -z "$FILE_PATH" ]; then
-  exit 0
-fi
+[ ! -f "$QUEUE" ] && exit 0
 
-# Only format supported file types
-case "$FILE_PATH" in
-  *.ts|*.tsx|*.js|*.jsx|*.json|*.css)
-    cd "$CLAUDE_PROJECT_DIR" && pnpm exec biome check --write --unsafe "$FILE_PATH" 2>/dev/null
-    ;;
-esac
+# Deduplicate and format
+sort -u "$QUEUE" | while IFS= read -r FILE_PATH; do
+  [ -f "$FILE_PATH" ] && cd "$CLAUDE_PROJECT_DIR" && pnpm exec biome check --write --unsafe "$FILE_PATH" 2>/dev/null
+done
 
+rm -f "$QUEUE"
 exit 0

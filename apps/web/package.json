@@ -23,7 +23,8 @@
     "nuqs": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "usehooks-ts": "catalog:"
+    "usehooks-ts": "catalog:",
+    "@vercel/speed-insights": "catalog:"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",

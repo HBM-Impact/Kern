@@ -1,3 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Messages } from "next-intl";
 import { NextIntlClientProvider } from "next-intl";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
@@ -34,6 +35,7 @@ export function RootLayout({ locale, messages, children }: Props) {
             <Footer />
           </Providers>
         </NextIntlClientProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
