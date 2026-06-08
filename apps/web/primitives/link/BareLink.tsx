@@ -6,16 +6,16 @@ import { IntlLink } from "@/i18n/navigation";
 
 type Props = ComponentProps<typeof IntlLink>;
 
-export function BareLink({ href, onPointerDown, ...props }: Props) {
+export function BareLink({ href, onPointerEnter, ...props }: Props) {
   const [active, setActive] = useState(false);
 
   return (
     <IntlLink
       href={href}
       prefetch={active ? null : false}
-      onPointerDown={(e) => {
+      onPointerEnter={(e) => {
         setActive(true);
-        onPointerDown?.(e);
+        onPointerEnter?.(e);
       }}
       {...props}
     />
