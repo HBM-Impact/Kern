@@ -2,8 +2,8 @@
 
 import "@repo/ui/globals.css";
 import { Button } from "@repo/ui/buttons";
-import { Display } from "@repo/ui/typography/display";
-import { Prose } from "@repo/ui/typography/prose";
+import { Container } from "@repo/ui/container";
+import { PageHeader } from "@/shell/page-header";
 
 type Props = {
   error: Error & { digest?: string };
@@ -14,15 +14,13 @@ export default function GlobalError({ error, reset }: Props) {
   return (
     <html lang="en">
       <body>
-        <section>
-          <hgroup>
-            <Display variant="display1" as="h1">
-              Something went wrong!
-            </Display>
-            <Prose>{error.message || "An unexpected error occurred"}</Prose>
-          </hgroup>
+        <Container as="section">
+          <PageHeader
+            title="Something went wrong!"
+            description={error.message || "An unexpected error occurred"}
+          />
           <Button onClick={reset}>Try again</Button>
-        </section>
+        </Container>
       </body>
     </html>
   );
