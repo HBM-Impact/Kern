@@ -16,6 +16,10 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*",
         headers: [
+          {
+            key: "Link",
+            value: '</sitemap.xml>; rel="sitemap"',
+          },
           { key: "X-DNS-Prefetch-Control", value: "on" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "X-Content-Type-Options", value: "nosniff" },
