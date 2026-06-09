@@ -38,3 +38,4 @@ debug-storybook.log
 # Misc
 .DS_Store
 *.pem
+.format-queue

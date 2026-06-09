@@ -16,15 +16,16 @@
     "@repo/utils": "workspace:*",
     "@tanstack/react-form": "catalog:",
     "@tanstack/react-query": "catalog:",
+    "@vercel/speed-insights": "catalog:",
     "clsx": "catalog:",
     "lucide-react": "catalog:",
     "next": "catalog:",
     "next-intl": "catalog:",
+    "node-html-markdown": "^2.0.0",
     "nuqs": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "usehooks-ts": "catalog:",
-    "@vercel/speed-insights": "catalog:"
+    "usehooks-ts": "catalog:"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
