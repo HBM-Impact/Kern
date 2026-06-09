@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import { X } from "lucide-react";
-import type { DialogHTMLAttributes, ReactNode } from "react";
+import type { DialogHTMLAttributes } from "react";
 import { IconButton } from "../buttons/icon-button";
 import { Display } from "../typography/display/Display";
 import styles from "./Dialog.module.css";
@@ -12,7 +12,6 @@ type Props = {
   store: ReturnType<typeof useDialogStore>;
   variant?: "center" | "aside";
   title: string;
-  children?: ReactNode;
 } & Omit<DialogHTMLAttributes<HTMLDialogElement>, "ref">;
 
 export function Dialog({

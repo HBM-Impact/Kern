@@ -1,12 +1,9 @@
 import clsx from "clsx";
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { ButtonHTMLAttributes } from "react";
 import styles from "./Button.module.css";
 import type { ButtonProps } from "./types";
 
-type Props = ButtonProps &
-  ButtonHTMLAttributes<HTMLButtonElement> & {
-    children?: ReactNode;
-  };
+type Props = ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export function Button({
   children,

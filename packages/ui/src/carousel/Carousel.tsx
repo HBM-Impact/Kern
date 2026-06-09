@@ -2,17 +2,16 @@
 
 import { weakKey } from "@repo/utils/weak-key";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { type ReactNode, useRef } from "react";
+import { type PropsWithChildren, useRef } from "react";
 import { IconButton } from "../buttons/icon-button";
 import { Display } from "../typography/display/Display";
 import { Prose } from "../typography/prose";
 import styles from "./Carousel.module.css";
 
-type Props = {
+type Props = PropsWithChildren<{
   title: string;
   description?: string;
-  children?: ReactNode;
-};
+}>;
 
 export function Carousel({ children, title, description }: Props) {
   const listRef = useRef<HTMLOListElement>(null);
