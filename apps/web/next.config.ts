@@ -18,7 +18,8 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Link",
-            value: '</sitemap.xml>; rel="sitemap"',
+            value:
+              '</sitemap.xml>; rel="sitemap", </.well-known/api-catalog>; rel="api-catalog"',
           },
           { key: "X-DNS-Prefetch-Control", value: "on" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
