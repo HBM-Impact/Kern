@@ -18,6 +18,7 @@
     "@tanstack/react-query": "catalog:",
     "@vercel/speed-insights": "catalog:",
     "clsx": "catalog:",
+    "ky": "catalog:",
     "lucide-react": "catalog:",
     "next": "catalog:",
     "next-intl": "catalog:",

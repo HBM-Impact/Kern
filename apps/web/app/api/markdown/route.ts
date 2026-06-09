@@ -1,5 +1,7 @@
 export const runtime = "nodejs";
 
+import { daysToSeconds, hoursToSeconds } from "@repo/utils/time";
+import ky, { HTTPError } from "ky";
 import { NodeHtmlMarkdown } from "node-html-markdown";
 
 function extractPageData(html: string) {
@@ -38,14 +40,19 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const path = url.searchParams.get("path") ?? "/";
 
-  const res = await fetch(`${url.origin}${path}`, {
-    headers: { Accept: "text/html" },
-  });
-  if (!res.ok) return new Response(null, { status: res.status });
+  let html: string;
+  try {
+    html = await ky(`${url.origin}${path}`, {
+      headers: { Accept: "text/html" },
+      next: { revalidate: daysToSeconds(1) },
+    }).text();
+  } catch (err) {
+    if (err instanceof HTTPError)
+      return new Response(null, { status: err.response.status });
+    throw err;
+  }
 
-  const { title, description, mainHtml, jsonLd } = extractPageData(
-    await res.text(),
-  );
+  const { title, description, mainHtml, jsonLd } = extractPageData(html);
   const output = buildMarkdown(
     title,
     description,
@@ -56,6 +63,7 @@ export async function GET(request: Request) {
   return new Response(output, {
     headers: {
       "Content-Type": "text/markdown; charset=utf-8",
+      "Cache-Control": `public, s-maxage=${daysToSeconds(1)}, stale-while-revalidate=${hoursToSeconds(1)}`,
       "x-markdown-tokens": String(Math.ceil(output.length / 4)),
     },
   });

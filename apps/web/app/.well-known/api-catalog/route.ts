@@ -1,5 +1,7 @@
 export const dynamic = "force-static";
 
+import { daysToSeconds } from "@repo/utils/time";
+
 const catalog = {
   linkset: [
     {
@@ -20,6 +22,7 @@ export function GET() {
     headers: {
       "Content-Type":
         'application/linkset+json; profile="https://www.rfc-editor.org/info/rfc9727"',
+      "Cache-Control": `public, max-age=${daysToSeconds(365)}, immutable`,
     },
   });
 }
