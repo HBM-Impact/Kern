@@ -15,53 +15,53 @@ export function Footer() {
 
   return (
     <footer className={styles.footer}>
-      <div className={styles.left}>
+      <div className={styles.copyright}>
         <Prose variant="label" muted>
           © {currentYear} Hannibal B. Moulvad
         </Prose>
-        <div className={styles.stack}>
-          <Prose variant="label" muted>
-            Built with
-          </Prose>
-          <ul className={styles.pills} aria-label="Tech stack">
-            {STACK.map(({ label, href }) => (
-              <li key={label}>
-                <ExternalLink
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {label}
-                </ExternalLink>
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
-      <div className={styles.right}>
-        <Prose variant="label" as="h2" muted>
+      <div className={styles.reachOut}>
+        <Prose variant="label" muted>
           Reach out
         </Prose>
-        <nav className={styles.links} aria-label="Contact">
-          <ExternalLink href="mailto:hmoulvad@hotmail.com">
-            hmoulvad@hotmail.com
-          </ExternalLink>
-          <ExternalLink
-            href="https://github.com/hmoulvad"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub
-          </ExternalLink>
-          <ExternalLink
-            href="https://kern-storybook.vercel.app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Storybook
-          </ExternalLink>
-        </nav>
       </div>
+      <div className={styles.stack}>
+        <Prose variant="label" muted>
+          Built with
+        </Prose>
+        <ul className={styles.pills} aria-label="Tech stack">
+          {STACK.map(({ label, href }) => (
+            <li key={label}>
+              <ExternalLink
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {label}
+              </ExternalLink>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <nav className={styles.links} aria-label="Contact">
+        <ExternalLink href="mailto:hmoulvad@hotmail.com">
+          hmoulvad@hotmail.com
+        </ExternalLink>
+        <ExternalLink
+          href="https://github.com/hmoulvad"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </ExternalLink>
+        <ExternalLink
+          href="https://kern-storybook.vercel.app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Storybook
+        </ExternalLink>
+      </nav>
     </footer>
   );
 }
