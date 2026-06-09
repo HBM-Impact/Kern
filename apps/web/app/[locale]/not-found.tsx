@@ -1,24 +1,27 @@
-import { Display } from "@repo/ui/typography/display";
-import { Prose } from "@repo/ui/typography/prose";
+import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { LinkButton } from "@/primitives/link/LinkButton";
+import { Breadcrumbs } from "@/shell/breadcrumbs";
+import { PageHeader } from "@/shell/page-header";
 
 export const metadata: Metadata = {
   title: "Not Found",
 };
 
 export default async function NotFound() {
-  const t = await getTranslations();
+  const [t, locale] = await Promise.all([getTranslations(), getLocale()]);
   return (
-    <section>
-      <hgroup>
-        <Display variant="display1" as="h1">
-          {t("Pages.NotFound.title")}
-        </Display>
-        <Prose>{t("Pages.NotFound.description")}</Prose>
-      </hgroup>
+    <Container as="section">
+      <Breadcrumbs
+        locale={locale}
+        items={[{ label: t("Pages.NotFound.title") }]}
+      />
+      <PageHeader
+        title={t("Pages.NotFound.title")}
+        description={t("Pages.NotFound.description")}
+      />
       <LinkButton href="/">{t("Pages.NotFound.backHome")}</LinkButton>
-    </section>
+    </Container>
   );
 }

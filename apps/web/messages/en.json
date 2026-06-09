@@ -6,8 +6,8 @@
       "description": "A Next.js storefront starter built for clean conventions, consistency, and simplicity."
     },
     "NotFound": {
-      "title": "Page Not Found",
-      "description": "The page you are looking for does not exist",
+      "title": "Page not found",
+      "description": "The page you're looking for doesn't exist or has been moved.",
       "backHome": "Back to Home"
     },
     "Products": {
