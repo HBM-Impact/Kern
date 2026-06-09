@@ -15,27 +15,33 @@
 }
 
 .body {
-  height: calc(var(--font-size-1) * var(--font-lineheight-3));
+  --skeleton-line-height: calc(var(--font-size-1) * var(--font-lineheight-3));
+  height: var(--skeleton-line-height);
 }
 
 .label {
-  height: calc(0.875rem * var(--font-lineheight-2));
+  --skeleton-line-height: calc(0.875rem * var(--font-lineheight-2));
+  height: var(--skeleton-line-height);
 }
 
 .display1 {
-  height: calc(var(--font-size-6) * var(--font-lineheight-0));
+  --skeleton-line-height: calc(var(--font-size-6) * var(--font-lineheight-0));
+  height: var(--skeleton-line-height);
 }
 
 .display2 {
-  height: calc(var(--font-size-5) * var(--font-lineheight-0));
+  --skeleton-line-height: calc(var(--font-size-5) * var(--font-lineheight-0));
+  height: var(--skeleton-line-height);
 }
 
 .display3 {
-  height: calc(var(--font-size-4) * var(--font-lineheight-1));
+  --skeleton-line-height: calc(var(--font-size-4) * var(--font-lineheight-1));
+  height: var(--skeleton-line-height);
 }
 
 .display4 {
-  height: calc(var(--font-size-3) * var(--font-lineheight-1));
+  --skeleton-line-height: calc(var(--font-size-3) * var(--font-lineheight-1));
+  height: var(--skeleton-line-height);
 }
 
 .button {
