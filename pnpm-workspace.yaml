@@ -13,7 +13,7 @@ allowBuilds:
 catalog:
   "@biomejs/biome": "^2.4.16"
   "@types/node": "^24.12.0"
-  "@types/react": "19.2.16"
+  "@types/react": "19.2.17"
   "@types/react-dom": "19.2.3"
   babel-plugin-react-compiler: "^1.0.0"
   clsx: "^2.1.1"
@@ -24,7 +24,7 @@ catalog:
   typescript: "6.0.3"
   next-intl: "^4.13.0"
   usehooks-ts: "^3.1.1"
-  ky: "^1.14.3"
+  ky: "^2.0.2"
   "@tanstack/react-query": "^5.101.0"
   "@storybook/nextjs-vite": "^10.4.2"
   "@storybook/react": "^10.4.2"
@@ -35,4 +35,4 @@ catalog:
   "@tanstack/react-form": "^1.33.0"
   storybook: "^10.4.2"
   vite: "^8.0.16"
-  "@vercel/speed-insights": "^1.2.0"
+  "@vercel/speed-insights": "^2.0.0"
