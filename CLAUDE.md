@@ -25,6 +25,7 @@ cd apps/web && pnpm dev  # single app
 Turborepo monorepo:
 
 - `apps/web` — Next.js 16, App Router, React 19, React Compiler enabled
+- `apps/storybook` — Storybook 10 + Vite for UI component development
 - `packages/ui` — shared React components as `@repo/ui`
 - `packages/services` — commerce API client as `@repo/services`
 - `packages/utils` — shared utilities as `@repo/utils`
@@ -35,12 +36,15 @@ All packages export from source, no build step. Import by specific path, never f
 - `@repo/ui/buttons` → `packages/ui/src/buttons/index.ts` (dirs are kebab-case)
 - `@repo/services/commerce/products/get-products` → individual service file
 - `@repo/utils/weak-key` → `packages/utils/src/weak-key.ts`
+- `@repo/utils/time` → `packages/utils/src/time.ts` (unit conversion helpers: `secondsToMs`, `minutesToMs`, etc.)
 
 `apps/web` uses `next-intl` for i18n. App Router routes live under `app/[locale]/`. Config in `i18n/` (routing, navigation, request).
 
+Key dependencies: `@tanstack/react-query` (server/client data fetching), `@tanstack/react-form`, `nuqs` (URL state), `usehooks-ts`, `ky` (HTTP client).
+
 ## Linting & Formatting
 
-Biome 2.x. PostToolUse hook auto-runs `biome check --write --unsafe` on edited files.
+Biome 2.x. Hooks queue edited files on PostToolUse, then run `biome check --write --unsafe` on Stop.
 
 ## TypeScript
 
