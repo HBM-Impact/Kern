@@ -5,7 +5,7 @@ import type { ButtonProps } from "./types";
 
 type Props<T extends ElementType = "a"> = ButtonProps & {
   as?: T;
-} & Omit<ComponentPropsWithoutRef<T>, "as" | "className">;
+} & Omit<ComponentPropsWithoutRef<T>, "as" | "className" | "isLoading">;
 
 export function LinkButton<T extends ElementType = "a">({
   as,

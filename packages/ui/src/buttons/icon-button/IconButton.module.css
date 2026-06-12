@@ -26,6 +26,11 @@
   background-color: var(--color-active-bg);
 }
 
+.iconButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 .iconButton > svg {
   height: var(--size-3);
   width: var(--size-3);

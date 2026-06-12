@@ -1,17 +1,22 @@
 import clsx from "clsx";
 import type { ButtonHTMLAttributes } from "react";
+import { Spinner } from "../spinner/Spinner";
 import styles from "./Button.module.css";
 import type { ButtonProps } from "./types";
 
-type Props = ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>;
+type Props = ButtonProps &
+  ButtonHTMLAttributes<HTMLButtonElement> & {
+    isLoading?: boolean;
+  };
 
 export function Button({
   children,
   fill = false,
   icon,
   iconPosition = "right",
-  disabled = false,
+  isLoading = false,
   className,
+  disabled,
   ...rest
 }: Props) {
   const fallbackLabel = typeof children === "string" ? children : undefined;
@@ -24,12 +29,19 @@ export function Button({
         fill && styles.fill,
         className,
       )}
-      disabled={disabled}
       aria-label={rest["aria-label"] ?? fallbackLabel}
       {...rest}
+      disabled={isLoading || disabled}
+      aria-busy={isLoading || undefined}
     >
-      {children}
-      {icon}
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          {children}
+          {icon}
+        </>
+      )}
     </button>
   );
 }
