@@ -5,6 +5,7 @@ const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  experimental: { useTypeScriptCli: true },
   images: {
     qualities: [75],
     remotePatterns: [{ protocol: "https", hostname: "cdn.dummyjson.com" }],
