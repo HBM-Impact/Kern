@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
 import { generateOrganizationJsonLd } from "@/lib/seo/organization";
+import { ErrorBoundary } from "@/shell/error-boundary";
 import { Footer } from "@/shell/footer";
 import { Header } from "@/shell/header";
 import { Providers } from "@/shell/Providers";
@@ -28,7 +29,7 @@ export function RootLayout({ locale, children }: Props) {
           <Providers>
             <Header />
             <main id="main-content" className={styles.main}>
-              {children}
+              <ErrorBoundary>{children}</ErrorBoundary>
             </main>
             <Footer />
           </Providers>
