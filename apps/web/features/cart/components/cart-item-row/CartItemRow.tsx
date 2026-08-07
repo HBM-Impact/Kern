@@ -3,11 +3,11 @@
 import type { Product } from "@repo/services/commerce/commerce-types";
 import { Button } from "@repo/ui/buttons";
 import { Prose } from "@repo/ui/typography/prose";
+import Image from "next/image";
 import { useCart } from "@/features/cart/cart-context";
 import { AddToCart } from "@/features/cart/components/add-to-cart";
 import { createProductSlug } from "@/lib/slug/create-product-slug";
 import { BareLink } from "@/primitives/link/BareLink";
-import { OptimizedImage } from "@/primitives/optimized-image";
 import styles from "./CartItemRow.module.css";
 
 type Props = {
@@ -29,7 +29,7 @@ export function CartItemRow({ productId, quantity, product }: Props) {
   return (
     <li className={styles.row}>
       <BareLink href={href} className={styles.imageLink}>
-        <OptimizedImage
+        <Image
           src={product.thumbnail}
           alt={product.title}
           width={96}

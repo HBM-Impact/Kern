@@ -1,6 +1,6 @@
 "use client";
 
-import { minutesToMs } from "@repo/utils/time";
+import { hoursToMs } from "@repo/utils/time";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { type PropsWithChildren, useState } from "react";
@@ -13,8 +13,10 @@ export function Providers({ children }: PropsWithChildren) {
       new QueryClient({
         defaultOptions: {
           queries: {
-            staleTime: minutesToMs(1),
-            gcTime: minutesToMs(5),
+            // Matches the 24h `revalidate` the services already ask for —
+            // refetching sooner just re-fetches identical data.
+            staleTime: hoursToMs(24),
+            gcTime: hoursToMs(24),
             retry: 2,
             refetchOnWindowFocus: false,
           },

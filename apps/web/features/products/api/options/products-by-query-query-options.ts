@@ -1,26 +1,16 @@
 import { getProductsByQuery } from "@repo/services/commerce/products/get-products-by-query";
 import { infiniteQueryOptions, keepPreviousData } from "@tanstack/react-query";
+import { getNextPageParam } from "../get-next-page-param";
 
-type Params = Omit<
-  Parameters<typeof getProductsByQuery>[0],
-  "signal" | "skip"
-> & {
-  initialPage?: number;
-};
+type Params = Omit<Parameters<typeof getProductsByQuery>[0], "signal" | "skip">;
 
-export const productsByQueryQueryOptions = ({
-  initialPage = 0,
-  ...params
-}: Params) =>
+export const productsByQueryQueryOptions = (params: Params) =>
   infiniteQueryOptions({
     queryKey: ["products", "search", params],
     queryFn: ({ pageParam, signal }) =>
       getProductsByQuery({ ...params, signal, skip: pageParam * params.limit }),
-    getNextPageParam: (lastPage) =>
-      lastPage.skip + lastPage.limit < lastPage.total
-        ? lastPage.skip / lastPage.limit + 1
-        : undefined,
-    initialPageParam: initialPage,
+    getNextPageParam,
+    initialPageParam: 0,
     enabled: !!params.query.length,
     placeholderData: keepPreviousData,
   });

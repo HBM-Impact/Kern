@@ -3,9 +3,10 @@
 import { Button } from "@repo/ui/buttons";
 import { Input } from "@repo/ui/form/input";
 import { useForm } from "@tanstack/react-form";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { parseAsString, useQueryState } from "nuqs";
-import { useProductsByQuery } from "../../api/queries/use-products-by-query";
-import { SORT_OPTIONS } from "../../sort-map";
+import { productsByQueryQueryOptions } from "../../api/options/products-by-query-query-options";
+import { CATEGORY_PAGE_SIZE, SORT_OPTIONS } from "../../sort-map";
 import { ProductGrid } from "../product-grid";
 import { SortControl } from "../sort-control";
 import styles from "./SearchSection.module.css";
@@ -23,12 +24,14 @@ export function SearchSection() {
   });
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isPending } =
-    useProductsByQuery({
-      query: q,
-      limit: 12,
-      sortBy: sortEntry?.sortBy,
-      order: sortEntry?.order,
-    });
+    useInfiniteQuery(
+      productsByQueryQueryOptions({
+        query: q,
+        limit: CATEGORY_PAGE_SIZE,
+        sortBy: sortEntry?.sortBy,
+        order: sortEntry?.order,
+      }),
+    );
 
   const products = data?.pages.flatMap((p) => p.products) ?? [];
 

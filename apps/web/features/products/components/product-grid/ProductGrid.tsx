@@ -13,11 +13,10 @@ type Props = {
   skeletonCount?: number;
 };
 
-const SKELETON_KEYS = Array.from({ length: 12 }, (_, i) => i);
-
 function SkeletonList({ count }: { count: number }) {
-  return SKELETON_KEYS.slice(0, count).map((i) => (
-    <li key={`skeleton-${i}`}>
+  return Array.from({ length: count }, (_, i) => (
+    // biome-ignore lint/suspicious/noArrayIndexKey: stateless placeholders, never reordered
+    <li key={i}>
       <ProductCardSkeleton />
     </li>
   ));

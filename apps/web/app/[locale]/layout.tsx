@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { getBaseUrl } from "@/lib/seo/get-base-url";
 import "@repo/ui/globals.css";
 import { RootLayout } from "@/shell/root-layout";
 
@@ -11,9 +12,16 @@ export function generateStaticParams() {
 }
 
 export const metadata = {
+  metadataBase: new URL(getBaseUrl()),
   title: {
     template: "%s | Kern",
     default: "Kern",
+  },
+  // "./" resolves per-route, so every page inherits a self-referencing canonical.
+  alternates: { canonical: "./" },
+  openGraph: {
+    type: "website",
+    siteName: "Kern",
   },
 } satisfies Metadata;
 

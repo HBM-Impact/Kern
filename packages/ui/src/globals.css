@@ -1,4 +1,9 @@
-@import "open-props/style";
+/* Only the prop groups actually referenced — the full "open-props/style" is ~30 KB. */
+@import "open-props/borders";
+@import "open-props/easings";
+@import "open-props/fonts";
+@import "open-props/gray";
+@import "open-props/sizes";
 
 :root {
   color-scheme: light dark;

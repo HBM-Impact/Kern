@@ -4,6 +4,7 @@ import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 import { Suspense } from "react";
+import { CATEGORY_PAGE_SIZE } from "@/features/products/sort-map";
 import { routingConfig } from "@/i18n/routing";
 import { generateCollectionPageJsonLd } from "@/lib/seo/collection-page";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
@@ -11,7 +12,7 @@ import { JsonLdScript } from "@/lib/seo/json-ld-script";
 import { createProductSlug } from "@/lib/slug/create-product-slug";
 import { Breadcrumbs } from "@/shell/breadcrumbs";
 import { PageHeader } from "@/shell/page-header";
-import { ProductCatalog } from "./[id]/_components/ProductCatalog";
+import { ProductCatalog } from "./_components/ProductCatalog";
 
 export async function generateStaticParams() {
   const categories = await getCategories();
@@ -41,10 +42,10 @@ export default async function CategoryPage({
 }: PageProps<"/[locale]/products/[category]">) {
   const { category } = await params;
   const baseUrl = getBaseUrl();
-  const [locale, name, { products }] = await Promise.all([
+  const [locale, name, initialPage] = await Promise.all([
     getLocale(),
     getCategoryName(category),
-    getProductByCategory({ category, skip: 0, limit: 20 }),
+    getProductByCategory({ category, skip: 0, limit: CATEGORY_PAGE_SIZE }),
   ]);
 
   return (
@@ -57,7 +58,7 @@ export default async function CategoryPage({
           name,
           description: `Browse all products in the ${name} category.`,
           url: `${baseUrl}/${locale}/products/${category}`,
-          products: products.map((product) => ({
+          products: initialPage.products.map((product) => ({
             name: product.title,
             url: `${baseUrl}/${locale}/products/${category}/${createProductSlug(product.id, product.title)}`,
             image: product.thumbnail,
@@ -69,7 +70,7 @@ export default async function CategoryPage({
         description={`Browse all products in the ${name} category.`}
       />
       <Suspense>
-        <ProductCatalog category={category} />
+        <ProductCatalog category={category} initialPage={initialPage} />
       </Suspense>
     </Container>
   );

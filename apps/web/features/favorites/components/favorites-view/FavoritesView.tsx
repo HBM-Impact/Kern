@@ -12,6 +12,7 @@ import { FavoritesViewSkeleton } from "./FavoritesViewSkeleton";
 export function FavoritesView() {
   const { ids } = useFavorites();
 
+  // ponytail: one request per favorite — see CartView; same ceiling, same upgrade path.
   const { products, isLoading } = useQueries({
     queries: ids.map((id) => productByIdQueryOptions({ id: String(id) })),
     combine: (results) => ({

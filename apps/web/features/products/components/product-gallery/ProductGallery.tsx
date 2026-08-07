@@ -3,8 +3,8 @@
 import { IconButton } from "@repo/ui/buttons/icon-button";
 import clsx from "clsx";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
-import { OptimizedImage } from "@/primitives/optimized-image";
 import styles from "./ProductGallery.module.css";
 
 type Props = { images: string[]; title: string };
@@ -23,14 +23,14 @@ export function ProductGallery({ images, title }: Props) {
   return (
     <figure className={styles.gallery}>
       <div className={styles.mainWrapper}>
-        <OptimizedImage
+        <Image
           src={images[activeIndex] ?? "/fallback.png"}
           alt={title}
           width={800}
           height={800}
           className={styles.mainImage}
           priority
-          breakpointSizes={{ md: "100vw", default: "50vw" }}
+          sizes="(max-width: 768px) 100vw, 50vw"
         />
         {images.length > 1 ? (
           <>
@@ -65,7 +65,7 @@ export function ProductGallery({ images, title }: Props) {
                 aria-label={`View image ${index + 1}`}
                 aria-current={index === activeIndex ? true : undefined}
               >
-                <OptimizedImage
+                <Image
                   src={image}
                   alt=""
                   width={80}

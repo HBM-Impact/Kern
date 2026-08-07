@@ -21,6 +21,9 @@ export function RootLayout({ locale, children }: Props) {
   return (
     <html lang={locale}>
       <body className={styles.body}>
+        {/* Catalog data is fetched client-side straight from the commerce API.
+            React hoists this into <head>. */}
+        <link rel="preconnect" href="https://dummyjson.com" />
         <JsonLdScript
           data={generateOrganizationJsonLd({ name: "Kern", url: baseUrl })}
         />

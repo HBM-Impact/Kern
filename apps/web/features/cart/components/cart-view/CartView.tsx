@@ -16,6 +16,8 @@ export function CartView() {
 
   const entries = [...items.entries()];
 
+  // ponytail: one request per line item — the commerce API has no batch-by-ids
+  // endpoint. Switch to a single `products?limit=0` fetch + filter if carts grow.
   const productQueries = useQueries({
     queries: entries.map(([productId]) =>
       productByIdQueryOptions({ id: String(productId) }),

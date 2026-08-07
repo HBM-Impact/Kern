@@ -1,15 +1,21 @@
+import type { ProductResponse } from "@repo/services/commerce/commerce-types";
 import { getProductByCategory } from "@repo/services/commerce/products/get-product-by-category";
-import { infiniteQueryOptions, keepPreviousData } from "@tanstack/react-query";
+import {
+  type InfiniteData,
+  infiniteQueryOptions,
+  keepPreviousData,
+} from "@tanstack/react-query";
+import { getNextPageParam } from "../get-next-page-param";
 
 type Params = Omit<
   Parameters<typeof getProductByCategory>[0],
   "signal" | "skip"
 > & {
-  initialPage?: number;
+  initialData?: InfiniteData<ProductResponse, number>;
 };
 
 export const productByCategoryQueryOptions = ({
-  initialPage = 0,
+  initialData,
   ...params
 }: Params) =>
   infiniteQueryOptions({
@@ -20,10 +26,8 @@ export const productByCategoryQueryOptions = ({
         signal,
         skip: pageParam * params.limit,
       }),
-    getNextPageParam: (lastPage) =>
-      lastPage.skip + lastPage.limit < lastPage.total
-        ? lastPage.skip / lastPage.limit + 1
-        : undefined,
-    initialPageParam: initialPage,
+    getNextPageParam,
+    initialPageParam: 0,
     placeholderData: keepPreviousData,
+    initialData,
   });

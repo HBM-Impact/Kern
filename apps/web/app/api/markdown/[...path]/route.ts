@@ -36,9 +36,13 @@ function buildMarkdown(
   return out;
 }
 
-export async function GET(request: Request) {
+export async function GET(
+  request: Request,
+  { params }: RouteContext<"/api/markdown/[...path]">,
+) {
   const url = new URL(request.url);
-  const path = url.searchParams.get("path") ?? "/";
+  const { path: segments } = await params;
+  const path = `/${segments.join("/")}`;
 
   let html: string;
   try {

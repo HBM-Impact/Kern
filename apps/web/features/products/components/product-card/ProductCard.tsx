@@ -1,10 +1,10 @@
 import type { Product } from "@repo/services/commerce/commerce-types";
 import { Prose } from "@repo/ui/typography/prose";
+import Image from "next/image";
 import { AddToCart } from "@/features/cart/components/add-to-cart";
 import { AddToFavorite } from "@/features/favorites/components/add-to-favorite";
 import { createProductSlug } from "@/lib/slug/create-product-slug";
 import { BareLink } from "@/primitives/link/BareLink";
-import { OptimizedImage } from "@/primitives/optimized-image";
 import styles from "./ProductCard.module.css";
 
 type Props = Pick<
@@ -39,14 +39,14 @@ export function ProductCard({
     <article className={styles.card}>
       <div className={styles.imageLink}>
         <BareLink href={href}>
-          <OptimizedImage
+          <Image
             src={images[0] ?? "/fallback.png"}
             alt={title}
             width={600}
             height={450}
             className={styles.image}
             priority={priority}
-            breakpointSizes={{ sm: "50vw", lg: "33vw", default: "25vw" }}
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           />
         </BareLink>
         {discountPercentage > 0 ? (

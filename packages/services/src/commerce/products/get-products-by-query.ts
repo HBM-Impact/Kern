@@ -1,9 +1,9 @@
 import { hoursToSeconds } from "@repo/utils/time";
-import type { FetcherArgs } from "../../service-types";
 import { commerceClient } from "../commerce-client";
 import type { Product, ProductResponse } from "../commerce-types";
 
-type Args = FetcherArgs & {
+type Args = {
+  signal?: AbortSignal;
   skip: number;
   limit: number;
   query: string;
@@ -21,7 +21,7 @@ export async function getProductsByQuery({
 }: Args) {
   return commerceClient
     .get("products/search", {
-      ...(signal !== undefined && { signal }),
+      signal,
       searchParams: {
         skip,
         limit,
