@@ -1,8 +1,7 @@
 import { getCategories } from "@repo/services/commerce/categories/get-categories";
 import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
-import type { Locale } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 import { CategoryList } from "@/features/products/components/category-list";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { generateItemListJsonLd } from "@/lib/seo/item-list";
@@ -16,14 +15,12 @@ export const metadata = {
   description: "Browse products by category or search for something specific.",
 } satisfies Metadata;
 
-export default async function ProductsPage({
-  params,
-}: PageProps<"/[locale]/products">) {
-  const { locale } = await params;
-  setRequestLocale(locale as Locale);
-
+export default async function ProductsPage() {
   const baseUrl = getBaseUrl();
-  const categories = await getCategories();
+  const [locale, categories] = await Promise.all([
+    getLocale(),
+    getCategories(),
+  ]);
 
   return (
     <>
@@ -36,7 +33,7 @@ export default async function ProductsPage({
         )}
       />
       <Container as="article">
-        <Breadcrumbs locale={locale} items={[{ label: "Products" }]} />
+        <Breadcrumbs items={[{ label: "Products" }]} />
         <PageHeader
           title="Products"
           description="Browse products by category or search for something specific."

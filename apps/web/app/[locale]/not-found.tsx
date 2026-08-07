@@ -1,6 +1,6 @@
 import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { LinkButton } from "@/primitives/link/LinkButton";
 import { Breadcrumbs } from "@/shell/breadcrumbs";
 import { PageHeader } from "@/shell/page-header";
@@ -10,13 +10,10 @@ export const metadata: Metadata = {
 };
 
 export default async function NotFound() {
-  const [t, locale] = await Promise.all([getTranslations(), getLocale()]);
+  const t = await getTranslations();
   return (
     <Container as="section">
-      <Breadcrumbs
-        locale={locale}
-        items={[{ label: t("Pages.NotFound.title") }]}
-      />
+      <Breadcrumbs items={[{ label: t("Pages.NotFound.title") }]} />
       <PageHeader
         title={t("Pages.NotFound.title")}
         description={t("Pages.NotFound.description")}

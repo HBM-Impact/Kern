@@ -1,8 +1,7 @@
 import { getProductByCategory } from "@repo/services/commerce/products/get-product-by-category";
 import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
-import type { Locale } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Hero } from "@/app/[locale]/_components/hero";
 import { FeaturedProducts } from "@/features/products/components/featured-products";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
@@ -11,22 +10,16 @@ import { generateWebSiteJsonLd } from "@/lib/seo/web-site";
 import { Breadcrumbs } from "@/shell/breadcrumbs";
 import { PageHeader } from "@/shell/page-header";
 
-export async function generateMetadata({
-  params,
-}: PageProps<"/[locale]">): Promise<Metadata> {
-  const { locale } = await params;
-  const t = await getTranslations({ locale: locale as Locale });
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
   return {
     title: t("Pages.Home.title"),
     description: t("Pages.Home.description"),
   };
 }
 
-export default async function HomePage({ params }: PageProps<"/[locale]">) {
-  const { locale } = await params;
-  setRequestLocale(locale as Locale);
-
-  const t = await getTranslations({ locale: locale as Locale });
+export default async function HomePage() {
+  const [t, locale] = await Promise.all([getTranslations(), getLocale()]);
   const baseUrl = getBaseUrl();
 
   const { products } = await getProductByCategory({
@@ -46,7 +39,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
         })}
       />
       <Container as="article">
-        <Breadcrumbs locale={locale} items={[]} />
+        <Breadcrumbs />
         <PageHeader
           title={t("Pages.Home.title")}
           description={t("Pages.Home.description")}

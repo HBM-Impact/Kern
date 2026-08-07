@@ -2,8 +2,7 @@ import { getProductByCategory } from "@repo/services/commerce/products/get-produ
 import { getProductById } from "@repo/services/commerce/products/get-product-by-id";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import type { Locale } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
 import { generateProductJsonLd } from "@/lib/seo/product";
@@ -28,13 +27,12 @@ export async function generateMetadata({
 export default async function ProductDetailPage({
   params,
 }: PageProps<"/[locale]/products/[category]/[id]">) {
-  const { locale, category, id } = await params;
-  setRequestLocale(locale as Locale);
-
+  const { category, id } = await params;
   const numId = parseProductSlug(id);
   if (!numId || numId <= 0) notFound();
 
-  const [product, { products: categoryProducts }] = await Promise.all([
+  const [locale, product, { products: categoryProducts }] = await Promise.all([
+    getLocale(),
     getProductById({ id: String(numId) }),
     getProductByCategory({ category, skip: 0, limit: 12 }),
   ]);
@@ -48,7 +46,6 @@ export default async function ProductDetailPage({
   return (
     <>
       <Breadcrumbs
-        locale={locale}
         items={[
           { href: "/products", label: "Products" },
           {

@@ -1,5 +1,4 @@
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import type { Messages } from "next-intl";
 import { NextIntlClientProvider } from "next-intl";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
@@ -12,11 +11,10 @@ import styles from "./RootLayout.module.css";
 
 type Props = {
   locale: string;
-  messages: Messages;
   children: React.ReactNode;
 };
 
-export function RootLayout({ locale, messages, children }: Props) {
+export function RootLayout({ locale, children }: Props) {
   const baseUrl = getBaseUrl();
 
   return (
@@ -26,7 +24,7 @@ export function RootLayout({ locale, messages, children }: Props) {
           data={generateOrganizationJsonLd({ name: "Kern", url: baseUrl })}
         />
         <SkipLink />
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider>
           <Providers>
             <Header />
             <main id="main-content" className={styles.main}>

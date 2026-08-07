@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { hasLocale } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import "@repo/ui/globals.css";
 import { RootLayout } from "@/shell/root-layout";
@@ -19,19 +17,6 @@ export const metadata = {
   },
 } satisfies Metadata;
 
-export default async function Layout({
-  children,
-  params,
-}: LayoutProps<"/[locale]">) {
-  const { locale } = await params;
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
-  setRequestLocale(locale);
-  const messages = await getMessages();
-  return (
-    <RootLayout locale={locale} messages={messages}>
-      {children}
-    </RootLayout>
-  );
+export default async function Layout({ children }: LayoutProps<"/[locale]">) {
+  return <RootLayout locale={await getLocale()}>{children}</RootLayout>;
 }

@@ -1,4 +1,5 @@
 import { ChevronRight, House } from "lucide-react";
+import { getLocale } from "next-intl/server";
 import type { ComponentProps } from "react";
 import { generateBreadcrumbJsonLd } from "@/lib/seo/breadcrumb";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
@@ -9,29 +10,27 @@ import styles from "./Breadcrumbs.module.css";
 type Href = ComponentProps<typeof BareLink>["href"];
 
 type Props = {
-  items: { href?: Href; label: string }[];
-  locale?: string;
+  items?: { href?: Href; label: string }[];
 };
 
-export function Breadcrumbs({ items, locale }: Props) {
+export async function Breadcrumbs({ items = [] }: Props) {
+  const locale = await getLocale();
   const baseUrl = getBaseUrl();
 
   return (
     <>
-      {locale && (
-        <JsonLdScript
-          data={generateBreadcrumbJsonLd(
-            [
-              { name: "Home", url: `/${locale}` },
-              ...items.map((item) => ({
-                name: item.label,
-                ...(item.href && { url: hrefToPath(item.href, locale) }),
-              })),
-            ],
-            baseUrl,
-          )}
-        />
-      )}
+      <JsonLdScript
+        data={generateBreadcrumbJsonLd(
+          [
+            { name: "Home", url: `/${locale}` },
+            ...items.map((item) => ({
+              name: item.label,
+              ...(item.href && { url: hrefToPath(item.href, locale) }),
+            })),
+          ],
+          baseUrl,
+        )}
+      />
       <nav aria-label="Breadcrumb">
         <ol className={styles.list}>
           <li className={styles.item}>

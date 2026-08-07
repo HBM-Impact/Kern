@@ -2,8 +2,7 @@ import { getCategories } from "@repo/services/commerce/categories/get-categories
 import { getProductByCategory } from "@repo/services/commerce/products/get-product-by-category";
 import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
-import type { Locale } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 import { Suspense } from "react";
 import { routingConfig } from "@/i18n/routing";
 import { generateCollectionPageJsonLd } from "@/lib/seo/collection-page";
@@ -40,11 +39,10 @@ export async function generateMetadata({
 export default async function CategoryPage({
   params,
 }: PageProps<"/[locale]/products/[category]">) {
-  const { locale, category } = await params;
-  setRequestLocale(locale as Locale);
-
+  const { category } = await params;
   const baseUrl = getBaseUrl();
-  const [name, { products }] = await Promise.all([
+  const [locale, name, { products }] = await Promise.all([
+    getLocale(),
     getCategoryName(category),
     getProductByCategory({ category, skip: 0, limit: 20 }),
   ]);
@@ -52,7 +50,6 @@ export default async function CategoryPage({
   return (
     <Container as="section">
       <Breadcrumbs
-        locale={locale}
         items={[{ href: "/products", label: "Products" }, { label: name }]}
       />
       <JsonLdScript
