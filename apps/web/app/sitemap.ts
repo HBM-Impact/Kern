@@ -2,15 +2,20 @@ import { getCategories } from "@repo/services/commerce/categories/get-categories
 import { getProducts } from "@repo/services/commerce/products/get-products";
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
+import { client } from "@/lib/sanity/client";
+import { PAGE_SLUGS_QUERY } from "@/lib/sanity/queries";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { createProductSlug } from "@/lib/slug/create-product-slug";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = getBaseUrl();
 
-  const [categories, { products }] = await Promise.all([
+  // PAGE_SLUGS_QUERY leaves out the home page, which is listed on its own
+  // below as the index.
+  const [categories, { products }, slugs] = await Promise.all([
     getCategories(),
     getProducts({ skip: 0, limit: 0 }),
+    client.fetch(PAGE_SLUGS_QUERY),
   ]);
 
   return routing.locales.flatMap((locale) => [
@@ -24,6 +29,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly" as const,
       priority: 0.9,
     },
+    ...slugs
+      .filter((slug): slug is string => Boolean(slug))
+      .map((slug) => ({
+        url: `${baseUrl}/${locale}/${slug}`,
+        changeFrequency: "monthly" as const,
+        priority: 0.6,
+      })),
     ...categories.map((category) => ({
       url: `${baseUrl}/${locale}/products/${category.slug}`,
       changeFrequency: "weekly" as const,

@@ -11,6 +11,7 @@ export const routingConfig = {
     "/products/search": "/products/search",
     "/products/[category]": "/products/[category]",
     "/products/[category]/[id]": "/products/[category]/[id]",
+    "/[slug]": "/[slug]",
   },
 } as const;
 

@@ -1,19 +1,26 @@
 import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
 import { FavoritesView } from "@/features/favorites/components/favorites-view/FavoritesView";
+import { getRouteMeta } from "@/lib/sanity/route-meta";
 import { Breadcrumbs } from "@/shell/Breadcrumbs";
 import { PageHeader } from "@/shell/PageHeader";
 
-export const metadata: Metadata = {
-  title: "Favorites",
-  description: "Your saved products.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const meta = await getRouteMeta("/favorites");
 
-export default function FavoritesPage() {
+  return { title: meta?.title, description: meta?.description };
+}
+
+export default async function FavoritesPage() {
+  const meta = await getRouteMeta("/favorites");
+
   return (
     <Container as="section">
-      <Breadcrumbs items={[{ label: "Favorites" }]} />
-      <PageHeader title="Favorites" description="Your saved products." />
+      <Breadcrumbs items={[{ label: meta?.title ?? "" }]} />
+      <PageHeader
+        title={meta?.title ?? ""}
+        description={meta?.description ?? undefined}
+      />
       <FavoritesView />
     </Container>
   );

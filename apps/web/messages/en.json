@@ -1,22 +1,8 @@
 {
   "Title": "Kern",
   "Pages": {
-    "Home": {
-      "title": "Kern",
-      "description": "A Next.js storefront starter built for clean conventions, consistency, and simplicity."
-    },
     "NotFound": {
-      "title": "Page not found",
-      "description": "The page you're looking for doesn't exist or has been moved.",
       "backHome": "Back to Home"
-    },
-    "Products": {
-      "title": "Products",
-      "description": "Browse products by category or search for something specific."
-    },
-    "ProductSearch": {
-      "title": "Search Products",
-      "description": "Find products by name, brand, or description."
     }
   }
 }

@@ -21,6 +21,7 @@
     "lucide-react": "catalog:",
     "next": "catalog:",
     "next-intl": "catalog:",
+    "next-sanity": "catalog:",
     "node-html-markdown": "^2.0.0",
     "nuqs": "catalog:",
     "react": "catalog:",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
+    "@sanity/client": "catalog:",
     "@stylexjs/babel-plugin": "catalog:",
     "@stylexjs/postcss-plugin": "catalog:",
     "@types/node": "catalog:",

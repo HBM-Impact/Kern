@@ -1,6 +1,9 @@
 import { colors, size } from "@repo/ui/tokens.stylex";
 import { Display } from "@repo/ui/typography/display";
 import * as stylex from "@stylexjs/stylex";
+import { client } from "@/lib/sanity/client";
+import { SITE_SETTINGS_QUERY } from "@/lib/sanity/queries";
+import { SITE_SETTINGS_REVALIDATE } from "@/lib/sanity/site-settings";
 import { Link } from "@/primitives/link/Link";
 
 const styles = stylex.create({
@@ -30,7 +33,13 @@ const styles = stylex.create({
   },
 });
 
-export function Header() {
+export async function Header() {
+  const settings = await client.fetch(
+    SITE_SETTINGS_QUERY,
+    {},
+    { next: { revalidate: SITE_SETTINGS_REVALIDATE } },
+  );
+
   return (
     <header {...stylex.props(styles.header)}>
       <div {...stylex.props(styles.content)}>
@@ -42,9 +51,13 @@ export function Header() {
           </Link>
         </div>
         <nav {...stylex.props(styles.nav)} aria-label="Main">
-          <Link href="/products">Products</Link>
-          <Link href="/favorites">Favorites</Link>
-          <Link href="/cart">Cart</Link>
+          {(settings?.headerNav ?? []).map(({ _key, label, route }) =>
+            route ? (
+              <Link key={_key} href={route}>
+                {label}
+              </Link>
+            ) : null,
+          )}
         </nav>
       </div>
     </header>
