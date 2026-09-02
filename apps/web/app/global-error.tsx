@@ -3,7 +3,7 @@
 import "@repo/ui/globals.css";
 import { Button } from "@repo/ui/buttons";
 import { Container } from "@repo/ui/container";
-import { PageHeader } from "@/shell/page-header";
+import { PageHeader } from "@/shell/PageHeader";
 
 type Props = {
   error: Error & { digest?: string };

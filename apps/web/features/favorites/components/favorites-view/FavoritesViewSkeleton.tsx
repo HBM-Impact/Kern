@@ -1,5 +1,6 @@
-import { ProductCardSkeleton } from "@/features/products/components/product-card";
-import styles from "./FavoritesView.module.css";
+import * as stylex from "@stylexjs/stylex";
+import { ProductCardSkeleton } from "@/features/products/components/product-card/ProductCardSkeleton";
+import { favoritesStyles } from "./styles";
 
 type Props = {
   count: number;
@@ -7,7 +8,7 @@ type Props = {
 
 export function FavoritesViewSkeleton({ count }: Props) {
   return (
-    <ul className={styles.grid}>
+    <ul {...stylex.props(favoritesStyles.grid)}>
       {Array.from({ length: count }, (_, i) => (
         // biome-ignore lint/suspicious/noArrayIndexKey: skeleton placeholder, no reordering
         <li key={i}>

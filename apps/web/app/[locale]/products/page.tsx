@@ -2,13 +2,13 @@ import { getCategories } from "@repo/services/commerce/categories/get-categories
 import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
-import { CategoryList } from "@/features/products/components/category-list";
+import { CategoryList } from "@/features/products/components/CategoryList";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { generateItemListJsonLd } from "@/lib/seo/item-list";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
 import { Link } from "@/primitives/link/Link";
-import { Breadcrumbs } from "@/shell/breadcrumbs";
-import { PageHeader } from "@/shell/page-header";
+import { Breadcrumbs } from "@/shell/Breadcrumbs";
+import { PageHeader } from "@/shell/PageHeader";
 
 export const metadata = {
   title: "Products",

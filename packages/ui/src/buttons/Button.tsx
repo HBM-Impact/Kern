@@ -1,11 +1,11 @@
-import clsx from "clsx";
+import * as stylex from "@stylexjs/stylex";
 import type { ButtonHTMLAttributes } from "react";
-import { Spinner } from "../spinner/Spinner";
-import styles from "./Button.module.css";
+import { Spinner } from "../Spinner";
+import { buttonStyles } from "./styles";
 import type { ButtonProps } from "./types";
 
 type Props = ButtonProps &
-  ButtonHTMLAttributes<HTMLButtonElement> & {
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className"> & {
     isLoading?: boolean;
   };
 
@@ -15,7 +15,6 @@ export function Button({
   icon,
   iconPosition = "right",
   isLoading = false,
-  className,
   disabled,
   ...rest
 }: Props) {
@@ -23,11 +22,10 @@ export function Button({
   return (
     <button
       type={rest.type ?? "button"}
-      className={clsx(
-        styles.base,
-        iconPosition === "left" && styles.reverse,
-        fill && styles.fill,
-        className,
+      {...stylex.props(
+        buttonStyles.base,
+        iconPosition === "left" && buttonStyles.reverse,
+        fill && buttonStyles.fill,
       )}
       aria-label={rest["aria-label"] ?? fallbackLabel}
       {...rest}

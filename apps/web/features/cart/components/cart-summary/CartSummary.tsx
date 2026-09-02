@@ -1,8 +1,9 @@
 import type { Product } from "@repo/services/commerce/commerce-types";
 import { Display } from "@repo/ui/typography/display";
 import { Prose } from "@repo/ui/typography/prose";
+import * as stylex from "@stylexjs/stylex";
 import { LinkButton } from "@/primitives/link/LinkButton";
-import styles from "./CartSummary.module.css";
+import { summaryStyles } from "./styles";
 
 type CartItemWithProduct = {
   productId: number;
@@ -22,29 +23,29 @@ export function CartSummary({ items }: Props) {
   );
 
   return (
-    <aside className={styles.summary}>
+    <aside {...stylex.props(summaryStyles.summary)}>
       <Display as="h2" variant="display4">
         Order Summary
       </Display>
-      <dl className={styles.details}>
-        <div className={styles.detailRow}>
+      <dl {...stylex.props(summaryStyles.details)}>
+        <div {...stylex.props(summaryStyles.detailRow)}>
           <Prose as="dt" variant="body">
             Items
           </Prose>
-          <Prose as="dd" variant="body">
+          <Prose as="dd" variant="body" {...stylex.props(summaryStyles.value)}>
             {totalItems}
           </Prose>
         </div>
-        <div className={styles.detailRow}>
+        <div {...stylex.props(summaryStyles.detailRow)}>
           <Prose as="dt" variant="body">
             Subtotal
           </Prose>
-          <Prose as="dd" variant="body">
+          <Prose as="dd" variant="body" {...stylex.props(summaryStyles.value)}>
             ${subtotal.toFixed(2)}
           </Prose>
         </div>
       </dl>
-      <div className={styles.totalRow}>
+      <div {...stylex.props(summaryStyles.totalRow)}>
         <Display as="span" variant="display4">
           Total
         </Display>

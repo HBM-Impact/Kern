@@ -29,7 +29,13 @@
         "noUnusedVariables": "warn"
       },
       "suspicious": {
-        "noConsole": "warn"
+        "noConsole": "warn",
+        "noUnknownAtRules": {
+          "level": "error",
+          "options": {
+            "ignore": ["stylex"]
+          }
+        }
       }
     },
     "domains": {

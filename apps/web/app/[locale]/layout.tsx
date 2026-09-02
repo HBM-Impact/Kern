@@ -3,7 +3,7 @@ import { getLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
 import "@repo/ui/globals.css";
-import { RootLayout } from "@/shell/root-layout";
+import { RootLayout } from "@/shell/RootLayout";
 
 export const dynamic = "force-static";
 

@@ -2,8 +2,8 @@ import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { LinkButton } from "@/primitives/link/LinkButton";
-import { Breadcrumbs } from "@/shell/breadcrumbs";
-import { PageHeader } from "@/shell/page-header";
+import { Breadcrumbs } from "@/shell/Breadcrumbs";
+import { PageHeader } from "@/shell/PageHeader";
 
 export const metadata: Metadata = {
   title: "Not Found",

@@ -4,8 +4,8 @@ import type { ProductResponse } from "@repo/services/commerce/commerce-types";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { parseAsString, useQueryState } from "nuqs";
 import { productByCategoryQueryOptions } from "@/features/products/api/options/product-by-category-query-options";
-import { ProductGrid } from "@/features/products/components/product-grid";
-import { SortControl } from "@/features/products/components/sort-control";
+import { ProductGrid } from "@/features/products/components/ProductGrid";
+import { SortControl } from "@/features/products/components/SortControl";
 import { CATEGORY_PAGE_SIZE, SORT_OPTIONS } from "@/features/products/sort-map";
 
 type Props = { category: string; initialPage: ProductResponse };

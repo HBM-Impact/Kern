@@ -1,5 +1,6 @@
 import { Skeleton } from "@repo/ui/skeleton";
 import type { Meta, StoryObj } from "@storybook/react";
+import * as stylex from "@stylexjs/stylex";
 
 const meta = {
   title: "Layout/Skeleton",
@@ -18,7 +19,7 @@ export const Circle: Story = {
   args: {
     shape: "circle",
     width: "48px",
-    style: { height: "48px" },
+    height: "48px",
   },
 };
 
@@ -50,17 +51,19 @@ export const Button: Story = {
   args: { variant: "button" },
 };
 
+const styles = stylex.create({
+  card: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "12px",
+    width: "240px",
+  },
+});
+
 export const CardComposition: Story = {
   render: () => (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "12px",
-        width: "240px",
-      }}
-    >
-      <Skeleton style={{ width: "100%", aspectRatio: "4/3" }} />
+    <div {...stylex.props(styles.card)}>
+      <Skeleton width="100%" height="180px" />
       <Skeleton variant="display4" width="60%" />
       <Skeleton variant="body" width="100%" />
       <Skeleton variant="body" width="80%" />

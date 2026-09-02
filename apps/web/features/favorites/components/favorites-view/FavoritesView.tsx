@@ -1,18 +1,18 @@
 "use client";
 
 import { Prose } from "@repo/ui/typography/prose";
+import * as stylex from "@stylexjs/stylex";
 import { useQueries } from "@tanstack/react-query";
 import { useFavorites } from "@/features/favorites/favorites-context";
 import { productByIdQueryOptions } from "@/features/products/api/options/product-by-id-query-options";
-import { ProductGrid } from "@/features/products/components/product-grid";
+import { ProductGrid } from "@/features/products/components/ProductGrid";
 import { LinkButton } from "@/primitives/link/LinkButton";
-import styles from "./FavoritesView.module.css";
 import { FavoritesViewSkeleton } from "./FavoritesViewSkeleton";
+import { favoritesStyles } from "./styles";
 
 export function FavoritesView() {
   const { ids } = useFavorites();
 
-  // ponytail: one request per favorite — see CartView; same ceiling, same upgrade path.
   const { products, isLoading } = useQueries({
     queries: ids.map((id) => productByIdQueryOptions({ id: String(id) })),
     combine: (results) => ({
@@ -23,7 +23,7 @@ export function FavoritesView() {
 
   if (ids.length === 0) {
     return (
-      <div className={styles.empty}>
+      <div {...stylex.props(favoritesStyles.empty)}>
         <Prose>Your favorites list is empty.</Prose>
         <LinkButton href="/products">Browse products</LinkButton>
       </div>
@@ -36,7 +36,7 @@ export function FavoritesView() {
 
   if (products.length === 0) {
     return (
-      <div className={styles.empty}>
+      <div {...stylex.props(favoritesStyles.empty)}>
         <Prose>No results found.</Prose>
         <LinkButton href="/products">Browse products</LinkButton>
       </div>

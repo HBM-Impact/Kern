@@ -1,6 +1,6 @@
-import clsx from "clsx";
+import * as stylex from "@stylexjs/stylex";
 import type { ComponentPropsWithoutRef, ElementType } from "react";
-import styles from "./Button.module.css";
+import { buttonStyles } from "./styles";
 import type { ButtonProps } from "./types";
 
 type Props<T extends ElementType = "a"> = ButtonProps & {
@@ -18,10 +18,10 @@ export function LinkButton<T extends ElementType = "a">({
   const Component = (as ?? "a") as ElementType;
   return (
     <Component
-      className={clsx(
-        styles.base,
-        iconPosition === "left" && styles.reverse,
-        fill && styles.fill,
+      {...stylex.props(
+        buttonStyles.base,
+        iconPosition === "left" && buttonStyles.reverse,
+        fill && buttonStyles.fill,
       )}
       {...rest}
     >

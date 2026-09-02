@@ -1,9 +1,9 @@
 import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { SearchSection } from "@/features/products/components/search-section";
-import { Breadcrumbs } from "@/shell/breadcrumbs";
-import { PageHeader } from "@/shell/page-header";
+import { SearchSection } from "@/features/products/components/SearchSection";
+import { Breadcrumbs } from "@/shell/Breadcrumbs";
+import { PageHeader } from "@/shell/PageHeader";
 
 export const metadata = {
   title: "Search Products",

@@ -4,7 +4,29 @@
   "private": true,
   "exports": {
     "./globals.css": "./src/globals.css",
-    "./*": "./src/*/index.ts"
+    "./tokens.stylex": "./src/tokens.stylex.ts",
+    "./accordion": "./src/Accordion.tsx",
+    "./carousel": "./src/Carousel.tsx",
+    "./container": "./src/Container.tsx",
+    "./dialog": "./src/Dialog.tsx",
+    "./link": "./src/Link.tsx",
+    "./skeleton": "./src/Skeleton.tsx",
+    "./spinner": "./src/Spinner.tsx",
+    "./table": "./src/Table.tsx",
+    "./tabs": "./src/Tabs.tsx",
+    "./tooltip": "./src/Tooltip.tsx",
+    "./buttons": "./src/buttons/index.ts",
+    "./buttons/icon-button": "./src/buttons/IconButton.tsx",
+    "./form/calendar": "./src/form/Calendar.tsx",
+    "./form/checkbox": "./src/form/Checkbox.tsx",
+    "./form/checkbox-group": "./src/form/CheckboxGroup.tsx",
+    "./form/input": "./src/form/Input.tsx",
+    "./form/radio": "./src/form/Radio.tsx",
+    "./form/radio-group": "./src/form/RadioGroup.tsx",
+    "./form/select": "./src/form/Select.tsx",
+    "./form/text-area": "./src/form/TextArea.tsx",
+    "./typography/display": "./src/typography/Display.tsx",
+    "./typography/prose": "./src/typography/Prose.tsx"
   },
   "scripts": {
     "lint": "biome check .",
@@ -13,7 +35,7 @@
   },
   "dependencies": {
     "@repo/utils": "workspace:*",
-    "clsx": "catalog:",
+    "@stylexjs/stylex": "catalog:",
     "lucide-react": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:"

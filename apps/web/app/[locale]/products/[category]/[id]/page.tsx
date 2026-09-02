@@ -10,7 +10,7 @@ import { JsonLdScript } from "@/lib/seo/json-ld-script";
 import { generateProductJsonLd } from "@/lib/seo/product";
 import { createProductSlug } from "@/lib/slug/create-product-slug";
 import { parseProductSlug } from "@/lib/slug/parse-product-slug";
-import { Breadcrumbs } from "@/shell/breadcrumbs";
+import { Breadcrumbs } from "@/shell/Breadcrumbs";
 import { ProductDetails } from "./_components/ProductDetails";
 
 export async function generateStaticParams() {

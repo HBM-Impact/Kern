@@ -34,6 +34,8 @@ Turborepo monorepo:
 All packages export from source, no build step. Import by specific path, never from a barrel:
 
 - `@repo/ui/buttons` → `packages/ui/src/buttons/index.ts` (dirs are kebab-case)
+- `@repo/ui/spinner` → `packages/ui/src/Spinner.tsx` (specifiers stay kebab-case; files are PascalCase, mapped explicitly in `packages/ui/package.json` exports)
+- `@repo/ui/tokens.stylex` → design tokens; must be imported from this exact path, never re-exported
 - `@repo/services/commerce/products/get-products` → individual service file
 - `@repo/utils/weak-key` → `packages/utils/src/weak-key.ts`
 - `@repo/utils/time` → `packages/utils/src/time.ts` (unit conversion helpers: `secondsToMs`, `minutesToMs`, etc.)
@@ -41,6 +43,22 @@ All packages export from source, no build step. Import by specific path, never f
 `apps/web` uses `next-intl` for i18n. App Router routes live under `app/[locale]/`. Config in `i18n/` (routing, navigation, request).
 
 Key dependencies: `@tanstack/react-query` (server/client data fetching), `@tanstack/react-form`, `nuqs` (URL state), `usehooks-ts`, `ky` (HTTP client).
+
+## Styling
+
+StyleX. No CSS Modules, no `clsx` — `stylex.props()` takes conditionals directly:
+
+```tsx
+const styles = stylex.create({ base: { color: colors.text }, active: { color: colors.accent } });
+<div {...stylex.props(styles.base, isActive && styles.active)} />
+```
+
+- Tokens come from `@repo/ui/tokens.stylex`: `colors` (StyleX vars, carry the dark-mode media query), and `size`/`radius`/`border`/`font`/`ease` (compile-time consts wrapping open-props).
+- Component files are PascalCase; a shared stylesheet for a component and its skeleton goes in a kebab-case folder named for the component, as `styles.ts`.
+- Use longhands: `backgroundColor`, not `background`. StyleX refuses to compile some shorthands, and `propertyValidationMode: "throw"` is set in both Babel configs so it fails the build instead of dropping the rule silently. Gradients go in `backgroundImage`.
+- StyleX cannot express descendant, child, or sibling combinators. Style only elements the component itself renders — if a rule needs to reach into a child, pass a prop or a variant instead.
+- Global resets live in `packages/ui/src/globals.css` inside `@layer resets`, declared before `@stylex;`. That order matters: unlayered rules beat every layered rule regardless of specificity.
+- Build wiring: `apps/web/babel.config.js` + `postcss.config.cjs`; Storybook uses `stylex-options.cjs` plus an inline Babel plugin in `.storybook/main.ts`. `rootDir` must match across both or class names will not line up.
 
 ## Linting & Formatting
 

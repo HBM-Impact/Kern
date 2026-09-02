@@ -2,13 +2,13 @@ import { getProductByCategory } from "@repo/services/commerce/products/get-produ
 import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
-import { Hero } from "@/app/[locale]/_components/hero";
-import { FeaturedProducts } from "@/features/products/components/featured-products";
+import { Hero } from "@/app/[locale]/_components/Hero";
+import { FeaturedProducts } from "@/features/products/components/FeaturedProducts";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
 import { generateWebSiteJsonLd } from "@/lib/seo/web-site";
-import { Breadcrumbs } from "@/shell/breadcrumbs";
-import { PageHeader } from "@/shell/page-header";
+import { Breadcrumbs } from "@/shell/Breadcrumbs";
+import { PageHeader } from "@/shell/PageHeader";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();

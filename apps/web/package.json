@@ -1,7 +1,6 @@
 {
   "name": "web",
   "version": "0.1.0",
-  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -14,10 +13,10 @@
     "@repo/services": "workspace:*",
     "@repo/ui": "workspace:*",
     "@repo/utils": "workspace:*",
+    "@stylexjs/stylex": "catalog:",
     "@tanstack/react-form": "catalog:",
     "@tanstack/react-query": "catalog:",
     "@vercel/speed-insights": "catalog:",
-    "clsx": "catalog:",
     "ky": "catalog:",
     "lucide-react": "catalog:",
     "next": "catalog:",
@@ -30,6 +29,8 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
+    "@stylexjs/babel-plugin": "catalog:",
+    "@stylexjs/postcss-plugin": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",

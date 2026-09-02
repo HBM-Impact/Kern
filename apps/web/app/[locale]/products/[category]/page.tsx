@@ -10,8 +10,8 @@ import { generateCollectionPageJsonLd } from "@/lib/seo/collection-page";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
 import { createProductSlug } from "@/lib/slug/create-product-slug";
-import { Breadcrumbs } from "@/shell/breadcrumbs";
-import { PageHeader } from "@/shell/page-header";
+import { Breadcrumbs } from "@/shell/Breadcrumbs";
+import { PageHeader } from "@/shell/PageHeader";
 import { ProductCatalog } from "./_components/ProductCatalog";
 
 export async function generateStaticParams() {
