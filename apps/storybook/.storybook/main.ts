@@ -1,7 +1,7 @@
 import { createRequire } from "node:module";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import type { StorybookConfig } from "@storybook/nextjs-vite";
+import type { StorybookConfig } from "@storybook/react-vite";
 import type { Plugin } from "vite";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -40,7 +40,7 @@ const config: StorybookConfig = {
   stories: ["../src/**/*.stories.@(ts|tsx)"],
   addons: [],
   framework: {
-    name: "@storybook/nextjs-vite",
+    name: "@storybook/react-vite",
     options: {},
   },
   async viteFinal(config) {

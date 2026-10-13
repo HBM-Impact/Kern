@@ -1,6 +1,7 @@
 import { getCategories } from "@repo/services/commerce/categories/get-categories";
 import { getProducts } from "@repo/services/commerce/products/get-products";
 import type { MetadataRoute } from "next";
+import { cacheLife } from "next/cache";
 import { routing } from "@/i18n/routing";
 import { client } from "@/lib/sanity/client";
 import { PAGE_SLUGS_QUERY } from "@/lib/sanity/queries";
@@ -8,6 +9,8 @@ import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { createProductSlug } from "@/lib/slug/create-product-slug";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  "use cache";
+  cacheLife("days");
   const baseUrl = getBaseUrl();
 
   // PAGE_SLUGS_QUERY leaves out the home page, which is listed on its own

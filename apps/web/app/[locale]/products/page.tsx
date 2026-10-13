@@ -1,6 +1,7 @@
 import { getCategories } from "@repo/services/commerce/categories/get-categories";
 import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
+import { cacheLife } from "next/cache";
 import { getLocale } from "next-intl/server";
 import { CategoryList } from "@/features/products/components/CategoryList";
 import { getRouteMeta } from "@/lib/sanity/route-meta";
@@ -18,6 +19,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ProductsPage() {
+  "use cache";
+  cacheLife("days");
   const baseUrl = getBaseUrl();
   const [locale, categories, meta] = await Promise.all([
     getLocale(),

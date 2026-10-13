@@ -344,12 +344,15 @@ export type ROUTE_META_QUERY_RESULT = {
 export type PAGE_SLUGS_QUERY_RESULT = Array<string | null>;
 
 // Query TypeMap
-import "@sanity/client";
-declare module "@sanity/client" {
+declare global {
   interface SanityQueries {
     '\n  *[_id == "siteSettings"][0]{\n    copyrightHolder,\n    headerNav[]{ _key, label, route },\n    footerContact[]{ _key, label, url },\n    footerStack[]{ _key, label, url }\n  }\n': SITE_SETTINGS_QUERY_RESULT;
     '\n  *[_type == "page" && slug.current == $slug][0]{\n    title,\n    description,\n    body,\n    modules[]{\n      _key,\n      _type,\n      _type == "heroModule" => {\n        heading,\n        subheading,\n        cta{ label, route }\n      },\n      _type == "productCarouselModule" => {\n        title,\n        description,\n        category,\n        limit\n      }\n    }\n  }\n': PAGE_QUERY_RESULT;
     '\n  *[_type == "routeMeta" && route == $route][0]{\n    title,\n    description\n  }\n': ROUTE_META_QUERY_RESULT;
     '\n  *[_type == "page" && defined(slug.current) && slug.current != "home"].slug.current\n': PAGE_SLUGS_QUERY_RESULT;
   }
+}
+// Lets @sanity/client releases that predate the global registry read it too
+declare module "@sanity/client" {
+  interface SanityQueries extends globalThis.SanityQueries {}
 }

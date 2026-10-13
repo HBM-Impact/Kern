@@ -1,5 +1,3 @@
-export const dynamic = "force-static";
-
 import { daysToSeconds } from "@repo/utils/time";
 
 const catalog = {

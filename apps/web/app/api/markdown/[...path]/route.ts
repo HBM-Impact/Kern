@@ -1,5 +1,3 @@
-export const runtime = "nodejs";
-
 import { daysToSeconds, hoursToSeconds } from "@repo/utils/time";
 import ky, { HTTPError } from "ky";
 import { NodeHtmlMarkdown } from "node-html-markdown";

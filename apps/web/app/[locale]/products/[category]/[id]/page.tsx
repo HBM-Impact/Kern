@@ -2,8 +2,10 @@ import { getProductByCategory } from "@repo/services/commerce/products/get-produ
 import { getProductById } from "@repo/services/commerce/products/get-product-by-id";
 import { getProducts } from "@repo/services/commerce/products/get-products";
 import type { Metadata } from "next";
+import { cacheLife } from "next/cache";
 import { notFound } from "next/navigation";
 import { getLocale } from "next-intl/server";
+import { Suspense } from "react";
 import { routingConfig } from "@/i18n/routing";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
@@ -27,6 +29,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/products/[category]/[id]">): Promise<Metadata> {
+  "use cache";
+  cacheLife("days");
   const { locale, category, id } = await params;
   const numId = parseProductSlug(id);
   if (!numId) return {};
@@ -42,9 +46,23 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProductDetailPage({
+// params is URL data: reading it outside Suspense ties the shared App Shell
+// to one URL and breaks instant navigation under partialPrefetching.
+export default function ProductDetailPage({
   params,
 }: PageProps<"/[locale]/products/[category]/[id]">) {
+  return (
+    <Suspense>
+      <ProductDetailContent params={params} />
+    </Suspense>
+  );
+}
+
+async function ProductDetailContent({
+  params,
+}: Pick<PageProps<"/[locale]/products/[category]/[id]">, "params">) {
+  "use cache";
+  cacheLife("days");
   const { category, id } = await params;
   const numId = parseProductSlug(id);
   if (!numId || numId <= 0) notFound();

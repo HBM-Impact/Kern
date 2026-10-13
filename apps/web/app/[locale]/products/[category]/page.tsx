@@ -2,6 +2,7 @@ import { getCategories } from "@repo/services/commerce/categories/get-categories
 import { getProductByCategory } from "@repo/services/commerce/products/get-product-by-category";
 import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
+import { cacheLife } from "next/cache";
 import { getLocale } from "next-intl/server";
 import { Suspense } from "react";
 import { CATEGORY_PAGE_SIZE } from "@/features/products/sort-map";
@@ -22,6 +23,8 @@ export async function generateStaticParams() {
 }
 
 async function getCategoryName(id: string) {
+  "use cache";
+  cacheLife("days");
   const categories = await getCategories();
   return categories.find((c) => c.slug === id)?.name ?? id;
 }
@@ -37,9 +40,23 @@ export async function generateMetadata({
   };
 }
 
-export default async function CategoryPage({
+// params is URL data: reading it outside Suspense ties the shared App Shell
+// to one URL and breaks instant navigation under partialPrefetching.
+export default function CategoryPage({
   params,
 }: PageProps<"/[locale]/products/[category]">) {
+  return (
+    <Suspense>
+      <CategoryContent params={params} />
+    </Suspense>
+  );
+}
+
+async function CategoryContent({
+  params,
+}: Pick<PageProps<"/[locale]/products/[category]">, "params">) {
+  "use cache";
+  cacheLife("days");
   const { category } = await params;
   const baseUrl = getBaseUrl();
   const [locale, name, initialPage] = await Promise.all([

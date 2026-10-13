@@ -1,9 +1,7 @@
 import { colors, size } from "@repo/ui/tokens.stylex";
 import { Display } from "@repo/ui/typography/display";
 import * as stylex from "@stylexjs/stylex";
-import { client } from "@/lib/sanity/client";
-import { SITE_SETTINGS_QUERY } from "@/lib/sanity/queries";
-import { SITE_SETTINGS_REVALIDATE } from "@/lib/sanity/site-settings";
+import { getSiteSettings } from "@/lib/sanity/site-settings";
 import { Link } from "@/primitives/link/Link";
 
 const styles = stylex.create({
@@ -34,11 +32,7 @@ const styles = stylex.create({
 });
 
 export async function Header() {
-  const settings = await client.fetch(
-    SITE_SETTINGS_QUERY,
-    {},
-    { next: { revalidate: SITE_SETTINGS_REVALIDATE } },
-  );
+  const settings = await getSiteSettings();
 
   return (
     <header {...stylex.props(styles.header)}>

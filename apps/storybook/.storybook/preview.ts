@@ -1,11 +1,8 @@
 import "@repo/ui/globals.css";
-import type { Preview } from "@storybook/nextjs-vite";
+import type { Preview } from "@storybook/react-vite";
 
 const preview: Preview = {
   parameters: {
-    nextjs: {
-      appDirectory: true,
-    },
     controls: {
       matchers: {
         color: /(background|color)$/i,

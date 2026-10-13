@@ -5,7 +5,10 @@ import { getBaseUrl } from "@/lib/seo/get-base-url";
 import "@repo/ui/globals.css";
 import { RootLayout } from "@/shell/RootLayout";
 
-export const dynamic = "force-static";
+// Every route must come out of the build fully rendered. A fetch outside
+// 'use cache' or a cookies()/headers() read now fails the build instead of
+// quietly turning a page dynamic.
+export const ensureStatic = "navigation";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

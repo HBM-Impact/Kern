@@ -1,9 +1,7 @@
 import { colors, size } from "@repo/ui/tokens.stylex";
 import { Prose } from "@repo/ui/typography/prose";
 import * as stylex from "@stylexjs/stylex";
-import { client } from "@/lib/sanity/client";
-import { SITE_SETTINGS_QUERY } from "@/lib/sanity/queries";
-import { SITE_SETTINGS_REVALIDATE } from "@/lib/sanity/site-settings";
+import { getSiteSettings } from "@/lib/sanity/site-settings";
 import { ExternalLink } from "@/primitives/link/ExternalLink";
 
 const styles = stylex.create({
@@ -58,11 +56,9 @@ function newTabProps(url: string) {
 }
 
 export async function Footer() {
-  const settings = await client.fetch(
-    SITE_SETTINGS_QUERY,
-    {},
-    { next: { revalidate: SITE_SETTINGS_REVALIDATE } },
-  );
+  // Cached so the year is read once per revalidation, not during prerender.
+  "use cache";
+  const settings = await getSiteSettings();
   const currentYear = new Date().getFullYear();
 
   return (

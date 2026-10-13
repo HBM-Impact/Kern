@@ -6,6 +6,8 @@ const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  cacheComponents: true,
+  partialPrefetching: true,
   experimental: {
     useTypeScriptCli: true,
     turbopackRustReactCompiler: true,

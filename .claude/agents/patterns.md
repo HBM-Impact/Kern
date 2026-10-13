@@ -26,7 +26,7 @@
 
 ## TypeScript
 
-See `.claude/skills/typescript.md` for full patterns. Key rules:
+See `.claude/skills/typescript/SKILL.md` for full patterns. Key rules:
 
 - `satisfies` over `as` for type assertions
 - Discriminated unions for impossible states with exhaustive `never` checks

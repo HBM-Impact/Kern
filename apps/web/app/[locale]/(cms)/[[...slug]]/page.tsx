@@ -3,10 +3,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getLocale } from "next-intl/server";
 import { stegaClean } from "next-sanity";
+import { Suspense } from "react";
 import { Modules } from "@/features/modules/components/Modules";
 import { routingConfig } from "@/i18n/routing";
 import { client } from "@/lib/sanity/client";
-import { sanityFetch } from "@/lib/sanity/live";
+import { cachedSanity, getDynamicFetchOptions } from "@/lib/sanity/live";
 import { HOME_SLUG, PAGE_QUERY, PAGE_SLUGS_QUERY } from "@/lib/sanity/queries";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
@@ -46,10 +47,15 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/[[...slug]]">): Promise<Metadata> {
-  const { slug } = await resolveSlug(params);
-  const { data: page } = await sanityFetch({
+  const [{ slug }, { perspective, variant }] = await Promise.all([
+    resolveSlug(params),
+    getDynamicFetchOptions(),
+  ]);
+  const { data: page } = await cachedSanity({
     query: PAGE_QUERY,
     params: { slug },
+    perspective,
+    variant,
     stega: false,
   });
 
@@ -59,16 +65,30 @@ export async function generateMetadata({
   };
 }
 
-export default async function CmsPage({
+// params is URL data: reading it outside Suspense ties the shared App Shell
+// to one URL and breaks instant navigation under partialPrefetching.
+export default function CmsPage({
   params,
 }: PageProps<"/[locale]/[[...slug]]">) {
-  const [{ slug, isHome }, locale] = await Promise.all([
+  return (
+    <Suspense>
+      <CmsContent params={params} />
+    </Suspense>
+  );
+}
+
+async function CmsContent({
+  params,
+}: Pick<PageProps<"/[locale]/[[...slug]]">, "params">) {
+  const [{ slug, isHome }, locale, options] = await Promise.all([
     resolveSlug(params),
     getLocale(),
+    getDynamicFetchOptions(),
   ]);
-  const { data: page } = await sanityFetch({
+  const { data: page } = await cachedSanity({
     query: PAGE_QUERY,
     params: { slug },
+    ...options,
   });
 
   if (!page) notFound();
