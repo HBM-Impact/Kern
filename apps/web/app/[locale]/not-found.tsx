@@ -1,10 +1,8 @@
 import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { getRouteMeta } from "@/lib/sanity/content";
 import { LinkButton } from "@/primitives/link/LinkButton";
-import { Breadcrumbs } from "@/shell/Breadcrumbs";
-import { PageHeader } from "@/shell/PageHeader";
+import { RouteHead } from "@/shell/RouteHead";
 
 // Next ignores generateMetadata in not-found.tsx, and also discards the
 // metadata of the page that threw notFound(), so the <title> has to be a
@@ -14,18 +12,11 @@ export const metadata: Metadata = {
 };
 
 export default async function NotFound() {
-  const [t, meta] = await Promise.all([
-    getTranslations(),
-    getRouteMeta("/404"),
-  ]);
+  const t = await getTranslations();
 
   return (
     <Container as="section">
-      <Breadcrumbs items={[{ label: meta?.title ?? "" }]} />
-      <PageHeader
-        title={meta?.title ?? ""}
-        description={meta?.description ?? undefined}
-      />
+      <RouteHead route="/404" />
       <LinkButton href="/">{t("Pages.NotFound.backHome")}</LinkButton>
     </Container>
   );

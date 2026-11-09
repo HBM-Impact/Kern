@@ -12,6 +12,7 @@ import { generateCollectionPageJsonLd } from "@/lib/seo/collection-page";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
 import { Breadcrumbs } from "@/shell/Breadcrumbs";
 import { PageHeader } from "@/shell/PageHeader";
+import { routeCrumb } from "@/shell/RouteHead";
 import { ProductCatalog } from "./_components/ProductCatalog";
 
 export async function generateStaticParams() {
@@ -53,17 +54,16 @@ async function CategoryContent({
   params,
 }: Pick<PageProps<"/[locale]/products/[category]">, "params">) {
   const { category } = await params;
-  const [locale, name, initialPage] = await Promise.all([
+  const [locale, name, initialPage, productsCrumb] = await Promise.all([
     getLocale(),
     getCategoryName(category),
     getProductByCategory({ category, skip: 0, limit: CATEGORY_PAGE_SIZE }),
+    routeCrumb("/products"),
   ]);
 
   return (
     <Container as="section">
-      <Breadcrumbs
-        items={[{ href: "/products", label: "Products" }, { label: name }]}
-      />
+      <Breadcrumbs items={[productsCrumb, { label: name }]} />
       <JsonLdScript
         data={generateCollectionPageJsonLd({
           name,
