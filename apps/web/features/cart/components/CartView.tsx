@@ -4,6 +4,7 @@ import { size } from "@repo/ui/tokens.stylex";
 import { Prose } from "@repo/ui/typography/prose";
 import * as stylex from "@stylexjs/stylex";
 import { useQueries } from "@tanstack/react-query";
+import { cartLines } from "@/features/cart/cart";
 import { useCart } from "@/features/cart/cart-context";
 import { CartItemRow } from "@/features/cart/components/cart-item-row/CartItemRow";
 import { CartItemRowSkeleton } from "@/features/cart/components/cart-item-row/CartItemRowSkeleton";
@@ -48,10 +49,10 @@ export function CartView() {
     ),
   });
 
-  const cartWithProducts = entries.flatMap(([productId, quantity], i) => {
-    const product = productQueries[i]?.data;
-    return product ? [{ productId, quantity, product }] : [];
-  });
+  const lines = cartLines(
+    entries,
+    productQueries.map((q) => q.data),
+  );
 
   if (items.size === 0) {
     return (
@@ -78,7 +79,7 @@ export function CartView() {
   return (
     <div {...stylex.props(styles.layout)}>
       <ul {...stylex.props(styles.list)}>
-        {cartWithProducts.map(({ productId, quantity, product }) => (
+        {lines.map(({ productId, quantity, product }) => (
           <CartItemRow
             key={productId}
             productId={productId}
@@ -87,7 +88,7 @@ export function CartView() {
           />
         ))}
       </ul>
-      <CartSummary items={cartWithProducts} />
+      <CartSummary lines={lines} />
     </div>
   );
 }

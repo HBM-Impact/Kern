@@ -2,6 +2,7 @@
 
 import { createContext, type PropsWithChildren, use } from "react";
 import { useLocalStorage } from "usehooks-ts";
+import { cartStorage } from "./cart";
 
 type Context = {
   items: Map<number, number>;
@@ -16,11 +17,12 @@ export function CartProvider({ children }: PropsWithChildren) {
   const [entries, setEntries] = useLocalStorage<[number, number][]>(
     "kern-cart",
     [],
-    { initializeWithValue: false },
+    {
+      initializeWithValue: false,
+      deserializer: (raw) => cartStorage.parse(JSON.parse(raw)),
+    },
   );
-  const items = new Map(
-    entries.filter((e): e is [number, number] => typeof e[0] === "number"),
-  );
+  const items = new Map(entries);
 
   function mutate(fn: (draft: Map<number, number>) => void) {
     setEntries((prev) => {
