@@ -4,7 +4,7 @@ import * as stylex from "@stylexjs/stylex";
 import Image from "next/image";
 import { AddToCart } from "@/features/cart/components/AddToCart";
 import { AddToFavorite } from "@/features/favorites/components/AddToFavorite";
-import { createProductSlug } from "@/lib/slug/create-product-slug";
+import { productHref } from "@/features/products/route";
 import { BareLink } from "@/primitives/link/BareLink";
 import { cardStyles } from "./styles";
 
@@ -31,10 +31,7 @@ export function ProductCard({
   images,
   priority,
 }: Props) {
-  const href = {
-    pathname: "/products/[category]/[id]" as const,
-    params: { category, id: createProductSlug(id, title) },
-  };
+  const href = productHref({ id, title, category });
 
   return (
     <article {...stylex.props(cardStyles.card)}>

@@ -2,13 +2,13 @@ import { colors, size } from "@repo/ui/tokens.stylex";
 import * as stylex from "@stylexjs/stylex";
 import { ChevronRight, House } from "lucide-react";
 import { getLocale } from "next-intl/server";
-import type { ComponentProps } from "react";
+import type { getPathname } from "@/i18n/navigation";
+import { absoluteUrl } from "@/lib/seo/absolute-url";
 import { generateBreadcrumbJsonLd } from "@/lib/seo/breadcrumb";
-import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
 import { BareLink } from "@/primitives/link/BareLink";
 
-type Href = ComponentProps<typeof BareLink>["href"];
+type Href = Parameters<typeof getPathname>[0]["href"];
 
 type Props = {
   items?: { href?: Href; label: string }[];
@@ -46,21 +46,17 @@ const styles = stylex.create({
 
 export async function Breadcrumbs({ items = [] }: Props) {
   const locale = await getLocale();
-  const baseUrl = getBaseUrl();
 
   return (
     <>
       <JsonLdScript
-        data={generateBreadcrumbJsonLd(
-          [
-            { name: "Home", url: `/${locale}` },
-            ...items.map((item) => ({
-              name: item.label,
-              ...(item.href && { url: hrefToPath(item.href, locale) }),
-            })),
-          ],
-          baseUrl,
-        )}
+        data={generateBreadcrumbJsonLd([
+          { name: "Home", url: absoluteUrl({ href: "/", locale }) },
+          ...items.map((item) => ({
+            name: item.label,
+            ...(item.href && { url: absoluteUrl({ href: item.href, locale }) }),
+          })),
+        ])}
       />
       <nav aria-label="Breadcrumb">
         <ol {...stylex.props(styles.list)}>
@@ -90,17 +86,4 @@ export async function Breadcrumbs({ items = [] }: Props) {
       </nav>
     </>
   );
-}
-
-function hrefToPath(href: Href, locale: string): string {
-  if (typeof href === "string") {
-    return `/${locale}${href}`;
-  }
-  let path = href.pathname as string;
-  if ("params" in href && href.params) {
-    for (const [key, value] of Object.entries(href.params)) {
-      path = path.replace(`[${key}]`, String(value));
-    }
-  }
-  return `/${locale}${path}`;
 }

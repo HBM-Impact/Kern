@@ -9,6 +9,7 @@ import { routingConfig } from "@/i18n/routing";
 import { client } from "@/lib/sanity/client";
 import { cachedSanity, getDynamicFetchOptions } from "@/lib/sanity/live";
 import { HOME_SLUG, PAGE_QUERY, PAGE_SLUGS_QUERY } from "@/lib/sanity/queries";
+import { absoluteUrl } from "@/lib/seo/absolute-url";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
 import { generateWebSiteJsonLd } from "@/lib/seo/web-site";
@@ -102,7 +103,7 @@ async function CmsContent({
           data={generateWebSiteJsonLd({
             name: "Kern",
             url: baseUrl,
-            searchUrl: `${baseUrl}/${locale}/products/search`,
+            searchUrl: absoluteUrl({ href: "/products/search", locale }),
             inLanguage: locale,
           })}
         />

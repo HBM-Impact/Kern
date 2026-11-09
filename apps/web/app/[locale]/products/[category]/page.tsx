@@ -5,12 +5,12 @@ import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
 import { getLocale } from "next-intl/server";
 import { Suspense } from "react";
+import { productHref } from "@/features/products/route";
 import { CATEGORY_PAGE_SIZE } from "@/features/products/sort-map";
 import { routingConfig } from "@/i18n/routing";
+import { absoluteUrl } from "@/lib/seo/absolute-url";
 import { generateCollectionPageJsonLd } from "@/lib/seo/collection-page";
-import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
-import { createProductSlug } from "@/lib/slug/create-product-slug";
 import { Breadcrumbs } from "@/shell/Breadcrumbs";
 import { PageHeader } from "@/shell/PageHeader";
 import { ProductCatalog } from "./_components/ProductCatalog";
@@ -58,7 +58,6 @@ async function CategoryContent({
   "use cache";
   cacheLife("days");
   const { category } = await params;
-  const baseUrl = getBaseUrl();
   const [locale, name, initialPage] = await Promise.all([
     getLocale(),
     getCategoryName(category),
@@ -74,10 +73,13 @@ async function CategoryContent({
         data={generateCollectionPageJsonLd({
           name,
           description: `Browse all products in the ${name} category.`,
-          url: `${baseUrl}/${locale}/products/${category}`,
+          url: absoluteUrl({
+            href: { pathname: "/products/[category]", params: { category } },
+            locale,
+          }),
           products: initialPage.products.map((product) => ({
             name: product.title,
-            url: `${baseUrl}/${locale}/products/${category}/${createProductSlug(product.id, product.title)}`,
+            url: absoluteUrl({ href: productHref(product), locale }),
             image: product.thumbnail,
           })),
         })}

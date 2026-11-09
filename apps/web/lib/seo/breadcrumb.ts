@@ -7,7 +7,6 @@ type BreadcrumbItem = {
 
 export function generateBreadcrumbJsonLd(
   items: BreadcrumbItem[],
-  baseUrl: string,
 ): WithContext<BreadcrumbList> {
   return {
     "@context": "https://schema.org",
@@ -16,7 +15,7 @@ export function generateBreadcrumbJsonLd(
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      ...(item.url && { item: `${baseUrl}${item.url}` }),
+      ...(item.url && { item: item.url }),
     })),
   };
 }
