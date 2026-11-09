@@ -1,7 +1,7 @@
 import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
 import { CartView } from "@/features/cart/components/CartView";
-import { getRouteMeta } from "@/lib/sanity/route-meta";
+import { getRouteMeta } from "@/lib/sanity/content";
 import { Breadcrumbs } from "@/shell/Breadcrumbs";
 import { PageHeader } from "@/shell/PageHeader";
 

@@ -1,5 +1,4 @@
 import { getProductByCategory } from "@repo/services/commerce/products/cached";
-import { stegaClean } from "next-sanity";
 import type { ModuleOf } from "@/features/modules/types";
 import { ProductCarousel } from "@/features/products/components/ProductCarousel";
 
@@ -11,12 +10,10 @@ export async function ProductCarouselModule({
   category,
   limit,
 }: Props) {
-  // The category goes into the commerce API request, not onto the page.
-  const slug = stegaClean(category);
-  if (!title || !slug) return null;
+  if (!title || !category) return null;
 
   const { products } = await getProductByCategory({
-    category: slug,
+    category,
     skip: 0,
     limit: limit ?? 8,
   });

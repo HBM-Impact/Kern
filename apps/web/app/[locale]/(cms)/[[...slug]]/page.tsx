@@ -2,13 +2,11 @@ import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getLocale } from "next-intl/server";
-import { stegaClean } from "next-sanity";
 import { Suspense } from "react";
 import { Modules } from "@/features/modules/components/Modules";
 import { routingConfig } from "@/i18n/routing";
-import { client } from "@/lib/sanity/client";
-import { cachedSanity, getDynamicFetchOptions } from "@/lib/sanity/live";
-import { HOME_SLUG, PAGE_QUERY, PAGE_SLUGS_QUERY } from "@/lib/sanity/queries";
+import { getPage, getPageSlugs } from "@/lib/sanity/content";
+import { HOME_SLUG } from "@/lib/sanity/queries";
 import { absoluteUrl } from "@/lib/seo/absolute-url";
 import { getBaseUrl } from "@/lib/seo/get-base-url";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
@@ -33,37 +31,20 @@ async function resolveSlug(params: Params) {
 }
 
 export async function generateStaticParams() {
-  const slugs = await client
-    .withConfig({ useCdn: false })
-    .fetch(PAGE_SLUGS_QUERY);
+  const slugs = await getPageSlugs();
 
   return routingConfig.locales.flatMap((locale) => [
     { locale, slug: [] },
-    ...slugs
-      .filter((slug): slug is string => Boolean(slug))
-      .map((slug) => ({ locale, slug: [slug] })),
+    ...slugs.map((slug) => ({ locale, slug: [slug] })),
   ]);
 }
 
 export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/[[...slug]]">): Promise<Metadata> {
-  const [{ slug }, { perspective, variant }] = await Promise.all([
-    resolveSlug(params),
-    getDynamicFetchOptions(),
-  ]);
-  const { data: page } = await cachedSanity({
-    query: PAGE_QUERY,
-    params: { slug },
-    perspective,
-    variant,
-    stega: false,
-  });
-
-  return {
-    title: page?.title ?? undefined,
-    description: page?.description ?? undefined,
-  };
+  const { slug } = await resolveSlug(params);
+  const page = await getPage(slug);
+  return page?.meta ?? {};
 }
 
 // params is URL data: reading it outside Suspense ties the shared App Shell
@@ -81,16 +62,11 @@ export default function CmsPage({
 async function CmsContent({
   params,
 }: Pick<PageProps<"/[locale]/[[...slug]]">, "params">) {
-  const [{ slug, isHome }, locale, options] = await Promise.all([
+  const [{ slug, isHome }, locale] = await Promise.all([
     resolveSlug(params),
     getLocale(),
-    getDynamicFetchOptions(),
   ]);
-  const { data: page } = await cachedSanity({
-    query: PAGE_QUERY,
-    params: { slug },
-    ...options,
-  });
+  const page = await getPage(slug);
 
   if (!page) notFound();
 
@@ -109,15 +85,13 @@ async function CmsContent({
         />
       ) : null}
       <Container as="article">
-        <Breadcrumbs
-          items={isHome ? [] : [{ label: stegaClean(page.title) ?? "" }]}
-        />
+        <Breadcrumbs items={isHome ? [] : [{ label: page.meta.title ?? "" }]} />
         <PageHeader
           title={page.title ?? ""}
           description={page.description ?? undefined}
         />
         {page.body ? <PortableTextBody value={page.body} /> : null}
-        <Modules modules={page.modules ?? []} />
+        <Modules modules={page.modules} />
       </Container>
     </>
   );

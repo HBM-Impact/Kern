@@ -1,13 +1,8 @@
-import type { StegaBranded } from "next-sanity";
-import type { PAGE_QUERY_RESULT } from "@/sanity.types";
+import type { getPage } from "@/lib/sanity/content";
 
-// `page` is the only document type with a modules field, so its query result is
-// the source of truth for the module union. StegaBranded because the modules
-// are read through cachedSanity, which encodes edit metadata into every string —
-// values used as hrefs or API params have to be stegaClean'd first.
-type Modules = NonNullable<
-  NonNullable<StegaBranded<PAGE_QUERY_RESULT>>["modules"]
->;
-
-export type Module = Modules[number];
+// The module union as getPage returns it: display text keeps its stega edit
+// metadata, while hrefs and API params arrive already cleaned.
+export type Module = NonNullable<
+  Awaited<ReturnType<typeof getPage>>
+>["modules"][number];
 export type ModuleOf<T extends Module["_type"]> = Extract<Module, { _type: T }>;

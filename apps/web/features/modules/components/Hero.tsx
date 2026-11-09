@@ -3,7 +3,6 @@ import { Display } from "@repo/ui/typography/display";
 import { Prose } from "@repo/ui/typography/prose";
 import * as stylex from "@stylexjs/stylex";
 import { ArrowRight } from "lucide-react";
-import { stegaClean } from "next-sanity";
 import type { ModuleOf } from "@/features/modules/types";
 import { LinkButton } from "@/primitives/link/LinkButton";
 
@@ -27,8 +26,7 @@ const styles = stylex.create({
 });
 
 export function Hero({ heading, subheading, cta }: Props) {
-  // An href carries no visible text, so the edit metadata would corrupt it.
-  const route = stegaClean(cta?.route);
+  const route = cta?.route;
 
   return (
     <section {...stylex.props(styles.section)}>

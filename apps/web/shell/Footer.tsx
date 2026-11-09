@@ -1,7 +1,7 @@
 import { colors, size } from "@repo/ui/tokens.stylex";
 import { Prose } from "@repo/ui/typography/prose";
 import * as stylex from "@stylexjs/stylex";
-import { getSiteSettings } from "@/lib/sanity/site-settings";
+import { getSiteSettings } from "@/lib/sanity/content";
 import { ExternalLink } from "@/primitives/link/ExternalLink";
 
 const styles = stylex.create({
