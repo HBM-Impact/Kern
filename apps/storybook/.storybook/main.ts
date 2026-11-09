@@ -31,7 +31,10 @@ function stylexBabel(): Plugin {
         sourceMaps: true,
       });
       if (!result?.code) return null;
-      return { code: result.code, map: result.map };
+      return {
+        code: result.code,
+        map: result.map && JSON.stringify(result.map),
+      };
     },
   };
 }

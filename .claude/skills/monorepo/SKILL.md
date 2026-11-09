@@ -83,7 +83,7 @@ pnpm update -r --latest       # rewrites the catalog + lockfile
 pnpm check-types && pnpm build
 ```
 
-Majors get bumped deliberately, one at a time — `@babel/core` is pinned to 7 because the StyleX plugin chain expects it.
+Majors get bumped deliberately, one at a time, verifying StyleX still compiles in Storybook — it runs `@babel/core` directly over the UI source.
 
 ## Commands
 

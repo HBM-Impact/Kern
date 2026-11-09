@@ -18,7 +18,6 @@
     "@stylexjs/babel-plugin": "catalog:",
     "@stylexjs/postcss-plugin": "catalog:",
     "@stylexjs/stylex": "catalog:",
-    "@types/babel__core": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "lucide-react": "catalog:",
