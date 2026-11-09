@@ -2,6 +2,7 @@
 
 import { createContext, type PropsWithChildren, use } from "react";
 import { useLocalStorage } from "usehooks-ts";
+import { favoritesStorage } from "./favorites-storage";
 
 type Context = {
   ids: number[];
@@ -12,14 +13,13 @@ type Context = {
 const FavoritesContext = createContext<Context | null>(null);
 
 export function FavoritesProvider({ children }: PropsWithChildren) {
-  const [favoriteIds, setFavoriteIds] = useLocalStorage<number[]>(
+  const [ids, setFavoriteIds] = useLocalStorage<number[]>(
     "kern-favorites",
     [],
-    { initializeWithValue: false },
-  );
-
-  const ids = (favoriteIds ?? []).filter(
-    (id): id is number => typeof id === "number",
+    {
+      initializeWithValue: false,
+      deserializer: (raw) => favoritesStorage.parse(JSON.parse(raw)),
+    },
   );
 
   function toggle(id: number) {

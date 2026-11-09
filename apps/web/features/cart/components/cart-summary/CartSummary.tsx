@@ -1,26 +1,14 @@
-import type { Product } from "@repo/services/commerce/commerce-types";
 import { Display } from "@repo/ui/typography/display";
 import { Prose } from "@repo/ui/typography/prose";
 import * as stylex from "@stylexjs/stylex";
+import { type CartLine, cartTotals } from "@/features/cart/cart";
 import { LinkButton } from "@/primitives/link/LinkButton";
 import { summaryStyles } from "./styles";
 
-type CartItemWithProduct = {
-  productId: number;
-  quantity: number;
-  product: Product;
-};
+type Props = { lines: CartLine[] };
 
-type Props = {
-  items: CartItemWithProduct[];
-};
-
-export function CartSummary({ items }: Props) {
-  const totalItems = items.reduce((sum, i) => sum + i.quantity, 0);
-  const subtotal = items.reduce(
-    (sum, i) => sum + i.product.price * i.quantity,
-    0,
-  );
+export function CartSummary({ lines }: Props) {
+  const { items: totalItems, subtotal } = cartTotals(lines);
 
   return (
     <aside {...stylex.props(summaryStyles.summary)}>
