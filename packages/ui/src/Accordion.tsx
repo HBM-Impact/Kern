@@ -1,49 +1,39 @@
 "use client";
 
+import { Collapsible } from "@base-ui/react/collapsible";
 import * as stylex from "@stylexjs/stylex";
 import { ChevronDown } from "lucide-react";
-import { type DetailsHTMLAttributes, useState } from "react";
+import { type ReactNode, useState } from "react";
 import { border, colors, ease, radius, size } from "./tokens.stylex";
 import { Prose } from "./typography/Prose";
 
 type Props = {
   title: string;
-} & DetailsHTMLAttributes<HTMLDetailsElement>;
+  defaultOpen?: boolean;
+  children: ReactNode;
+};
 
 const styles = stylex.create({
-  details: {
-    display: "grid",
+  root: {
     borderWidth: border[1],
     borderStyle: "solid",
     borderColor: colors.border,
     borderRadius: radius[2],
     paddingInline: size[3],
-    // `[open]` was an attribute selector; `:open` is the pseudo-class form,
-    // which StyleX can express.
-    gap: { ":open": size[2] },
-    "::details-content": {
-      height: 0,
-      overflow: "hidden",
-      transition: "height 0.3s, content-visibility 0.3s",
-      transitionBehavior: "allow-discrete",
-    },
   },
-  detailsOpen: {
-    "::details-content": {
-      height: "auto",
-      paddingBottom: size[3],
-    },
-  },
-  summary: {
+  trigger: {
     display: "flex",
+    width: "100%",
     cursor: "pointer",
     alignItems: "center",
-    backgroundColor: "transparent",
-    borderStyle: "none",
     justifyContent: "space-between",
     minHeight: "2.5rem",
     gap: size[2],
-    listStyle: "none",
+    padding: 0,
+    backgroundColor: "transparent",
+    borderStyle: "none",
+    color: "inherit",
+    textAlign: "start",
   },
   icon: {
     height: size[3],
@@ -51,31 +41,48 @@ const styles = stylex.create({
     flexShrink: 0,
     transition: `transform 0.3s ${ease.inOut3}`,
   },
-  // `.details[open] > .summary > svg` reached through two combinators. The open
-  // state is tracked here instead so the icon styles itself.
   iconOpen: {
     transform: "rotate(180deg)",
+  },
+  // Base UI measures the content into this variable so height can animate.
+  panel: {
+    height: "var(--collapsible-panel-height)",
+    overflow: "hidden",
+    transition: "height 0.3s",
+  },
+  panelHidden: {
+    height: 0,
   },
   content: {
     display: "grid",
     gap: size[3],
+    paddingBottom: size[3],
   },
 });
 
-export function Accordion({ title, children, ...rest }: Props) {
-  const [open, setOpen] = useState(Boolean(rest.open));
+export function Accordion({ title, defaultOpen = false, children }: Props) {
+  const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <details
-      {...stylex.props(styles.details, open && styles.detailsOpen)}
-      onToggle={(event) => setOpen(event.currentTarget.open)}
-      {...rest}
+    <Collapsible.Root
+      open={open}
+      onOpenChange={setOpen}
+      {...stylex.props(styles.root)}
     >
-      <summary {...stylex.props(styles.summary)}>
-        <Prose>{title}</Prose>
+      <Collapsible.Trigger {...stylex.props(styles.trigger)}>
+        <Prose as="span">{title}</Prose>
         <ChevronDown {...stylex.props(styles.icon, open && styles.iconOpen)} />
-      </summary>
-      <div {...stylex.props(styles.content)}>{children}</div>
-    </details>
+      </Collapsible.Trigger>
+      <Collapsible.Panel
+        className={({ transitionStatus: t }) =>
+          stylex.props(
+            styles.panel,
+            (t === "starting" || t === "ending") && styles.panelHidden,
+          ).className
+        }
+      >
+        <div {...stylex.props(styles.content)}>{children}</div>
+      </Collapsible.Panel>
+    </Collapsible.Root>
   );
 }

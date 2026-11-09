@@ -1,12 +1,7 @@
-import { createRequire } from "node:module";
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { resolve } from "node:path";
 import type { StorybookConfig } from "@storybook/react-vite";
 import type { Plugin } from "vite";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const require = createRequire(import.meta.url);
-const stylexOptions = require("../stylex-options.cjs");
+import stylexOptions from "../stylex-options.cjs";
 
 /**
  * Compiles stylex.create calls to class names. apps/web gets this from Next's
@@ -53,7 +48,7 @@ const config: StorybookConfig = {
       resolve: {
         alias: {
           "@repo/ui/globals.css": resolve(
-            __dirname,
+            import.meta.dirname,
             "../../../packages/ui/src/globals.css",
           ),
         },

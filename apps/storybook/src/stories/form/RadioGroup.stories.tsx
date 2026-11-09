@@ -8,9 +8,9 @@ const meta = {
     label: "Shipping method",
     name: "shipping",
     options: [
-      { label: "Standard (3–5 days)", name: "shipping", value: "standard" },
-      { label: "Express (1–2 days)", name: "shipping", value: "express" },
-      { label: "Overnight", name: "shipping", value: "overnight" },
+      { label: "Standard (3–5 days)", value: "standard" },
+      { label: "Express (1–2 days)", value: "express" },
+      { label: "Overnight", value: "overnight" },
     ],
   },
 } satisfies Meta<typeof RadioGroup>;

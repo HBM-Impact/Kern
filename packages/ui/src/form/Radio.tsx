@@ -1,56 +1,62 @@
+"use client";
+
+import { Radio as BaseRadio } from "@base-ui/react/radio";
 import * as stylex from "@stylexjs/stylex";
-import type { InputHTMLAttributes } from "react";
-import { border, colors, ease, radius, size } from "../tokens.stylex";
+import { useId } from "react";
+import { border, colors, radius, size } from "../tokens.stylex";
 import { formStyles } from "./styles";
 import type { InputProps } from "./types";
 
-type Props = InputProps & InputHTMLAttributes<HTMLInputElement>;
+/** Must render inside a `RadioGroup`, which owns `name` and the value. */
+type Props = InputProps & { value: string; disabled?: boolean };
 
 const styles = stylex.create({
   label: {
-    position: "relative",
     display: "flex",
     gap: size[2],
     cursor: "pointer",
     height: size[5],
     alignItems: "center",
-    flexDirection: "row-reverse",
-    justifyContent: "flex-end",
   },
-  // Same reasoning as Checkbox: the input carries the visual so `:checked` is
-  // a pseudo-class on this element instead of a sibling combinator.
   dot: {
-    appearance: "none",
-    margin: 0,
     width: size[3],
     height: size[3],
     borderRadius: radius.round,
-    backgroundColor: "transparent",
     borderWidth: border[1],
     borderStyle: "solid",
     borderColor: colors.border,
     display: "grid",
     placeContent: "center",
     cursor: "pointer",
-    transition: `background-color 0.3s ${ease.inOut3}`,
-    outline: { ":focus": `${border[3]} auto -webkit-focus-ring-color` },
-    "::after": {
-      content: '""',
-      width: "0.5rem",
-      height: "0.5rem",
-      borderRadius: radius.round,
-      backgroundColor: colors.text,
-      transition: `opacity 0.3s ${ease.inOut3}`,
-      opacity: { default: 0, ":checked": 1 },
-    },
+    outline: { ":focus-visible": `${border[3]} auto -webkit-focus-ring-color` },
+  },
+  disabled: {
+    cursor: "not-allowed",
+    opacity: 0.5,
+  },
+  indicator: {
+    width: "0.5rem",
+    height: "0.5rem",
+    borderRadius: radius.round,
+    backgroundColor: colors.text,
   },
 });
 
 export function Radio({ label, ...rest }: Props) {
+  const id = useId();
+
   return (
-    <label {...stylex.props(styles.label)}>
+    <label htmlFor={id} {...stylex.props(styles.label)}>
+      <BaseRadio.Root
+        id={id}
+        {...rest}
+        className={({ disabled }) =>
+          stylex.props(styles.dot, disabled && styles.disabled).className
+        }
+      >
+        <BaseRadio.Indicator {...stylex.props(styles.indicator)} />
+      </BaseRadio.Root>
       <span {...stylex.props(formStyles.labelText)}>{label}</span>
-      <input {...stylex.props(styles.dot)} type="radio" {...rest} />
     </label>
   );
 }

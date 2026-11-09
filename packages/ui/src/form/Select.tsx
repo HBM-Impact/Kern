@@ -1,7 +1,9 @@
+"use client";
+
+import { Select as BaseSelect } from "@base-ui/react/select";
 import * as stylex from "@stylexjs/stylex";
-import { ChevronDown } from "lucide-react";
-import type { SelectHTMLAttributes } from "react";
-import { font, size } from "../tokens.stylex";
+import { Check, ChevronDown } from "lucide-react";
+import { border, colors, font, radius, size } from "../tokens.stylex";
 import { formStyles } from "./styles";
 import type { InputProps } from "./types";
 
@@ -10,62 +12,111 @@ type SelectOption = string | { value: string; label: string };
 type Props = {
   options: SelectOption[];
 } & InputProps &
-  Omit<SelectHTMLAttributes<HTMLSelectElement>, "className">;
-
-function getOptionValue(option: SelectOption) {
-  return typeof option === "string" ? option : option.value;
-}
-
-function getOptionLabel(option: SelectOption) {
-  return typeof option === "string" ? option : option.label;
-}
+  Pick<
+    BaseSelect.Root.Props<string>,
+    "name" | "value" | "defaultValue" | "onValueChange" | "disabled"
+  >;
 
 const styles = stylex.create({
-  select: {
+  trigger: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: size[2],
     height: "2.5rem",
-    appearance: "none",
-    paddingLeft: size[3],
-    paddingRight: `calc(${size[3]} * 2)`,
-    cursor: "pointer",
+    paddingInline: size[3],
+    cursor: { default: "pointer", ":disabled": "not-allowed" },
+    color: colors.text,
     fontSize: font.size1,
+    opacity: { ":disabled": 0.5 },
   },
-  wrapper: {
-    position: "relative",
+  icon: {
+    display: "flex",
   },
-  // Was `.selectWrapper > svg`. Select renders this icon itself, so it takes
-  // the styles directly instead of being reached through a combinator.
-  chevron: {
-    width: size[3],
-    height: size[3],
-    position: "absolute",
-    bottom: `calc(2.5rem / 2 - ${size[2]})`,
-    right: size[3],
+  popup: {
+    minWidth: "var(--anchor-width)",
+    maxHeight: "var(--available-height)",
+    overflowY: "auto",
+    padding: size[1],
+    backgroundColor: colors.bgElevated,
+    borderWidth: border[1],
+    borderStyle: "solid",
+    borderColor: colors.border,
+    borderRadius: radius[2],
+    transition: "opacity 0.15s ease-out",
+  },
+  hidden: {
+    opacity: 0,
+  },
+  item: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: size[3],
+    paddingBlock: size[2],
+    paddingInline: size[3],
+    borderRadius: radius[2],
     cursor: "pointer",
-    pointerEvents: "none",
+    fontFamily: font.sans,
+    fontSize: font.size1,
+    color: colors.text,
+    outline: "none",
+  },
+  highlighted: {
+    backgroundColor: colors.hoverBg,
   },
 });
 
-export function Select({ options, label, name, ...rest }: Props) {
+export function Select({ options, label, ...rest }: Props) {
+  const items = options.map((option) =>
+    typeof option === "string" ? { value: option, label: option } : option,
+  );
+
   return (
-    <label {...stylex.props(formStyles.label, styles.wrapper)}>
-      <span {...stylex.props(formStyles.labelText)}>{label}</span>
-      <select
-        id={name}
-        name={name}
-        {...stylex.props(formStyles.control, styles.select)}
-        {...rest}
-      >
-        {options.map((option) => {
-          const value = getOptionValue(option);
-          const optionLabel = getOptionLabel(option);
-          return (
-            <option key={value} value={value}>
-              {optionLabel}
-            </option>
-          );
-        })}
-      </select>
-      <ChevronDown {...stylex.props(styles.chevron)} />
-    </label>
+    <BaseSelect.Root items={items} {...rest}>
+      <div {...stylex.props(formStyles.label)}>
+        <BaseSelect.Label {...stylex.props(formStyles.labelText)}>
+          {label}
+        </BaseSelect.Label>
+        <BaseSelect.Trigger
+          {...stylex.props(formStyles.control, styles.trigger)}
+        >
+          <BaseSelect.Value />
+          <BaseSelect.Icon {...stylex.props(styles.icon)}>
+            <ChevronDown size={16} />
+          </BaseSelect.Icon>
+        </BaseSelect.Trigger>
+      </div>
+      <BaseSelect.Portal>
+        <BaseSelect.Positioner sideOffset={4}>
+          <BaseSelect.Popup
+            className={({ transitionStatus: t }) =>
+              stylex.props(
+                styles.popup,
+                (t === "starting" || t === "ending") && styles.hidden,
+              ).className
+            }
+          >
+            <BaseSelect.List>
+              {items.map((item) => (
+                <BaseSelect.Item
+                  key={item.value}
+                  value={item.value}
+                  className={({ highlighted }) =>
+                    stylex.props(styles.item, highlighted && styles.highlighted)
+                      .className
+                  }
+                >
+                  <BaseSelect.ItemText>{item.label}</BaseSelect.ItemText>
+                  <BaseSelect.ItemIndicator>
+                    <Check size={14} />
+                  </BaseSelect.ItemIndicator>
+                </BaseSelect.Item>
+              ))}
+            </BaseSelect.List>
+          </BaseSelect.Popup>
+        </BaseSelect.Positioner>
+      </BaseSelect.Portal>
+    </BaseSelect.Root>
   );
 }
