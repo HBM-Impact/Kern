@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 import { Suspense } from "react";
 import { productHref } from "@/features/products/route";
-import { CATEGORY_PAGE_SIZE } from "@/features/products/sort-map";
+import { PRODUCT_PAGE_SIZE } from "@/features/products/sort-map";
 import { routingConfig } from "@/i18n/routing";
 import { absoluteUrl } from "@/lib/seo/absolute-url";
 import { generateCollectionPageJsonLd } from "@/lib/seo/collection-page";
@@ -57,7 +57,7 @@ async function CategoryContent({
   const [locale, name, initialPage, productsCrumb] = await Promise.all([
     getLocale(),
     getCategoryName(category),
-    getProductByCategory({ category, skip: 0, limit: CATEGORY_PAGE_SIZE }),
+    getProductByCategory({ category, skip: 0, limit: PRODUCT_PAGE_SIZE }),
     routeCrumb("/products"),
   ]);
 

@@ -2,8 +2,7 @@
 
 import { Select } from "@repo/ui/form/select";
 import * as stylex from "@stylexjs/stylex";
-import { parseAsString, useQueryState } from "nuqs";
-import { SORT_OPTIONS } from "../sort-map";
+import { SORT_OPTIONS, sortParser, useSort } from "../sort-map";
 
 const styles = stylex.create({
   wrapper: {
@@ -13,7 +12,7 @@ const styles = stylex.create({
 });
 
 export function SortControl() {
-  const [sort, setSort] = useQueryState("sort", parseAsString.withDefault(""));
+  const [sort, setSort] = useSort();
 
   return (
     <div {...stylex.props(styles.wrapper)}>
@@ -27,8 +26,8 @@ export function SortControl() {
             label,
           })),
         ]}
-        value={sort}
-        onValueChange={(value) => setSort(value || null)}
+        value={sort ?? ""}
+        onValueChange={(value) => setSort(sortParser.parse(value ?? ""))}
       />
     </div>
   );
