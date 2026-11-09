@@ -14,6 +14,7 @@ import { absoluteUrl } from "@/lib/seo/absolute-url";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
 import { generateProductJsonLd } from "@/lib/seo/product";
 import { Breadcrumbs } from "@/shell/Breadcrumbs";
+import { routeCrumb } from "@/shell/RouteHead";
 import { ProductDetails } from "./_components/ProductDetails";
 
 export async function generateStaticParams() {
@@ -63,11 +64,13 @@ async function ProductDetailContent({
   const numId = parseProductId(id);
   if (!numId) notFound();
 
-  const [locale, product, { products: categoryProducts }] = await Promise.all([
-    getLocale(),
-    getProductById({ id: String(numId) }),
-    getProductByCategory({ category, skip: 0, limit: 12 }),
-  ]);
+  const [locale, product, { products: categoryProducts }, productsCrumb] =
+    await Promise.all([
+      getLocale(),
+      getProductById({ id: String(numId) }),
+      getProductByCategory({ category, skip: 0, limit: 12 }),
+      routeCrumb("/products"),
+    ]);
 
   if (!product) notFound();
 
@@ -78,7 +81,7 @@ async function ProductDetailContent({
     <>
       <Breadcrumbs
         items={[
-          { href: "/products", label: "Products" },
+          productsCrumb,
           {
             href: {
               pathname: "/products/[category]",

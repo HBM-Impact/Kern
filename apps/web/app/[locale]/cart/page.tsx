@@ -1,26 +1,13 @@
 import { Container } from "@repo/ui/container";
-import type { Metadata } from "next";
 import { CartView } from "@/features/cart/components/CartView";
-import { getRouteMeta } from "@/lib/sanity/content";
-import { Breadcrumbs } from "@/shell/Breadcrumbs";
-import { PageHeader } from "@/shell/PageHeader";
+import { RouteHead, routeMetadata } from "@/shell/RouteHead";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const meta = await getRouteMeta("/cart");
+export const generateMetadata = () => routeMetadata("/cart");
 
-  return { title: meta?.title, description: meta?.description };
-}
-
-export default async function CartPage() {
-  const meta = await getRouteMeta("/cart");
-
+export default function CartPage() {
   return (
     <Container as="section">
-      <Breadcrumbs items={[{ label: meta?.title ?? "" }]} />
-      <PageHeader
-        title={meta?.title ?? ""}
-        description={meta?.description ?? undefined}
-      />
+      <RouteHead route="/cart" />
       <CartView />
     </Container>
   );
