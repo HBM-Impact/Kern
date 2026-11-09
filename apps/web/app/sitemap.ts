@@ -1,5 +1,5 @@
-import { getCategories } from "@repo/services/commerce/categories/get-categories";
-import { getProducts } from "@repo/services/commerce/products/get-products";
+import { getCategories } from "@repo/services/commerce/categories/cached";
+import { getProducts } from "@repo/services/commerce/products/cached";
 import type { MetadataRoute } from "next";
 import { cacheLife } from "next/cache";
 import { productHref } from "@/features/products/route";

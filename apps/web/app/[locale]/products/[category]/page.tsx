@@ -1,8 +1,7 @@
-import { getCategories } from "@repo/services/commerce/categories/get-categories";
-import { getProductByCategory } from "@repo/services/commerce/products/get-product-by-category";
+import { getCategories } from "@repo/services/commerce/categories/cached";
+import { getProductByCategory } from "@repo/services/commerce/products/cached";
 import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
-import { cacheLife } from "next/cache";
 import { getLocale } from "next-intl/server";
 import { Suspense } from "react";
 import { productHref } from "@/features/products/route";
@@ -23,8 +22,6 @@ export async function generateStaticParams() {
 }
 
 async function getCategoryName(id: string) {
-  "use cache";
-  cacheLife("days");
   const categories = await getCategories();
   return categories.find((c) => c.slug === id)?.name ?? id;
 }
@@ -55,8 +52,6 @@ export default function CategoryPage({
 async function CategoryContent({
   params,
 }: Pick<PageProps<"/[locale]/products/[category]">, "params">) {
-  "use cache";
-  cacheLife("days");
   const { category } = await params;
   const [locale, name, initialPage] = await Promise.all([
     getLocale(),

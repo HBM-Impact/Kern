@@ -1,8 +1,9 @@
-import { getProductByCategory } from "@repo/services/commerce/products/get-product-by-category";
-import { getProductById } from "@repo/services/commerce/products/get-product-by-id";
-import { getProducts } from "@repo/services/commerce/products/get-products";
+import {
+  getProductByCategory,
+  getProductById,
+  getProducts,
+} from "@repo/services/commerce/products/cached";
 import type { Metadata } from "next";
-import { cacheLife } from "next/cache";
 import { notFound } from "next/navigation";
 import { getLocale } from "next-intl/server";
 import { Suspense } from "react";
@@ -28,8 +29,6 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/products/[category]/[id]">): Promise<Metadata> {
-  "use cache";
-  cacheLife("days");
   const [{ id }, locale] = await Promise.all([params, getLocale()]);
   const numId = parseProductId(id);
   if (!numId) return {};
@@ -60,8 +59,6 @@ export default function ProductDetailPage({
 async function ProductDetailContent({
   params,
 }: Pick<PageProps<"/[locale]/products/[category]/[id]">, "params">) {
-  "use cache";
-  cacheLife("days");
   const { category, id } = await params;
   const numId = parseProductId(id);
   if (!numId) notFound();

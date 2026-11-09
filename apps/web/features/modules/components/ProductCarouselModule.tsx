@@ -1,5 +1,4 @@
-import { getProductByCategory } from "@repo/services/commerce/products/get-product-by-category";
-import { cacheLife } from "next/cache";
+import { getProductByCategory } from "@repo/services/commerce/products/cached";
 import { stegaClean } from "next-sanity";
 import type { ModuleOf } from "@/features/modules/types";
 import { ProductCarousel } from "@/features/products/components/ProductCarousel";
@@ -12,9 +11,6 @@ export async function ProductCarouselModule({
   category,
   limit,
 }: Props) {
-  "use cache";
-  cacheLife("days");
-
   // The category goes into the commerce API request, not onto the page.
   const slug = stegaClean(category);
   if (!title || !slug) return null;

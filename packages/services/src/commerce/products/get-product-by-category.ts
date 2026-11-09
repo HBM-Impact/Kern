@@ -1,37 +1,18 @@
-import { hoursToSeconds } from "@repo/utils/time";
 import { commerceClient } from "../commerce-client";
-import type { Product, ProductResponse } from "../commerce-types";
+import type { ProductResponse } from "../commerce-types";
+import { type ListArgs, listParams } from "../list-params";
 
-type Args = {
-  signal?: AbortSignal;
-  skip: number;
-  limit: number;
-  sortBy?: keyof Product;
-  order?: "asc" | "desc";
-  category: string;
-};
+type Args = ListArgs & { category: string };
 
 export async function getProductByCategory({
   category,
   signal,
-  skip,
-  limit,
-  sortBy,
-  order,
+  ...args
 }: Args) {
   return commerceClient
     .get(`products/category/${category}`, {
       signal,
-      searchParams: {
-        skip,
-        limit,
-        ...(sortBy && { sortBy }),
-        ...(order && { order }),
-      },
-      next: {
-        revalidate: hoursToSeconds(24),
-        tags: [`category-${category}`, "products"],
-      },
+      searchParams: listParams(args),
     })
     .json<ProductResponse>();
 }

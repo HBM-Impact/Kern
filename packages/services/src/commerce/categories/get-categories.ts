@@ -1,4 +1,3 @@
-import { hoursToSeconds } from "@repo/utils/time";
 import { commerceClient } from "../commerce-client";
 import type { CategoryResponse } from "../commerce-types";
 
@@ -8,12 +7,6 @@ type Args = {
 
 export async function getCategories({ signal }: Args = {}) {
   return commerceClient
-    .get("products/categories", {
-      signal,
-      next: {
-        revalidate: hoursToSeconds(24),
-        tags: ["categories"],
-      },
-    })
+    .get("products/categories", { signal })
     .json<CategoryResponse>();
 }

@@ -313,9 +313,6 @@ importers:
 
   packages/services:
     dependencies:
-      '@repo/utils':
-        specifier: workspace:*
-        version: link:../utils
       ky:
         specifier: 'catalog:'
         version: 2.2.0

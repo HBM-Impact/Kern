@@ -13,7 +13,7 @@ export function Providers({ children }: PropsWithChildren) {
       new QueryClient({
         defaultOptions: {
           queries: {
-            // Matches the 24h `revalidate` the services already ask for —
+            // Matches the catalog's server cacheLife("days") (services/*/cached.ts) —
             // refetching sooner just re-fetches identical data.
             staleTime: hoursToMs(24),
             gcTime: hoursToMs(24),
