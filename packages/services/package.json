@@ -7,15 +7,19 @@
   },
   "scripts": {
     "lint": "biome check .",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "@repo/utils": "workspace:*",
-    "ky": "catalog:"
+    "ky": "catalog:",
+    "next": "catalog:",
+    "server-only": "catalog:"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
     "@types/node": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   }
 }
