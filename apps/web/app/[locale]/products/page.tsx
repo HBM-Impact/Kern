@@ -5,7 +5,7 @@ import { cacheLife } from "next/cache";
 import { getLocale } from "next-intl/server";
 import { CategoryList } from "@/features/products/components/CategoryList";
 import { getRouteMeta } from "@/lib/sanity/route-meta";
-import { getBaseUrl } from "@/lib/seo/get-base-url";
+import { absoluteUrl } from "@/lib/seo/absolute-url";
 import { generateItemListJsonLd } from "@/lib/seo/item-list";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
 import { Link } from "@/primitives/link/Link";
@@ -21,7 +21,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ProductsPage() {
   "use cache";
   cacheLife("days");
-  const baseUrl = getBaseUrl();
   const [locale, categories, meta] = await Promise.all([
     getLocale(),
     getCategories(),
@@ -34,7 +33,13 @@ export default async function ProductsPage() {
         data={generateItemListJsonLd(
           categories.map((category) => ({
             name: category.name,
-            url: `${baseUrl}/${locale}/products/${category.slug}`,
+            url: absoluteUrl({
+              href: {
+                pathname: "/products/[category]",
+                params: { category: category.slug },
+              },
+              locale,
+            }),
           })),
         )}
       />

@@ -8,7 +8,7 @@ import * as stylex from "@stylexjs/stylex";
 import Image from "next/image";
 import { useCart } from "@/features/cart/cart-context";
 import { AddToCart } from "@/features/cart/components/AddToCart";
-import { createProductSlug } from "@/lib/slug/create-product-slug";
+import { productHref } from "@/features/products/route";
 import { BareLink } from "@/primitives/link/BareLink";
 import { rowStyles } from "./styles";
 
@@ -32,13 +32,7 @@ const styles = stylex.create({
 
 export function CartItemRow({ productId, quantity, product }: Props) {
   const { remove } = useCart();
-  const href = {
-    pathname: "/products/[category]/[id]" as const,
-    params: {
-      category: product.category,
-      id: createProductSlug(product.id, product.title),
-    },
-  };
+  const href = productHref(product);
 
   return (
     <li {...stylex.props(rowStyles.row)}>

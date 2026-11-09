@@ -6,12 +6,12 @@ import { cacheLife } from "next/cache";
 import { notFound } from "next/navigation";
 import { getLocale } from "next-intl/server";
 import { Suspense } from "react";
+import { parseProductId, productHref } from "@/features/products/route";
+import { getPathname } from "@/i18n/navigation";
 import { routingConfig } from "@/i18n/routing";
-import { getBaseUrl } from "@/lib/seo/get-base-url";
+import { absoluteUrl } from "@/lib/seo/absolute-url";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";
 import { generateProductJsonLd } from "@/lib/seo/product";
-import { createProductSlug } from "@/lib/slug/create-product-slug";
-import { parseProductSlug } from "@/lib/slug/parse-product-slug";
 import { Breadcrumbs } from "@/shell/Breadcrumbs";
 import { ProductDetails } from "./_components/ProductDetails";
 
@@ -20,8 +20,7 @@ export async function generateStaticParams() {
   return routingConfig.locales.flatMap((locale) =>
     products.map((product) => ({
       locale,
-      category: product.category,
-      id: createProductSlug(product.id, product.title),
+      ...productHref(product).params,
     })),
   );
 }
@@ -31,8 +30,8 @@ export async function generateMetadata({
 }: PageProps<"/[locale]/products/[category]/[id]">): Promise<Metadata> {
   "use cache";
   cacheLife("days");
-  const { locale, category, id } = await params;
-  const numId = parseProductSlug(id);
+  const [{ id }, locale] = await Promise.all([params, getLocale()]);
+  const numId = parseProductId(id);
   if (!numId) return {};
   const product = await getProductById({ id: String(numId) });
   if (!product) return {};
@@ -41,7 +40,7 @@ export async function generateMetadata({
     description: product.description,
     // The bare-id URL (/products/x/1) renders too, so point both at the slug form.
     alternates: {
-      canonical: `/${locale}/products/${category}/${createProductSlug(product.id, product.title)}`,
+      canonical: getPathname({ href: productHref(product), locale }),
     },
   };
 }
@@ -64,8 +63,8 @@ async function ProductDetailContent({
   "use cache";
   cacheLife("days");
   const { category, id } = await params;
-  const numId = parseProductSlug(id);
-  if (!numId || numId <= 0) notFound();
+  const numId = parseProductId(id);
+  if (!numId) notFound();
 
   const [locale, product, { products: categoryProducts }] = await Promise.all([
     getLocale(),
@@ -75,8 +74,7 @@ async function ProductDetailContent({
 
   if (!product) notFound();
 
-  const baseUrl = getBaseUrl();
-  const productUrl = `${baseUrl}/${locale}/products/${category}/${id}`;
+  const productUrl = absoluteUrl({ href: productHref(product), locale });
   const relatedProducts = categoryProducts.filter((p) => p.id !== numId);
 
   return (
