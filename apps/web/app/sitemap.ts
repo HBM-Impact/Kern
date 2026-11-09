@@ -4,19 +4,18 @@ import type { MetadataRoute } from "next";
 import { cacheLife } from "next/cache";
 import { productHref } from "@/features/products/route";
 import { routing } from "@/i18n/routing";
-import { client } from "@/lib/sanity/client";
-import { PAGE_SLUGS_QUERY } from "@/lib/sanity/queries";
+import { getPageSlugs } from "@/lib/sanity/content";
 import { absoluteUrl } from "@/lib/seo/absolute-url";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   "use cache";
   cacheLife("days");
-  // PAGE_SLUGS_QUERY leaves out the home page, which is listed on its own
+  // getPageSlugs leaves out the home page, which is listed on its own
   // below as the index.
   const [categories, { products }, slugs] = await Promise.all([
     getCategories(),
     getProducts({ skip: 0, limit: 0 }),
-    client.fetch(PAGE_SLUGS_QUERY),
+    getPageSlugs(),
   ]);
 
   return routing.locales.flatMap((locale) => [
@@ -30,16 +29,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly" as const,
       priority: 0.9,
     },
-    ...slugs
-      .filter((slug): slug is string => Boolean(slug))
-      .map((slug) => ({
-        url: absoluteUrl({
-          href: { pathname: "/[slug]", params: { slug } },
-          locale,
-        }),
-        changeFrequency: "monthly" as const,
-        priority: 0.6,
-      })),
+    ...slugs.map((slug) => ({
+      url: absoluteUrl({
+        href: { pathname: "/[slug]", params: { slug } },
+        locale,
+      }),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
     ...categories.map((category) => ({
       url: absoluteUrl({
         href: {

@@ -3,7 +3,7 @@ import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 import { CategoryList } from "@/features/products/components/CategoryList";
-import { getRouteMeta } from "@/lib/sanity/route-meta";
+import { getRouteMeta } from "@/lib/sanity/content";
 import { absoluteUrl } from "@/lib/seo/absolute-url";
 import { generateItemListJsonLd } from "@/lib/seo/item-list";
 import { JsonLdScript } from "@/lib/seo/json-ld-script";

@@ -1,7 +1,7 @@
 import { Container } from "@repo/ui/container";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { getRouteMeta } from "@/lib/sanity/route-meta";
+import { getRouteMeta } from "@/lib/sanity/content";
 import { LinkButton } from "@/primitives/link/LinkButton";
 import { Breadcrumbs } from "@/shell/Breadcrumbs";
 import { PageHeader } from "@/shell/PageHeader";
