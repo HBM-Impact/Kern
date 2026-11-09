@@ -9,7 +9,6 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   experimental: {
-    useTypeScriptCli: true,
     turbopackRustReactCompiler: true,
     // Prerendering every product hammers the commerce API hard enough to trip
     // its rate limiter. One worker, two pages at a time, retry the stragglers.
@@ -45,8 +44,6 @@ const nextConfig: NextConfig = {
           destination: "/api/markdown/:path*",
         },
       ],
-      afterFiles: [],
-      fallback: [],
     };
   },
   async headers() {

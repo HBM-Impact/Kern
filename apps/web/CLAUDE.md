@@ -19,7 +19,7 @@ Only three link sources allowed:
 | `BareLink` from `@/primitives/link` | Internal navigation without UI styles (image wrappers, custom-styled anchors) |
 | `ExternalLink` from `@/primitives/link` | External links (non-`IntlLink`, plain `<a>` with UI styles) |
 
-Never import `Link` from `@repo/ui/link`, `LinkButton` from `@repo/ui/buttons`, `IntlLink` from `@/i18n/navigation`, or `Link` from `next/link` directly. The primitives wrap these with locale-aware routing — bypassing them breaks i18n. Prefetch is left at Next's default: every route is prerendered, so prefetches are cheap CDN hits.
+Never import `Link` from `@repo/ui/link`, `LinkButton` from `@repo/ui/buttons`, `IntlLink` from `@/i18n/navigation`, or `Link` from `next/link` directly. The primitives wrap these with locale-aware routing — bypassing them breaks i18n. The primitives default to `prefetch` (full): under partialPrefetching a default link only loads the App Shell, and every route is prerendered, so full prefetches are cheap CDN hits.
 
 Exceptions: raw `<a>` for anchor-only navigation (e.g. skip links), `router.push()` for programmatic navigation after form submission.
 

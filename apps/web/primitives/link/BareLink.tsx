@@ -3,8 +3,9 @@ import { IntlLink } from "@/i18n/navigation";
 
 type Props = ComponentProps<typeof IntlLink>;
 
-// Every route is prerendered, so prefetches are cheap CDN hits — Next's default
-// (viewport-based) beats hover-gating, which never fires on touch devices.
+// Under partialPrefetching a default Link only fetches the shared App Shell;
+// params-dependent content would load after the click. Every route is
+// prerendered, so a full prefetch is a cheap CDN hit and makes clicks instant.
 export function BareLink(props: Props) {
-  return <IntlLink {...props} />;
+  return <IntlLink prefetch {...props} />;
 }

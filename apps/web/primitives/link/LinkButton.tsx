@@ -7,5 +7,5 @@ type Props = Omit<ComponentProps<typeof IntlLink>, "className" | "as"> &
   ButtonProps;
 
 export function LinkButton(props: Props) {
-  return <UILinkButton as={IntlLink} {...props} />;
+  return <UILinkButton as={IntlLink} prefetch {...props} />;
 }
